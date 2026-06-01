@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Práctica - B2 Oxford</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Confetti CDN para celebraciones -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+        .animate-shake {
+            animation: shake 0.2s ease-in-out 2;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40 px-4 py-4 md:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-400 bg-clip-text text-transparent">PLATAFORMA INTEGRAL DE TIEMPOS VERBALES</h1>
+                    <p class="text-xs text-slate-400 font-medium">B2 Oxford Training Platform • David's Custom Study Workspace</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Progreso de Sección -->
+                <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="font-semibold text-slate-300">Progreso de Sección:</span>
+                    <span id="global-progress" class="font-bold text-white">0 / 12 Retos</span>
+                </div>
+                <!-- Botón de Chuleta -->
+                <button onclick="toggleCheatSheet()" class="bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 hover:border-indigo-500 px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                    Ver Chuleta de David
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ESTÉTICA PREMIUM: MENÚ DE 6 BOTONES PRINCIPALES -->
+    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-6">
+        <div class="bg-slate-900/60 p-2 rounded-2xl border border-slate-800/80 backdrop-blur-md">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                <!-- 1. TEORÍA -->
+                <button onclick="switchView('theory')" id="tab-btn-theory" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">📚</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Teoría Completa</span>
+                </button>
+                <!-- 2. PASADO -->
+                <button onclick="switchView('past')" id="tab-btn-past" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">🕒</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Pasado</span>
+                </button>
+                <!-- 3. PRESENTE -->
+                <button onclick="switchView('present')" id="tab-btn-present" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">⏳</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Presente</span>
+                </button>
+                <!-- 4. FUTURO -->
+                <button onclick="switchView('future')" id="tab-btn-future" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">🚀</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Futuro</span>
+                </button>
+                <!-- 5. PHRASAL VERBS -->
+                <button onclick="switchView('phrasals')" id="tab-btn-phrasals" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">🔄</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Phrasal Verbs</span>
+                </button>
+                <!-- 6. VERBOS IRREGULARES -->
+                <button onclick="switchView('verbs')" id="tab-btn-verbs" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">📋</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Verbos Irregulares</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 md:px-8">
+        
+        <!-- ================= SECCIÓN 1: TEORÍA DETALLADA ================= -->
+        <section id="theory-section" class="hidden animate-fade-in space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="p-2 bg-indigo-500/10 rounded-xl text-indigo-400 text-xl">📚</span>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Manual de tiempos verbales - B2</h2>
+                        <p class="text-sm text-slate-400">Los 12 tiempos verbales explicados sin rodeos académicos, listos para arrasar en el examen Oxford.</p>
+                    </div>
+                </div>
+
+                <!-- SUB-TABS INTERNAS TEORÍA -->
+                <div class="flex border-b border-slate-800 mb-6 gap-2 overflow-x-auto pb-2">
+                    <button onclick="switchTheorySubTab('theory-past')" id="subtab-btn-theory-past" class="px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400">🕒 Tiempos de Pasado</button>
+                    <button onclick="switchTheorySubTab('theory-present')" id="subtab-btn-theory-present" class="px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400">⏳ Tiempos de Presente</button>
+                    <button onclick="switchTheorySubTab('theory-future')" id="subtab-btn-theory-future" class="px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400">🚀 Tiempos de Futuro</button>
+                </div>
+
+                <!-- CONTENIDOS DE TEORÍA -->
+                <div id="theory-past" class="theory-sub-content space-y-6 hidden">
+                    <!-- Past Simple -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">1. Past Simple <span class="text-xs bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded font-medium">Consecuencia directa</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + Verbo (2ª Columna / -ed)</p>
+                                <p class="text-[11px] text-slate-500 mt-1">Neg: Sujeto + didn't + Verb (Inf.)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">El "Efecto Dominó". Acciones completadas en el pasado. Se utiliza para contar sucesos continuos y puntuales.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Yesterday, last night, in 2010, ago, as soon as</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Past Continuous -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">2. Past Continuous <span class="text-xs bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded font-medium">El Escenario</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + was / were + Verb-ing</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">El decorado de la escena. Una acción larga que estaba ocurriendo en el pasado de fondo cuando de repente algo puntual la interrumpe.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>While, as, at 5 PM yesterday, when</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="theory-present" class="theory-sub-content space-y-6 hidden">
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">3. Present Simple <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-medium">Rutina y Hecho</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + Verb (base / -s)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Tus costumbres, verdades universales, horarios o estados permanentes en tu vida.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Always, usually, twice a week, every</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="theory-future" class="theory-sub-content space-y-6 hidden">
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">4. Future Simple (Will) <span class="text-xs bg-rose-500/10 text-rose-300 px-2 py-0.5 rounded font-medium">La Promesa o Intuición</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + will + Verb (Infinitivo)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Decisiones improvisadas, promesas inquebrantables, o predicciones basadas puramente en tu opinión subjetiva.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>I think, probably, promise, next year</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 2: ÁREA DE PRÁCTICAS GENERAL ================= -->
+        <section id="practice-section" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- LATERAL DE HISTORIAS Y SELECCIÓN DE COMPETENCIAS -->
+            <section class="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-4">
+                
+                <!-- SELECTOR DE COMPETENCIA (GAP-FILL, READING, LISTENING) -->
+                <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-2 flex flex-col gap-1">
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 px-2 py-1">Modalidad de Práctica</span>
+                    <div class="grid grid-cols-3 gap-1">
+                        <button onclick="setCompetenceMode('fill')" id="comp-btn-fill" class="py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 bg-indigo-600 text-white">
+                            <span>📝</span>
+                            <span>Gap-Fill</span>
+                        </button>
+                        <button onclick="setCompetenceMode('reading')" id="comp-btn-reading" class="py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 text-slate-400 hover:bg-slate-900">
+                            <span>📖</span>
+                            <span>Reading</span>
+                        </button>
+                        <button onclick="setCompetenceMode('listening')" id="comp-btn-listening" class="py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 text-slate-400 hover:bg-slate-900">
+                            <span>🎧</span>
+                            <span>Listening</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-800/80 my-1"></div>
+
+                <div class="flex items-center justify-between px-2">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider" id="sidebar-activity-title">Selecciona un Ejercicio</h2>
+                    <span id="activity-counter-badge" class="text-[10px] font-bold bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full">5 Disponibles</span>
+                </div>
+
+                <!-- LISTADO DINÁMICO DE ACTIVIDADES -->
+                <div class="flex flex-col gap-2 max-h-[300px] lg:max-h-[500px] overflow-y-auto pr-1" id="story-selector-list">
+                    <!-- Se inyecta dinámicamente según competencia activa -->
+                </div>
+                
+                <!-- Estadísticas de Sección -->
+                <div class="border-t border-slate-800 pt-4 mt-2">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 px-2">Rendimiento Actual</h3>
+                    <div class="grid grid-cols-2 gap-2 text-center">
+                        <div class="bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
+                            <p class="text-2xl font-extrabold text-indigo-400" id="stat-total-correct">0</p>
+                            <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wide">Aciertos</p>
+                        </div>
+                        <div class="bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
+                            <p class="text-2xl font-extrabold text-violet-400" id="stat-accuracy">0%</p>
+                            <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wide">Precisión</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTENEDOR CENTRAL DE ACTIVIDAD -->
+            <section class="lg:col-span-8 flex flex-col gap-6">
+                
+                <!-- FICHA DE ACTIVIDAD INTERACTIVA -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden" id="active-story-card">
+                    
+                    <!-- CABECERA DE RETO -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20" id="story-active-badge">Reto 1</span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400" id="story-genre-badge">Modo Gap-Fill</span>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white tracking-tight" id="story-title">Título de Actividad</h2>
+                        </div>
+                        <div class="text-right flex flex-col items-end">
+                            <span class="text-xs text-slate-400 font-medium">Estado del ejercicio:</span>
+                            <span class="text-sm font-bold text-yellow-500" id="story-status-text">Pendiente de realizar</span>
+                        </div>
+                    </div>
+
+                    <!-- REPRODUCTOR DE LISTENING (SOLO SE MUESTRA EN MODO LISTENING) -->
+                    <div id="listening-player-container" class="hidden bg-slate-950 border border-slate-800 rounded-2xl p-4 mb-6 animate-fade-in flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
+                                Reproductor B2 Oxford Audio
+                            </span>
+                            <div class="flex items-center gap-2">
+                                <label class="text-[10px] font-bold text-slate-400">Velocidad:</label>
+                                <select id="listening-speed" class="bg-slate-900 border border-slate-700 rounded text-[10px] text-white px-1.5 py-0.5">
+                                    <option value="1">1.0x (Normal)</option>
+                                    <option value="0.8">0.8x (B2 Training)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-slate-900/60 p-3 rounded-xl border border-slate-800/80">
+                            <button onclick="playListeningAudio()" id="btn-audio-play" class="h-12 w-12 rounded-full bg-indigo-600 hover:bg-indigo-500 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/25 active:scale-95 transition-all text-white font-bold text-lg">
+                                ▶
+                            </button>
+                            <button onclick="stopListeningAudio()" class="h-10 w-10 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center shrink-0 active:scale-95 transition-all text-slate-300 text-sm">
+                                ⏹
+                            </button>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-[10px] text-slate-500 font-semibold mb-1">
+                                    <span id="player-status-lbl">Listo para reproducir</span>
+                                    <span>Voz Oxford Británica/Americana</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div id="listening-progress-bar" class="bg-gradient-to-r from-indigo-500 to-violet-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón para ver script -->
+                        <details class="group bg-slate-900/40 rounded-xl border border-slate-800/60">
+                            <summary class="list-none flex items-center justify-between p-3 cursor-pointer text-xs font-bold text-slate-400 select-none hover:text-white transition-colors">
+                                <span>📄 Mostrar/Ocultar Transcripción (Audio Script)</span>
+                                <span class="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <div class="p-4 border-t border-slate-800/80 text-xs text-slate-300 leading-relaxed italic bg-slate-950/20" id="listening-transcript-text">
+                                Transcripción de prueba...
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Sinopsis / Instrucción -->
+                    <p class="text-sm text-slate-400 bg-slate-950/40 border border-slate-800/50 rounded-xl p-4 mb-6 italic" id="story-intro">
+                        Instrucciones de la prueba...
+                    </p>
+
+                    <!-- CUERPO DE EJERCICIO CENTRAL -->
+                    <div class="text-slate-200 leading-relaxed text-base md:text-lg mb-8 space-y-4" id="story-text-container">
+                        <!-- Se inyecta dinámicamente según ejercicio -->
+                    </div>
+
+                    <!-- BOTONES DE CONTROL -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 border-t border-slate-800 pt-6">
+                        <button onclick="resetCurrentExercise()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H17" />
+                            </svg>
+                            Reiniciar Ejercicio
+                        </button>
+
+                        <button onclick="checkAnswers()" class="px-7 py-3 bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-bold rounded-xl text-sm transition-all duration-200 transform hover:scale-[1.02] shadow-lg shadow-indigo-500/20 active:scale-95 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Verificar Respuestas
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DIAGNÓSTICO DETALLADO -->
+                <div id="feedback-panel" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 animate-fade-in">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Reporte Diagnóstico</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-4 flex flex-col items-center justify-center p-4 bg-slate-950/50 border border-slate-800/80 rounded-2xl text-center">
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Resultado</span>
+                            <span class="text-4xl font-black text-indigo-400 mb-2" id="feedback-score-ratio">0 / 10</span>
+                            <div class="w-full bg-slate-800 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full transition-all duration-500" id="feedback-score-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="md:col-span-8">
+                            <h4 class="text-sm font-bold text-slate-300 mb-1">Análisis para David:</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed" id="feedback-text">
+                                Introduce tus respuestas arriba para ver un análisis pormenorizado de tus errores.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 border-t border-slate-800 pt-6">
+                        <h4 class="text-sm font-bold text-slate-300 mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            Explicación Paso a Paso:
+                        </h4>
+                        <div class="space-y-3" id="explanation-list">
+                            <!-- Inyección vía JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
+        <!-- ================= SECCIÓN 3: PHRASAL VERBS ================= -->
+        <section id="phrasals-section" class="hidden animate-fade-in space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                
+                <!-- Cabecera -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-pink-500/10 text-pink-300 border border-pink-500/20">Sección Phrasals</span>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400" id="phrasal-total-count-badge">Estructuras Clave</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Diccionario de Phrasal Verbs B2</h2>
+                    </div>
+                    <button onclick="exportPhrasalsToCSV()" class="bg-pink-600 hover:bg-pink-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-2 shadow-lg shadow-pink-600/10">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Exportar Phrasals a CSV
+                    </button>
+                </div>
+
+                <!-- Búsqueda y Filtros de la A a la Z -->
+                <div class="space-y-4 mb-6">
+                    <div class="relative max-w-md">
+                        <input type="text" id="phrasal-search-input" onkeyup="filterPhrasals()" placeholder="Buscar por phrasal, significado en español o ejemplo..." class="w-full bg-slate-950 border border-slate-800 focus:border-pink-500 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-pink-500 transition-all">
+                        <span class="absolute right-3.5 top-3.5 text-slate-600">🔍</span>
+                    </div>
+
+                    <!-- Faja de Letras A-Z -->
+                    <div class="flex flex-col gap-1.5">
+                        <span class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Filtrado Rápido por Letra:</span>
+                        <div class="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-800" id="phrasal-alphabet-strip">
+                            <!-- Inyección JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Phrasal Verbs -->
+                <div class="overflow-x-auto rounded-2xl border border-slate-800/80 bg-slate-950/20 max-h-[500px]">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-900 sticky top-0 z-10 border-b border-slate-800">
+                            <tr>
+                                <th class="p-4 font-bold text-slate-300 uppercase tracking-wider w-1/4">Phrasal Verb</th>
+                                <th class="p-4 font-bold text-slate-300 uppercase tracking-wider w-1/3">Spanish Meaning</th>
+                                <th class="p-4 font-bold text-pink-400 uppercase tracking-wider w-5/12">B2 Context Example</th>
+                            </tr>
+                        </thead>
+                        <tbody id="phrasals-table-body" class="divide-y divide-slate-800/60">
+                            <!-- Inyección JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 4: VERBOS IRREGULARES ================= -->
+        <section id="verbs-section" class="hidden animate-fade-in space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                
+                <!-- Cabecera -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-violet-500/10 text-violet-300 border border-violet-500/20">Sección Oro</span>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400">225 Verbos</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Diccionario Oficial de Verbos Irregulares</h2>
+                    </div>
+                    <button onclick="exportVerbsToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-2 shadow-lg shadow-emerald-600/10">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Exportar Verbos a CSV
+                    </button>
+                </div>
+
+                <!-- Búsqueda e Índice de la A a la Z -->
+                <div class="space-y-4 mb-6">
+                    <div class="relative max-w-md">
+                        <input type="text" id="verb-search-input" onkeyup="filterVerbs()" placeholder="Buscar por infinitivo, pasado simple, participio o español..." class="w-full bg-slate-950 border border-slate-800 focus:border-violet-500 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all">
+                        <span class="absolute right-3.5 top-3.5 text-slate-600">🔍</span>
+                    </div>
+
+                    <!-- Faja de Letras A-Z -->
+                    <div class="flex flex-col gap-1.5">
+                        <span class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Filtrado Rápido por Letra:</span>
+                        <div class="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-800" id="verb-alphabet-strip">
+                            <!-- Inyección JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Verbos Irregulares -->
+                <div class="overflow-x-auto rounded-2xl border border-slate-800/80 bg-slate-950/20 max-h-[600px]">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-900 sticky top-0 z-10 border-b border-slate-800">
+                            <tr>
+                                <th class="p-4 font-bold text-slate-300 uppercase tracking-wider">Infinitive (1)</th>
+                                <th class="p-4 font-bold text-slate-300 uppercase tracking-wider">Past Simple (2)</th>
+                                <th class="p-4 font-bold text-slate-300 uppercase tracking-wider">Past Participle (3)</th>
+                                <th class="p-4 font-bold text-slate-300 uppercase tracking-wider">Spanish Meaning (4)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="irregular-verbs-table-body" class="divide-y divide-slate-800/60">
+                            <!-- Inyección JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CHULETA DE ESTUDIO LATERAL -->
+    <div id="cheat-sheet-sidebar" class="fixed inset-y-0 right-0 w-full max-w-lg bg-slate-900 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </span>
+                <h3 class="text-base font-bold text-white uppercase tracking-wider" id="cheat-sheet-main-title">Chuleta de Oro</h3>
+            </div>
+            <button onclick="toggleCheatSheet()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto flex-1 space-y-6" id="cheat-sheet-content-container">
+            <!-- Rellenado dinámico -->
+        </div>
+    </div>
+    
+    <!-- OVERLAY CHULETA -->
+    <div id="cheat-sheet-overlay" onclick="toggleCheatSheet()" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity duration-300 ease-in-out"></div>
+
+    <!-- MODAL DETECTIVE PROFE IA -->
+    <div id="ai-teacher-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 opacity-0 transition-all duration-300">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="ai-teacher-modal-card">
+            
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-gradient-to-r from-indigo-950/40 to-slate-900">
+                <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">✨</div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Análisis del Ejercicio</h3>
+                        <p class="text-[10px] text-indigo-400 font-extrabold tracking-wider uppercase">Método de Corrección • B2 Oxford</p>
+                    </div>
+                </div>
+                <button onclick="closeAITeacherModal()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-4">
+                <div class="text-xs text-indigo-300 font-bold uppercase tracking-wider bg-indigo-500/10 border border-indigo-500/20 rounded-lg px-3 py-2 flex flex-wrap gap-2 items-center justify-between">
+                    <span>Pregunta / Verbo: <span id="ai-modal-verb" class="font-mono text-white">...</span></span>
+                    <span class="text-[10px] bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">
+                        <span id="ai-modal-user" class="font-mono text-rose-400 line-through">...</span> ➜ <span id="ai-modal-correct" class="font-mono text-emerald-400">...</span>
+                    </span>
+                </div>
+                
+                <div id="ai-modal-response-container" class="text-sm text-slate-300 leading-relaxed max-h-[250px] overflow-y-auto pr-2 space-y-2">
+                    <!-- Respuesta Explicativa -->
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-950/50 border-t border-slate-800 flex justify-end">
+                <button onclick="closeAITeacherModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-xs transition-colors shadow-lg shadow-indigo-500/20">
+                    ¡Entendido!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-4 text-center text-xs text-slate-500 mt-auto">
+        Plataforma integral de tiempos verbales • Éxito garantizado para David en el B2 de Oxford • © 2026.
+    </footer>
+
+    <!-- LÓGICA DE CONTROL DE LA PLATAFORMA -->
+    <script>
+        // VARIABLE DE ESTADO COMPETENCIA (fill, reading, listening)
+        let activeCompetence = 'fill'; 
+
+        // ================= BASE DE DATOS DE EJERCICIOS (ESTÁTICA, ESTABLE Y AMPLIA) =================
+
+        // 1. GAP-FILL STORIES (Exactamente 5 por bloque: Pasado, Presente, Futuro)
+        const storiesDB = {
+            past: [
+                {
+                    id: 1,
+                    title: "The Midnight Highway Call",
+                    genre: "Misterio",
+                    introduction: "Una misteriosa llamada interrumpe un viaje solitario por carretera en las montañas de Canarias.",
+                    text: [
+                        "While I ", " home, it suddenly ", " to rain heavily. I ", " the car by the side of the road and ", " a dark shadow moving in the woods. The road was extremely slippery because it ", " for hours. As soon as I ", " a strange tapping on my window, I realized that I ", " my phone at the office. I frantically ", " to turn on the engine, but it ", ". While I ", " in terror, someone knocked loudly on the glass."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "drive", answers: ["was driving"], hint: "Acción de fondo.", explanation: "'While' indica un fondo escénico continuo: Past Continuous." },
+                        { index: 1, verb: "start", answers: ["started"], hint: "Acción repentina.", explanation: "Un acontecimiento puntual que interrumpe: Past Simple." },
+                        { index: 2, verb: "stop", answers: ["stopped"], hint: "Consecución lógica.", explanation: "Efecto dominó rápido: detuve el coche: Past Simple." },
+                        { index: 3, verb: "see", answers: ["saw"], hint: "Ficha consecutiva.", explanation: "Siguiente acción de la cadena: Past Simple." },
+                        { index: 4, verb: "rain", answers: ["had been raining"], hint: "Duración de causa previa.", explanation: "La carretera estaba mojada por una lluvia previa prolongada: Past Perfect Continuous." },
+                        { index: 5, verb: "hear", answers: ["heard"], hint: "Reacción instantánea.", explanation: "'As soon as' delata una reacción inmediata: Past Simple." },
+                        { index: 6, verb: "leave", answers: ["had left"], hint: "El pasado del pasado.", explanation: "Dejé el teléfono antes de iniciar el viaje: Past Perfect Simple." },
+                        { index: 7, verb: "try", answers: ["tried"], hint: "Acción voluntaria única.", explanation: "Intento puntual en un momento concreto: Past Simple." },
+                        { index: 8, verb: "not work", answers: ["did not work", "didn't work"], hint: "Estado puntual negativo.", explanation: "Un hecho cerrado que falló: Past Simple negativo." },
+                        { index: 9, verb: "wait", answers: ["was waiting"], hint: "Acción de fondo en progreso.", explanation: "La espera continuaba en el trasfondo mientras llamaban: Past Continuous." }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "The Lost Sun Temple",
+                    genre: "Aventura",
+                    introduction: "Un grupo de arqueólogos busca las ruinas del legendario Templo del Sol en la selva.",
+                    text: [
+                        "By noon, the explorers ", " for five hours when they suddenly ", " the hidden entrance. As soon as they ", " the dense jungle vines, they ", " inside. The morning sun ", " through the rock cracks. Suddenly, Sarah realized she ", " the compass, but they ", " to continue. While they ", " the wall drawings, they ", " a deep rumbling noise. Frightened, they ", " out into the open immediately."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "walk", answers: ["had been walking"], hint: "Proceso duradero acumulado.", explanation: "Llevaban 5 horas acumuladas caminando antes del hito: Past Perfect Continuous." },
+                        { index: 1, verb: "find", answers: ["found"], hint: "Encuentro repentino.", explanation: "Acción corta que interrumpe la caminata: Past Simple." },
+                        { index: 2, verb: "clear", answers: ["cleared"], hint: "Efecto dominó rápido.", explanation: "Limpiaron las lianas inmediatamente después: Past Simple." },
+                        { index: 3, verb: "step", answers: ["stepped"], hint: "Siguiente acción consecutiva.", explanation: "Entraron en el templo: Past Simple." },
+                        { index: 4, verb: "shine", answers: ["was shining"], hint: "Fondo escénico.", explanation: "El sol decoraba el ambiente brillando de fondo: Past Continuous." },
+                        { index: 5, verb: "lose", answers: ["had lost"], hint: "Acción anterior de fondo.", explanation: "Perdió la brújula mucho antes de entrar: Past Perfect Simple." },
+                        { index: 6, verb: "decide", answers: ["decided"], hint: "Decisión puntual en el tiempo.", explanation: "Determinaron continuar la marcha: Past Simple." },
+                        { index: 7, verb: "examine", answers: ["were examining"], hint: "Acción prolongada en curso.", explanation: "Estaban ocupados investigando los muros cuando ocurrió algo: Past Continuous." },
+                        { index: 8, verb: "hear", answers: ["heard"], hint: "Interrupción puntual.", explanation: "Oyeron el ruido de repente: Past Simple." },
+                        { index: 9, verb: "run", answers: ["ran"], hint: "Fuga instantánea.", explanation: "Salieron corriendo como acto seguido: Past Simple." }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "The Secret Bakery Recipe",
+                    genre: "Comedia",
+                    introduction: "Un desastroso chef intenta hornear el pastel de bodas más grande de Vecindario.",
+                    text: [
+                        "Yesterday morning, chef Marco ", " a premium wedding cake. He ", " his assistant's instructions because he ", " he was a genius. While the cake ", " in the oven, he realized that he ", " salt instead of sugar! By the time he open the oven door, the cake ", " completely. Marco was furious because he ", " his brand-new kitchen for hours. Suddenly, the bride ", " in, looked at the disaster, and ", " laughing. Marco realized he ", " his career."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "prepare", answers: ["was preparing"], hint: "Escenario o acción de fondo.", explanation: "Estaba en proceso de preparación como marco de la historia: Past Continuous." },
+                        { index: 1, verb: "not follow", answers: ["did not follow", "didn't follow"], hint: "Hecho negativo cerrado.", explanation: "Hecho simple puntual del relato: Past Simple." },
+                        { index: 2, verb: "believe", answers: ["believed"], hint: "Estado cognitivo.", explanation: "Los verbos de estado en pasado usan Past Simple." },
+                        { index: 3, verb: "bake", answers: ["was baking"], hint: "Acción de fondo en curso.", explanation: "Mientras el bizcocho se horneaba lentamente: Past Continuous." },
+                        { index: 4, verb: "use", answers: ["had used"], hint: "Hecho anterior al horneado.", explanation: "El uso de la sal ocurrió antes del horneado (pasado del pasado): Past Perfect Simple." },
+                        { index: 5, verb: "rise", answers: ["had risen"], hint: "Hito completado antes del momento límite.", explanation: "El bizcocho ya había subido antes de abrir el horno: Past Perfect Simple." },
+                        { index: 6, verb: "clean", answers: ["had been cleaning"], hint: "Esfuerzo físico previo duradero.", explanation: "Llevaba horas limpiando antes de la catástrofe: Past Perfect Continuous." },
+                        { index: 7, verb: "walk", answers: ["walked"], hint: "Acción puntual que interrumpe.", explanation: "Entró por la puerta de manera repentina: Past Simple." },
+                        { index: 8, verb: "start", answers: ["started"], hint: "Acción inmediata de reacción.", explanation: "Comenzó a reírse como consecuencia directa: Past Simple." },
+                        { index: 9, verb: "ruin", answers: ["had ruined"], hint: "Resultado previo consolidado.", explanation: "Creyó que ya había arruinado su trayectoria antes de esa risa: Past Perfect Simple." }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "The Abandoned Cabin",
+                    genre: "Misterio",
+                    introduction: "Dos amigos se refugian en una cabaña olvidada durante una tormenta.",
+                    text: [
+                        "Last Friday, Lucas and Leo ", " in the forest when a storm ", ". They ", " shelter for an hour before they ", " an old cabin. The wind ", " violently through the trees. Inside, they saw that someone ", " a fire, as the ashes were still warm. While they ", " some dry clothes, the door suddenly ", " open. Lucas, who ", " spooky stories all week, screamed. But it was only a lost dog."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "hike", answers: ["were hiking"], hint: "Acción larga de fondo.", explanation: "Estaban de excursión cuando todo empezó: Past Continuous." },
+                        { index: 1, verb: "break out", answers: ["broke out"], hint: "Acción puntual imprevista.", explanation: "La tormenta estalló de repente: Past Simple." },
+                        { index: 2, verb: "seek", answers: ["had been seeking"], hint: "Proceso duradero previo.", explanation: "Llevaban una hora buscando refugio antes de encontrarlo: Past Perfect Continuous." },
+                        { index: 3, verb: "discover", answers: ["discovered"], hint: "Hito puntual.", explanation: "Encontraron la cabaña en un momento dado: Past Simple." },
+                        { index: 4, verb: "blow", answers: ["was blowing"], hint: "Fondo atmosférico.", explanation: "El viento soplaba (decorado escénico): Past Continuous." },
+                        { index: 5, verb: "light", answers: ["had lit"], hint: "Acción previa al hallazgo.", explanation: "Alguien había encendido el fuego con anterioridad: Past Perfect Simple." },
+                        { index: 6, verb: "seek", answers: ["were seeking"], hint: "Acción en curso paralela.", explanation: "Estaban buscando ropa seca mientras ocurría otra cosa: Past Continuous." },
+                        { index: 7, verb: "fly", answers: ["flew"], hint: "Acción interruptora rápida.", explanation: "La puerta se abrió de golpe: Past Simple." },
+                        { index: 8, verb: "read", answers: ["had been reading"], hint: "Proceso de fondo repetitivo previo.", explanation: "Llevaba toda la semana leyendo historias de miedo: Past Perfect Continuous." },
+                        { index: 9, verb: "scream", answers: ["screamed"], hint: "Reacción puntual rápida.", explanation: "Gritó de inmediato: Past Simple." }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "A Life-Changing Journey",
+                    genre: "Drama",
+                    introduction: "Elena decide dar un giro radical a su carrera mudándose al extranjero.",
+                    text: [
+                        "By 2025, Elena ", " as an accountant for ten years. She ", " her job because it ", " extremely boring. As soon as she ", " her resignation letter, she ", " a one-way ticket to Dublin. Her family ", " her decision at first, but she proved them wrong. When she arrived in Ireland, she realized she ", " her passport. Fortunately, she ", " a digital copy on her drive. Within months, she ", " her own company."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "work", answers: ["had been working"], hint: "Duración de carrera previa.", explanation: "Había estado trabajando durante 10 años antes de renunciar: Past Perfect Continuous." },
+                        { index: 1, verb: "hate", answers: ["hated"], hint: "Verbo de estado pasado.", explanation: "Odiaba su trabajo (estado emocional): Past Simple." },
+                        { index: 2, verb: "become", answers: ["had become"], hint: "Estado previo consolido.", explanation: "El trabajo se había vuelto aburrido antes de que decidiera dejarlo: Past Perfect Simple." },
+                        { index: 3, verb: "submit", answers: ["submitted"], hint: "Reacción secuencial.", explanation: "En cuanto entregó su carta (hecho puntual): Past Simple." },
+                        { index: 4, verb: "buy", answers: ["bought"], hint: "Siguiente paso consecutiva.", explanation: "Compró el billete de avión: Past Simple." },
+                        { index: 5, verb: "not support", answers: ["did not support", "didn't support"], hint: "Falta de apoyo puntual.", explanation: "Hecho negativo puntual en el pasado: Past Simple." },
+                        { index: 6, verb: "lose", answers: ["had lost"], hint: "Hecho de pérdida anterior.", explanation: "Había extraviado el pasaporte antes de pasar por aduana: Past Perfect Simple." },
+                        { index: 7, verb: "save", answers: ["had saved"], hint: "Acción de previsión previa.", explanation: "Había guardado una copia en la nube con antelación: Past Perfect Simple." },
+                        { index: 8, verb: "launch", answers: ["launched"], hint: "Hito puntual completado.", explanation: "Fundó su empresa como acción puntual cerrada en el pasado: Past Simple." },
+                        { index: 9, verb: "always want", answers: ["had always wanted"], hint: "Deseo prolongado del pasado del pasado.", explanation: "Era algo que siempre había querido hacer antes de dar el paso: Past Perfect Simple." }
+                    ]
+                }
+            ],
+            present: [
+                {
+                    id: 1,
+                    title: "La Cafetería de Vecindario",
+                    genre: "Vida Real",
+                    introduction: "Sigue las rutinas y novedades de un cliente habitual en un rincón acogedor de Vecindario.",
+                    text: [
+                        "Every morning, the cozy coffee shop in Vecindario ", " at 7:00 AM. Today, many customers ", " in line because the weather is freezing. I ", " this place for three years, and I can say they make the best espresso. Right now, the barista ", " my favorite drink. Lately, they ", " to offer vegan options, which is great. I ", " a croissant, but it ", " yet. Usually, the owner ", " everyone personally. At the moment, he ", " to a supplier on the phone."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "open", answers: ["opens"], hint: "Hecho rutinario.", explanation: "Rutina diaria: Present Simple." },
+                        { index: 1, verb: "wait", answers: ["are waiting"], hint: "Acción en vivo.", explanation: "'Today' e 'is freezing' indican una acción en desarrollo ahora: Present Continuous." },
+                        { index: 2, verb: "visit", answers: ["have visited"], hint: "Periodo conector con el pasado.", explanation: "Lleva 3 años visitándolo hasta hoy: Present Perfect Simple." },
+                        { index: 3, verb: "prepare", answers: ["is preparing"], hint: "Directo de instagram.", explanation: "'Right now' indica acción en desarrollo: Present Continuous." },
+                        { index: 4, verb: "try", answers: ["have been trying"], hint: "Esfuerzo progresivo reciente.", explanation: "'Lately' demanda un proceso que sigue vivo desde el pasado reciente: Present Perfect Continuous." },
+                        { index: 5, verb: "already order", answers: ["have already ordered"], hint: "Hito con 'already'.", explanation: "Ya lo he pedido: Present Perfect Simple." },
+                        { index: 6, verb: "not arrive", answers: ["has not arrived", "hasn't arrived"], hint: "Acción inconclusa con 'yet'.", explanation: "'Yet' en negativas exige: Present Perfect Simple." },
+                        { index: 7, verb: "greet", answers: ["greets"], hint: "Frecuencia general.", explanation: "'Usually' marca un hábito: Present Simple." },
+                        { index: 8, verb: "talk", answers: ["is talking"], hint: "Acción puntual en desarrollo.", explanation: "'At the moment' expresa acción simultánea al habla: Present Continuous." },
+                        { index: 9, verb: "change", answers: ["have been changing"], hint: "Proceso evolutivo reciente.", explanation: "Llevan cambiando el menú de forma constante este mes: Present Perfect Continuous." }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "The Digital Nomad Life",
+                    genre: "Trabajo",
+                    introduction: "Conoce el día a día de un nómada digital que trabaja en Vecindario.",
+                    text: [
+                        "Alex is a software engineer who ", " in Vecindario this winter. He usually ", " at 8:00 AM. Currently, he ", " on a major project for an American startup. He ", " three different coworking hubs so far, and he loves them. Since he arrived, he ", " Spanish vocabulary every day. At this moment, his team ", " an urgent bug. He ", " his computer for six hours today. Alex enjoys this lifestyle because he ", " free to plan his schedule. Now, he ", " a coffee breaks to stretch."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "live", answers: ["is living"], hint: "Situación provisional.", explanation: "Vivir allí este invierno es provisional: Present Continuous." },
+                        { index: 1, verb: "start", answers: ["starts"], hint: "Hábito o rutina.", explanation: "'Usually' indica regularidad: Present Simple." },
+                        { index: 2, verb: "work", answers: ["is working"], hint: "Foco de trabajo actual.", explanation: "'Currently' requiere acción en progreso: Present Continuous." },
+                        { index: 3, verb: "visit", answers: ["has visited"], hint: "Resultados hasta ahora.", explanation: "'So far' mide hitos de experiencia hasta hoy: Present Perfect Simple." },
+                        { index: 4, verb: "study", answers: ["has been studying"], hint: "Esfuerzo constante continuado.", explanation: "Estudio persistente desde que llegó: Present Perfect Continuous." },
+                        { index: 5, verb: "solve", answers: ["is solving"], hint: "Acción en directo.", explanation: "'At this moment' indica directo de Instagram: Present Continuous." },
+                        { index: 6, verb: "use", answers: ["has been using"], hint: "Lazo temporal de duración.", explanation: "Lleva 6 horas consecutivas usando el PC hoy: Present Perfect Continuous." },
+                        { index: 7, verb: "feel", answers: ["feels"], hint: "Estado permanente de percepción.", explanation: "Verbo de estado de opinión: Present Simple." },
+                        { index: 8, verb: "take", answers: ["is taking"], hint: "Acción inmediata.", explanation: "'Now' indica acción en progreso actual: Present Continuous." },
+                        { index: 9, verb: "not want", answers: ["does not want", "doesn't want"], hint: "Estado negativo permanente.", explanation: "Verbo de estado cognitivo negativo: Present Simple." }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "A Dog Sanctuary's Mission",
+                    genre: "Social",
+                    introduction: "Descubre la bonita labor de un santuario de animales local en Gran Canaria.",
+                    text: [
+                        "The animal shelter in town ", " care of abandoned dogs. Every weekend, volunteers ", " to walk the animals. Right now, a vet ", " a little puppy. The shelter ", " over 200 pets this year alone. Recently, the manager ", " for more donations online. How long ", " you ", " as a volunteer? I ", " about joining them since last month. Currently, they ", " a brand new play area."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "take", answers: ["takes"], hint: "Hecho permanente o verdad.", explanation: "Es un hecho estable de la institución: Present Simple." },
+                        { index: 1, verb: "come", answers: ["come"], hint: "Hábito del fin de semana.", explanation: "Acción recurrente de fin de semana: Present Simple." },
+                        { index: 2, verb: "examine", answers: ["is examining"], hint: "Directo en progreso.", explanation: "'Right now' delata acción clínica en curso: Present Continuous." },
+                        { index: 3, verb: "rescue", answers: ["has rescued"], hint: "Hito acumulado.", explanation: "Logro de rescates en un tiempo no cerrado (este año): Present Perfect Simple." },
+                        { index: 4, verb: "ask", answers: ["has been asking"], hint: "Demanda continua reciente.", explanation: "El director lleva pidiendo ayuda de forma repetida últimamente: Present Perfect Continuous." },
+                        { index: 5, verb: "work", answers: ["have been working", "have worked"], hint: "Interrogativa de duración.", explanation: "¿Cuánto tiempo llevas colaborando?: Present Perfect Continuous." },
+                        { index: 6, verb: "think", answers: ["have been thinking"], hint: "Reflexión prolongada hasta hoy.", explanation: "'Since' demanda un proceso que empezó en el pasado y sigue rondando: Present Perfect Continuous." },
+                        { index: 7, verb: "build", answers: ["are building"], hint: "Acción provisional actual.", explanation: "'Currently' indica construcción en curso: Present Continuous." },
+                        { index: 8, verb: "need", answers: ["need"], hint: "Necesidad de estado.", explanation: "Verbo de estado 'need' en presente: Present Simple." },
+                        { index: 9, verb: "love", answers: ["love"], hint: "Preferencia emocional.", explanation: "Verbo de estado de emoción: Present Simple." }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Eco-Friendly Initiatives",
+                    genre: "Medioambiente",
+                    introduction: "Vecindario se adapta a las energías verdes. Analiza el proceso ecológico.",
+                    text: [
+                        "Many citizens of Vecindario now ", " solar energy. The local government ", " new recycling bins at this moment. I ", " green habits for years because climate change is real. Look! Those wind turbines ", " incredibly fast today. Recently, our carbon footprint ", " significantly. Scientists ", " renewable technologies for decades. Currently, my cousin ", " his electric car in the garage. He always ", " the environment."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "use", answers: ["use"], hint: "Estado general actual.", explanation: "Hecho permanente moderno: Present Simple." },
+                        { index: 1, verb: "install", answers: ["is installing"], hint: "Acción en vivo.", explanation: "'At this moment' indica instalación en desarrollo: Present Continuous." },
+                        { index: 2, verb: "practice", answers: ["have been practicing", "have been practising"], hint: "Hábito largo conectado hoy.", explanation: "Práctica ecológica prolongada durante años: Present Perfect Continuous." },
+                        { index: 3, verb: "spin", answers: ["are spinning"], hint: "Acción perceptible visual.", explanation: "'Look!' exige un directo en desarrollo: Present Continuous." },
+                        { index: 4, verb: "decrease", answers: ["has decreased"], hint: "Hito con resultado visible.", explanation: "La huella de carbono ha bajado recientemente: Present Perfect Simple." },
+                        { index: 5, verb: "develop", answers: ["have been developing"], hint: "Investigación duradera.", explanation: "'For decades' indica investigación de larga data: Present Perfect Continuous." },
+                        { index: 6, verb: "charge", answers: ["is charging"], hint: "Acción en curso.", explanation: "'Currently' indica carga en progreso: Present Continuous." },
+                        { index: 7, verb: "protect", answers: ["protects"], hint: "Adverbio de frecuencia 'always'.", explanation: "'Always' marca hábito del sujeto: Present Simple." },
+                        { index: 8, verb: "believe", answers: ["believes"], hint: "Verbo de opinión.", explanation: "Creencia (verbo de estado): Present Simple." },
+                        { index: 9, verb: "not buy", answers: ["does not buy", "doesn't buy"], hint: "Negación de hábito.", explanation: "Decisión rutinaria de no comprar plástico: Present Simple negativo." }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "The Culinary Masterpiece",
+                    genre: "Cocina",
+                    introduction: "Un chef de alta cocina se prepara para inaugurar su restaurante de gala.",
+                    text: [
+                        "Every single evening, chef Robert ", " his signature recipe. Today, his kitchen staff ", " harder than usual. I ", " a table at his restaurant three times, and his meals are incredible. At this moment, Robert ", " the final sauces. Lately, customers ", " for booking lists continuously. The restaurant ", " its doors yet, but it already has thousands of followers. Robert ", " a great success because he ", " a perfectionist. Right now, he ", " the plating."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "cook", answers: ["cooks"], hint: "Rutina del chef.", explanation: "'Every single evening' marca hábito: Present Simple." },
+                        { index: 1, verb: "work", answers: ["are working"], hint: "Acción provisional excepcional.", explanation: "'Today' combinado con un esfuerzo extraordinario provisional: Present Continuous." },
+                        { index: 2, verb: "reserve", answers: ["have reserved"], hint: "Experiencia acumulada.", explanation: "Reservar 3 veces mide la experiencia acumulada hasta hoy: Present Perfect Simple." },
+                        { index: 3, verb: "taste", answers: ["is tasting"], hint: "Acción activa voluntaria.", explanation: "Probar el plato justo ahora es una acción en desarrollo: Present Continuous." },
+                        { index: 4, verb: "demand", answers: ["have been demanding"], hint: "Proceso reciente de insistencia.", explanation: "'Lately' indica demanda acumulada reciente: Present Perfect Continuous." },
+                        { index: 5, verb: "not open", answers: ["has not opened", "hasn't opened"], hint: "Acción inconclusa con 'yet'.", explanation: "'Yet' exige el uso del Present Perfect Simple negativo." },
+                        { index: 6, verb: "expect", answers: ["expects"], hint: "Estado de creencia o previsión.", explanation: "Expectativa general (verbo de estado): Present Simple." },
+                        { index: 7, verb: "be", answers: ["is"], hint: "Estado permanente.", explanation: "Ser perfeccionista es una cualidad estable: Present Simple." },
+                        { index: 8, verb: "supervise", answers: ["is supervising"], hint: "Acción de control actual.", explanation: "'Right now' delata supervisión en directo: Present Continuous." },
+                        { index: 9, verb: "know", answers: ["knows"], hint: "Conocimiento de estado.", explanation: "Saber que los detalles lo son todo: Present Simple." }
+                    ]
+                }
+            ],
+            future: [
+                {
+                    id: 1,
+                    title: "El Examen de Oxford de David",
+                    genre: "Académico",
+                    introduction: "David se visualiza aprobando y certificando su nivel B2 de inglés.",
+                    text: [
+                        "By this time next month, David ", " his intensive B2 English course. Next Saturday, he ", " a full mock exam to test his skills. If he keeps studying like this, he ", " an excellent score. Tomorrow at 5:00 PM, he ", " the passive voice with his tutor. By the end of the year, he ", " his official Oxford certification. He ", " with his classmates once the results arrive. I am sure he ", " any problems with the listening part. Look at his efforts! He ", " for sure. From next week, he ", " on advanced writing techniques."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "finish", answers: ["will have finished"], hint: "Hito cerrado futuro.", explanation: "'By this time next month' marca límite de finalización: Future Perfect Simple." },
+                        { index: 1, verb: "take", answers: ["is taking", "is going to take"], hint: "Plan agendado.", explanation: "Plan agendado inminente: Present Continuous de futuro o Be Going To." },
+                        { index: 2, verb: "achieve", answers: ["will achieve"], hint: "Predicción condicionada.", explanation: "Estructura de primer condicional: Future Simple con 'will'." },
+                        { index: 3, verb: "practice", answers: ["will be practicing", "will be practising"], hint: "Acción suspendida en la hora.", explanation: "Momento futuro exacto de fondo: Future Continuous." },
+                        { index: 4, verb: "obtain", answers: ["will have obtained"], hint: "Hito cerrado con fecha límite.", explanation: "'By the end of the year' marca la fecha de vencimiento del logro: Future Perfect Simple." },
+                        { index: 5, verb: "celebrate", answers: ["will celebrate", "is going to celebrate"], hint: "Predicción / Intención firme.", explanation: "Planificación de celebración futura: Future Simple o Be Going To." },
+                        { index: 6, verb: "not have", answers: ["will not have", "won't have"], hint: "Predicción subjetiva.", explanation: "Predicción basada en opinión personal: Future Simple negativo." },
+                        { index: 7, verb: "succeed", answers: ["is going to succeed"], hint: "Predicción con evidencia.", explanation: "Sus esfuerzos actuales son la evidencia física del éxito: Be Going To." },
+                        { index: 8, verb: "focus", answers: ["will focus", "is going to focus"], hint: "Decisión organizativa.", explanation: "Enfoque a partir de la próxima semana: Future Simple o Be Going To." },
+                        { index: 9, verb: "study", answers: ["will have been studying"], hint: "Proceso de duración acumulado.", explanation: "Llevará 2 años estudiando para cuando se gradúe: Future Perfect Continuous." }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Humans on Mars in 2040",
+                    genre: "Ciencia Ficción",
+                    introduction: "Proyecciones científicas sobre la primera base estable en el planeta rojo.",
+                    text: [
+                        "By 2040, aerospace agencies ", " the first colony on Mars. Next January, scientists ", " a new robotic rover to search for underground water. If the mission succeeds, astronauts ", " Mars in the following decade. In July, a team of engineers ", " gravity simulations. By the end of the century, humanity ", " several cities on other planets. I am certain that space travel ", " as common as flying today. Look at those rocket prototypes! They ", " very soon. Scientists ", " the rocket engines tomorrow afternoon."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "build", answers: ["will have built"], hint: "Hito cerrado en el 2040.", explanation: "'By 2040' marca el límite para completar la construcción: Future Perfect Simple." },
+                        { index: 1, verb: "launch", answers: ["are launching", "are going to launch"], hint: "Plan agendado de agencia.", explanation: "Plan inminente programado: Present Continuous de futuro o Be Going To." },
+                        { index: 2, verb: "visit", answers: ["will visit"], hint: "Predicción condicionada.", explanation: "Estructura condicional tipo 1: Future Simple." },
+                        { index: 3, verb: "conduct", answers: ["will be conducting"], hint: "Acción en curso en fecha futura.", explanation: "Estarán realizando simulaciones durante ese mes futuro: Future Continuous." },
+                        { index: 4, verb: "establish", answers: ["will have established"], hint: "Hito a fin de siglo.", explanation: "'By the end of the century' indica logro completado: Future Perfect Simple." },
+                        { index: 5, verb: "become", answers: ["will become"], hint: "Predicción subjetiva.", explanation: "Predicción basada en opinión tecnológica: Future Simple." },
+                        { index: 6, verb: "test-launch", answers: ["are going to test-launch"], hint: "Evidencia física visual.", explanation: "Los prototipos físicos son la evidencia del despegue inminente: Be Going To." },
+                        { index: 7, verb: "evaluate", answers: ["will be evaluating"], hint: "Acción suspendida en la tarde.", explanation: "Estarán evaluando los motores mañana por la tarde: Future Continuous." },
+                        { index: 8, verb: "travel", answers: ["will have been traveling", "will have been travelling"], hint: "Duración de viaje espacial.", explanation: "Habrán estado viajando por meses antes de aterrizar: Future Perfect Continuous." },
+                        { index: 9, verb: "unlock", answers: ["will unlock"], hint: "Predicción categórica.", explanation: "Predicción absoluta del desarrollo de la humanidad: Future Simple." }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Vecindario Smart City Plan",
+                    genre: "Urbanismo",
+                    introduction: "El plan estratégico para modernizar la ciudad canaria en la próxima década.",
+                    text: [
+                        "By next year, Vecindario ", " several eco-friendly parks. Next month, the city council ", " smart streetlights across the central avenue. If citizens cooperate, we ", " our energy waste by half. Tomorrow at 10 AM, municipal workers ", " solar panels. By the end of 2030, our local carbon emissions ", " completely. I think this project ", " Vecindario into a beautiful green city. Look! They ", " the charging stations tomorrow because the cables are ready."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "complete", answers: ["will have completed"], hint: "Hito cerrado para el próximo año.", explanation: "'By next year' marca la fecha de consolidación: Future Perfect Simple." },
+                        { index: 1, verb: "install", answers: ["is installing", "is going to install"], hint: "Plan urbano programado.", explanation: "Acción planificada e inminente de la alcaldía: Present Continuous de futuro o Be Going To." },
+                        { index: 2, verb: "reduce", answers: ["will reduce"], hint: "Consecuencia lógica condicional.", explanation: "Consecuencia directa en primer condicional: Future Simple con 'will'." },
+                        { index: 3, verb: "fit", answers: ["will be fitting"], hint: "Acción en pleno progreso en hora fija.", explanation: "Estarán instalando paneles a esa hora concreta: Future Continuous." },
+                        { index: 4, verb: "disappear", answers: ["will have disappeared"], hint: "Hito cerrado para 2030.", explanation: "'By the end of 2030' marca la consolidación definitiva: Future Perfect Simple." },
+                        { index: 5, verb: "transform", answers: ["will transform"], hint: "Predicción subjetiva con 'I think'.", explanation: "'I think' requiere predicción subjetiva con 'will': Future Simple." },
+                        { index: 6, verb: "connect", answers: ["are going to connect"], hint: "Evidencia física lista.", explanation: "Cables listos como evidencia física del acto inminente: Be Going To." },
+                        { index: 7, verb: "work", answers: ["will have been working"], hint: "Duración de reforma urbana.", explanation: "Llevarán trabajando en esto por meses para cuando acabe: Future Perfect Continuous." },
+                        { index: 8, verb: "improve", answers: ["will improve"], hint: "Predicción de beneficio futuro.", explanation: "Predicción simple de mejora urbana: Future Simple." },
+                        { index: 9, verb: "lead", answers: ["will lead"], hint: "Predicción general.", explanation: "Consecuencia futura de desarrollo: Future Simple." }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "The Upcoming Music Festival",
+                    genre: "Ocio",
+                    introduction: "Vecindario organiza el mayor concierto pop del verano canario.",
+                    text: [
+                        "By next Friday, the organizers ", " the main music stage. Tomorrow morning, ticket offices ", " online sales. If you buy early, you ", " a 20% discount. This time next week, thousands of music lovers ", " to Gran Canaria. By the end of the weekend, the rock band ", " all over the island. They ", " to the hotel once the show finishes. I believe the event ", " a complete success. Look! The security guards ", " the entrance gates now."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "set up", answers: ["will have set up"], hint: "Hito cerrado antes del concierto.", explanation: "'By next Friday' es el vencimiento para la preparación: Future Perfect Simple." },
+                        { index: 1, verb: "open", answers: ["are opening", "are going to open"], hint: "Plan agendado.", explanation: "Apertura agendada para mañana: Present Continuous de futuro o Be Going To." },
+                        { index: 2, verb: "get", answers: ["will get"], hint: "Condicional primer grado.", explanation: "Estructura de primer condicional con 'If': Future Simple." },
+                        { index: 3, verb: "travel", answers: ["will be traveling", "will be travelling"], hint: "Acción en curso en momento futuro.", explanation: "'This time next week' delata acción suspendida en pleno desarrollo: Future Continuous." },
+                        { index: 4, verb: "perform", answers: ["will have performed"], hint: "Hito completado a fin de evento.", explanation: "'By the end of...' indica hito cumplido: Future Perfect Simple." },
+                        { index: 5, verb: "return", answers: ["will return", "are going to return"], hint: "Consecuencia lógica o plan.", explanation: "Retornarán al hotel como plan futuro: Future Simple o Be Going To." },
+                        { index: 6, verb: "be", answers: ["will be"], hint: "Predicción con 'I believe'.", explanation: "'I believe' delata predicción de opinión personal: Future Simple." },
+                        { index: 7, verb: "organize", answers: ["are going to organize"], hint: "Evidencia física de guardias.", explanation: "Los guardias ya están en sus puestos de entrada: Be Going To." },
+                        { index: 8, verb: "sing", answers: ["will have been singing"], hint: "Duración del canto.", explanation: "Llevarán cantando tres horas para cuando acabe: Future Perfect Continuous." },
+                        { index: 9, verb: "remember", answers: ["will remember"], hint: "Predicción de recuerdo futuro.", explanation: "Predicción simple de nostalgia futura: Future Simple." }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "Career Goals for the Next Decade",
+                    genre: "Desarrollo Personal",
+                    introduction: "Planes estratégicos de un joven profesional de Vecindario.",
+                    text: [
+                        "By 2030, I ", " my master's degree in business management. Next September, I ", " my first internship in London. If I get the job, I ", " to England immediately. Next winter, I ", " advanced digital marketing strategies. By the end of my contract, I ", " valuable skills. I am confident that my efforts ", " off. Look at my grades! I ", " the final admission exam. I ", " for three months before the test."
+                    ],
+                    blanks: [
+                        { index: 0, verb: "complete", answers: ["will have completed"], hint: "Hito cerrado en 2030.", explanation: "'By 2030' marca fecha de finalización académica: Future Perfect Simple." },
+                        { index: 1, verb: "start", answers: ["am starting", "am going to start"], hint: "Plan agendado.", explanation: "Práctica agendada firmemente en Londres: Present Continuous de futuro o Be Going To." },
+                        { index: 2, verb: "move", answers: ["will move"], hint: "Condicional primer grado.", explanation: "Consecuencia de primer condicional con 'If': Future Simple." },
+                        { index: 3, verb: "study", answers: ["will be studying"], hint: "Acción en progreso futura.", explanation: "Estará estudiando marketing el próximo invierno: Future Continuous." },
+                        { index: 4, verb: "acquire", answers: ["will have acquired"], hint: "Hito cerrado al terminar contrato.", explanation: "'By the end of my contract' es fecha límite: Future Perfect Simple." },
+                        { index: 5, verb: "pay", answers: ["will pay"], hint: "Predicción con 'confident'.", explanation: "Predicción de éxito subjetivo: Future Simple." },
+                        { index: 6, verb: "pass", answers: ["am going to pass"], hint: "Evidencia de buenas notas.", explanation: "Buenas notas son evidencia física de aprobado: Be Going To." },
+                        { index: 7, verb: "prepare", answers: ["will have been preparing"], hint: "Duración de estudio acumulado.", explanation: "Llevará 3 meses preparando el examen: Future Perfect Continuous." },
+                        { index: 8, verb: "grow", answers: ["will grow"], hint: "Predicción de desarrollo.", explanation: "Crecimiento profesional estimado: Future Simple." },
+                        { index: 9, verb: "not give up", answers: ["will not give up", "won't give up"], hint: "Promesa o compromiso.", explanation: "Promesa de no rendirse (compromiso personal): Future Simple con 'will'." }
+                    ]
+                }
+            ]
+        };
+
+        // 2. READING COMPREHENSION DATABASE (Exactamente 2 por bloque)
+        const readingsDB = {
+            past: [
+                {
+                    id: 1,
+                    title: "The Canary Islands Volcano Discovery",
+                    text: "In 1971, the Teneguía volcano on the island of La Palma erupted, capturing global scientific attention. Geologists from all over the world rushed to the Canary Islands. Before the eruption began, local seismic stations had recorded minor earthquakes, but nobody expected a full volcanic eruption. While scientists were investigating the site, tourists gathered nearby to photograph the stunning flows of lava. By the time the eruption finally stopped, the volcanic ash had covered surrounding crop fields, causing major agricultural losses. Fortunately, scientists had already evacuated local residents, preventing a tragedy.",
+                    questions: [
+                        {
+                            question: "What happened before the Teneguía volcano erupted in 1971?",
+                            options: [
+                                "Tourists gathered to take photographs of lava.",
+                                "Minor earthquakes had been recorded by seismic stations.",
+                                "Geologists left the island of La Palma."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto indica que antes de que empezara la erupción, las estaciones sísmicas ya habían registrado terremotos menores ('had recorded minor earthquakes')."
+                        },
+                        {
+                            question: "Why was there no loss of human life during the eruption?",
+                            options: [
+                                "The volcano erupted very slowly.",
+                                "Scientists had already evacuated the local residents.",
+                                "The lava flows avoided all towns."
+                            ],
+                            correctIndex: 1,
+                            explanation: "La evacuación previa ('had already evacuated') protegió a los residentes antes del desastre."
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "The Legend of the Canary Lighthouse",
+                    text: "For generations, the old lighthouse keeper of Maspalomas kept a secret diary. When he retired in 1995, his daughter found the book inside a hidden drawer. He had been writing down stories of lost sailors for over thirty years. While she was reading the yellow pages, she came across an entry about a ship that had disappeared in 1962 during a mysterious storm. The keeper wrote that he had heard a strange song in the wind just before the ship vanished. Nobody believed his claims back then, but his daughter decided to investigate.",
+                    questions: [
+                        {
+                            question: "How long had the keeper been writing in his secret diary?",
+                            options: [
+                                "For over thirty years.",
+                                "Since the lighthouse was built.",
+                                "Until he disappeared in a storm."
+                            ],
+                            correctIndex: 0,
+                            explanation: "El texto especifica que estuvo escribiendo historias durante más de treinta años ('for over thirty years')."
+                        },
+                        {
+                            question: "What was his daughter doing when she found the entry about the lost ship?",
+                            options: [
+                                "She was talking to old sailors in Maspalomas.",
+                                "She was reading the yellow pages of the diary.",
+                                "She was searching for the ship in the sea."
+                            ],
+                            correctIndex: 1,
+                            explanation: "La acción larga de fondo interrumpida por el descubrimiento fue leer el diario ('While she was reading... she came across')."
+                        }
+                    ]
+                }
+            ],
+            present: [
+                {
+                    id: 1,
+                    title: "The Rise of Canary Eco-Agriculture",
+                    text: "Currently, agricultural cooperatives in Gran Canaria are changing their farming practices. Many local farmers are using organic methods to grow tomatoes and bananas because consumers demand chemical-free fruits. I have visited three organic farms recently, and the results are outstanding. Water preservation systems have been improving our regional water usage this season. At the moment, researchers from the University of Las Palmas are testing a natural pesticide. Although organic farming takes more time, it protects the volcanic soil.",
+                    questions: [
+                        {
+                            question: "Why are local farmers currently choosing organic methods?",
+                            options: [
+                                "Because organic seeds are cheaper.",
+                                "Because consumers demand chemical-free fruits.",
+                                "Because organic farming takes less time."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto indica: 'because consumers demand chemical-free fruits'."
+                        },
+                        {
+                            question: "What is happening at the moment regarding pesticides?",
+                            options: [
+                                "Farmers have stopped using all pesticides.",
+                                "Researchers from the University are testing a natural pesticide.",
+                                "The government is banishing chemical products."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto utiliza el Present Continuous para el directo: 'At the moment, researchers... are testing'."
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Canary High-Tech Workspace Hubs",
+                    text: "Gran Canaria is rapidly becoming a leading technology hub in southern Europe. Currently, hundreds of developers are moving to the islands to work in modern shared workspaces. Business analysts believe that the pleasant climate and reliable infrastructure are attracting tech professionals. For the past year, several startups have been developing cloud software from Vecindario. Right now, a local software engineer is presenting his new app at the hub. It is clear that technology is transforming Gran Canaria's economy.",
+                    questions: [
+                        {
+                            question: "What has been happening in Vecindario for the past year?",
+                            options: [
+                                "Several startups have been developing cloud software.",
+                                "Developers have built a new fiber optic network.",
+                                "The town council has opened its first technology school."
+                            ],
+                            correctIndex: 0,
+                            explanation: "El texto dice: 'For the past year, several startups have been developing cloud software from Vecindario'."
+                        },
+                        {
+                            question: "What is the local software engineer doing right now?",
+                            options: [
+                                "He is coding a new website.",
+                                "He is presenting his new app at the hub.",
+                                "He is discussing contract terms on the phone."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto usa Present Continuous: 'Right now, a local software engineer is presenting...'."
+                        }
+                    ]
+                }
+            ],
+            future: [
+                {
+                    id: 1,
+                    title: "The Gran Canaria Eco-Train Project",
+                    text: "By 2030, Gran Canaria will have completed the construction of its high-speed ecological train. The train will connect Las Palmas with the southern tourist resorts in under thirty minutes. Next winter, engineers are going to build the first tunnels through the volcanic mountains. If the project receives international green funds, construction will accelerate. This time next year, builders will be laying the train tracks along the coast. It is certain that the train will reduce highway traffic, offering a fast and clean travel alternative.",
+                    questions: [
+                        {
+                            question: "What hito will have been completed by the year 2030?",
+                            options: [
+                                "The ecological train construction.",
+                                "A new highway to Las Palmas.",
+                                "An international green funding campaign."
+                            ],
+                            correctIndex: 0,
+                            explanation: "El texto indica: 'By 2030, Gran Canaria will have completed the construction of its train' (Future Perfect)."
+                        },
+                        {
+                            question: "What will builders be doing this time next year?",
+                            options: [
+                                "They will be negotiating the budget with the council.",
+                                "They will be laying the train tracks along the coast.",
+                                "They will be celebrating the inauguration of the first station."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto usa Future Continuous para la acción en progreso: 'This time next year, builders will be laying...'."
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Renewable Canary Islands Goal",
+                    text: "By 2035, the Canary Islands will have transitioned to 100% renewable energy. To achieve this, the regional government is going to invest millions in offshore wind farms. Next June, workers are starting the installation of a giant wind turbine near the shore. If the weather conditions remain optimal, the turbines will generate double the energy. By the end of the decade, solar panels will have replaced oil-powered generators completely. It is expected that Gran Canaria will be leading Europe's green transition.",
+                    questions: [
+                        {
+                            question: "What major change will have happened by the end of the decade?",
+                            options: [
+                                "Offshore wind farms will close.",
+                                "Solar panels will have replaced oil-powered generators.",
+                                "The government will stop all investments."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto dice: 'By the end of the decade, solar panels will have replaced oil-powered generators completely'."
+                        },
+                        {
+                            question: "What is scheduled to start next June?",
+                            options: [
+                                "A new campaign for ecological education.",
+                                "The installation of a giant wind turbine.",
+                                "A meeting with European green leaders."
+                            ],
+                            correctIndex: 1,
+                            explanation: "El texto indica un plan futuro inminente: 'Next June, workers are starting the installation...'"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // 3. LISTENING COMPREHENSION DATABASE WITH REAL TEXT-TO-SPEECH (Exactamente 5 por bloque)
+        const listeningsDB = {
+            past: [
+                { id: 1, title: "The Storm of '85", audioText: "In the winter of 1985, a massive storm hit the Canary Islands. While the winds were blowing furiously, the electricity went out. My grandmother had spent hours preparing dinner, but we ended up eating sandwiches in the dark.", questions: [
+                    { question: "What was the grandmother doing when the electricity went out?", options: ["She was preparing dinner.", "She was sleeping in her room.", "She was walking in the storm."], correctIndex: 0, explanation: "El texto dice que había pasado horas preparando la cena ('preparing dinner')." }
+                ]},
+                { id: 2, title: "An Archaeologist's Diary", audioText: "By the time we found the ancient script, the rain had already started. We had been digging for hours under the hot Canary sun, and we were completely exhausted.", questions: [
+                    { question: "How were they feeling when they found the ancient script?", options: ["Excited but tired.", "Completely exhausted.", "Happy and relaxed."], correctIndex: 1, explanation: "El texto menciona literalmente que estaban 'completely exhausted'." }
+                ]},
+                { id: 3, title: "The Great Fishing Day", audioText: "My uncle had never caught a big fish before that day. While he was waiting on his small boat, a huge blue marlin bit the hook. He fought the fish for three hours before landing it.", questions: [
+                    { question: "What happened while the uncle was waiting on his boat?", options: ["A big marlin bit the hook.", "The weather changed.", "He fell asleep."], correctIndex: 0, explanation: "El texto indica: 'While he was waiting... a huge blue marlin bit the hook'." }
+                ]},
+                { id: 4, title: "The Forgotten Concert", audioText: "As soon as we arrived at the Las Palmas stadium, we realized that we had left the tickets on the kitchen table. The concert had already started, so we missed the opening act.", questions: [
+                    { question: "Where did they leave the tickets?", options: ["On the kitchen table.", "In the car.", "At the ticket office."], correctIndex: 0, explanation: "Habían dejado las entradas en la mesa de la cocina ('on the kitchen table')." }
+                ]},
+                { id: 5, title: "A Midnight Hike", audioText: "Last night, my friends and I were walking up the volcanic trail. We had been hiking for two hours when suddenly a bright shooting star crossed the night sky. We stopped in surprise.", questions: [
+                    { question: "How long had they been hiking when the shooting star appeared?", options: ["For half an hour.", "For two hours.", "For a whole day."], correctIndex: 1, explanation: "Habían estado caminando durante dos horas ('for two hours')." }
+                ]}
+            ],
+            present: [
+                { id: 1, title: "Vecindario's Busy Market", audioText: "Every Wednesday morning, the local market in Vecindario opens at dawn. Currently, I am shopping for organic fruits and vegetables because they taste much better than supermarkets.", questions: [
+                    { question: "What is the speaker currently doing?", options: ["Selling handmade items.", "Shopping for organic food.", "Drinking coffee at the market."], correctIndex: 1, explanation: "El locutor está comprando alimentos orgánicos ('Currently, I am shopping for organic fruits...')." }
+                ]},
+                { id: 2, title: "A Lifelong Spanish Learner", audioText: "I have been living in Gran Canaria for three years. Right now, I am taking an advanced Spanish class. I practice with my neighbors daily, which helps my vocabulary.", questions: [
+                    { question: "How long has the speaker been living in Gran Canaria?", options: ["For three months.", "For three years.", "Since last winter."], correctIndex: 1, explanation: "Indica que lleva tres años viviendo en la isla ('for three years')." }
+                ]},
+                { id: 3, title: "The Windsurfing School", audioText: "At the moment, our school is training young surfers in Pozo Izquierdo. Windsurfing is very popular here, and we have rescued fifty lost surfboards this season alone.", questions: [
+                    { question: "What is the school doing at the moment?", options: ["Testing new surfboards.", "Training young surfers.", "Organizing a world cup."], correctIndex: 1, explanation: "Están entrenando a jóvenes surfistas ('training young surfers')." }
+                ]},
+                { id: 4, title: "A Tech Entrepreneur's Day", audioText: "Usually, I start my day checking emails. Today, I am meeting a client from London at the hub. Lately, we have been expanding our software solutions across the Canary Islands.", questions: [
+                    { question: "Who is the speaker meeting today?", options: ["A developer from Las Palmas.", "A client from London.", "His university professor."], correctIndex: 1, explanation: "Hoy se reúne con un cliente de Londres ('meeting a client from London')." }
+                ]},
+                { id: 5, title: "The Ecological Tomato Farm", audioText: "Our family organic farm produces thousands of red tomatoes every week. Currently, we are preparing a shipping order for Europe because international demand is growing fast.", questions: [
+                    { question: "Why are they preparing a shipping order for Europe?", options: ["Because demand is growing fast.", "To reduce local taxes.", "To present them at a contest."], correctIndex: 0, explanation: "La demanda internacional crece rápido ('international demand is growing fast')." }
+                ]}
+            ],
+            future: [
+                { id: 1, title: "The Smart Bus Project", audioText: "By the end of this month, the local transport authority will have installed digital screens in all buses. Next Monday, engineers are starting the GPS calibration.", questions: [
+                    { question: "What will have been installed in all buses by the end of the month?", options: ["Electric engines.", "Digital screens.", "Air conditioning units."], correctIndex: 1, explanation: "Habrán instalado pantallas digitales ('will have installed digital screens')." }
+                ]},
+                { id: 2, title: "Study Plans in the UK", audioText: "If I pass my B2 exam next week, I will study at a London university. This time next year, I will be living in England and enjoying a new lifestyle.", questions: [
+                    { question: "What will the speaker be doing this time next year?", options: ["Working in Vecindario.", "Living in England.", "Traveling around Europe."], correctIndex: 1, explanation: "Estará viviendo en Inglaterra ('I will be living in England')." }
+                ]},
+                { id: 3, title: "The Green Airport Expansion", audioText: "By 2030, our international airport will have replaced all fossil fuel vehicles with electric ones. I am sure it will protect our volcanic environment.", questions: [
+                    { question: "What will happen to the airport vehicles by 2030?", options: ["They will be replaced with electric ones.", "They will be sold to private airlines.", "They will run on hydrogen fuel."], correctIndex: 0, explanation: "Serán reemplazados por vehículos eléctricos ('replaced all fossil fuel vehicles with electric ones')." }
+                ]},
+                { id: 4, title: "The Gran Canaria Marathon", audioText: "Next Sunday, athletes are going to run the Gran Canaria marathon. If David trains hard, he will win the senior gold medal. This time next week, we will be celebrating.", questions: [
+                    { question: "What event is taking place next Sunday?", options: ["A windsurfing cup.", "The Gran Canaria marathon.", "A music festival."], correctIndex: 1, explanation: "Se celebrará el maratón de Gran Canaria ('run the Gran Canaria marathon')." }
+                ]},
+                { id: 5, title: "Deep Sea Exploring", audioText: "By next October, marine biologists will have explored the deep volcanic caves of Arinaga. They will be using advanced robotic cameras to film rare species.", questions: [
+                    { question: "What technology will the biologists use?", options: ["Deep-sea submarines.", "Robotic cameras.", "Satellite sensors."], correctIndex: 1, explanation: "Usarán cámaras robóticas avanzadas ('using advanced robotic cameras')." }
+                ]}
+            ]
+        };
+
+        // BASE DE DATOS DE VERBOS IRREGULARES COPIADA DE LA ÚLTIMA VERSIÓN
+        const irregularVerbsDB = [
+            { infinitive: "Abide", pastSimple: "abode", pastParticiple: "abode", meaning: "Permanecer, residir" },
+            { infinitive: "arise", pastSimple: "arose", pastParticiple: "arisen", meaning: "surgir" },
+            { infinitive: "awake", pastSimple: "awakened/awoke", pastParticiple: "awakened/awoken", meaning: "despertarse" },
+            { infinitive: "be", pastSimple: "was/were", pastParticiple: "been", meaning: "ser/estar" },
+            { infinitive: "bear", pastSimple: "bore", pastParticiple: "borne / born", meaning: "soportar" },
+            { infinitive: "beat", pastSimple: "beat", pastParticiple: "beaten", meaning: "golpear" },
+            { infinitive: "become", pastSimple: "became", pastParticiple: "become", meaning: "llegar a ser" },
+            { infinitive: "Beget", pastSimple: "begot", pastParticiple: "begotten", meaning: "Engendrar, procrear" },
+            { infinitive: "begin", pastSimple: "began", pastParticiple: "begun", meaning: "empezar" },
+            { infinitive: "Behold", pastSimple: "beheld", pastParticiple: "beheld", meaning: "Mirar, contemplar (lit)" },
+            { infinitive: "bend", pastSimple: "bent", pastParticiple: "bent", meaning: "doblar" },
+            { infinitive: "Bereave", pastSimple: "bereft", pastParticiple: "bereft", meaning: "despojar, privar" },
+            { infinitive: "Beseech", pastSimple: "besought", pastParticiple: "besought", meaning: "Suplicar, rogar" },
+            { infinitive: "bet", pastSimple: "bet/betted", pastParticiple: "bet/betted", meaning: "apostar" },
+            { infinitive: "bid", pastSimple: "bid", pastParticiple: "bid", meaning: "pujar, ofrecer" },
+            { infinitive: "bind", pastSimple: "bound", pastParticiple: "bound", meaning: "atar, encuadernar" },
+            { infinitive: "bite", pastSimple: "bit", pastParticiple: "bitten", meaning: "morder" },
+            { infinitive: "bleed", pastSimple: "bled", pastParticiple: "bled", meaning: "sangrar" },
+            { infinitive: "blow", pastSimple: "blew", pastParticiple: "blown", meaning: "soplar" },
+            { infinitive: "break", pastSimple: "broke", pastParticiple: "broken", meaning: "romper" },
+            { infinitive: "breed", pastSimple: "bred", pastParticiple: "bred", meaning: "criar, reproducirse" },
+            { infinitive: "bring", pastSimple: "brought", pastParticiple: "brought", meaning: "traer" },
+            { infinitive: "broadcast", pastSimple: "broadcast", pastParticiple: "broadcast", meaning: "transmitir, emitir" },
+            { infinitive: "build", pastSimple: "built", pastParticiple: "built", meaning: "construir" },
+            { infinitive: "burn", pastSimple: "burnt/burned", pastParticiple: "burnt/burned", meaning: "quemar" },
+            { infinitive: "burst", pastSimple: "burst", pastParticiple: "burst", meaning: "estallar, reventar" },
+            { infinitive: "buy", pastSimple: "bought", pastParticiple: "bought", meaning: "comprar" },
+            { infinitive: "cast", pastSimple: "cast", pastParticiple: "cast", meaning: "lanzar, arrojar" },
+            { infinitive: "catch", pastSimple: "caught", pastParticiple: "caught", meaning: "atrapar, coger" },
+            { infinitive: "choose", pastSimple: "chose", pastParticiple: "chosen", meaning: "elegir" },
+            { infinitive: "cling", pastSimple: "clung", pastParticiple: "clung", meaning: "aferrarse, pegarse" },
+            { infinitive: "clothe", pastSimple: "clad/clothed", pastParticiple: "clad/clothed", meaning: "vestir, cubrir" },
+            { infinitive: "come", pastSimple: "came", pastParticiple: "come", meaning: "venir" },
+            { infinitive: "cost", pastSimple: "cost", pastParticiple: "cost", meaning: "costar" },
+            { infinitive: "creep", pastSimple: "crept", pastParticiple: "crept", meaning: "arrastrarse, deslizarse" },
+            { infinitive: "cut", pastSimple: "cut", pastParticiple: "cut", meaning: "cortar" },
+            { infinitive: "deal", pastSimple: "dealt", pastParticiple: "dealt", meaning: "tratar, repartir" },
+            { infinitive: "dig", pastSimple: "dug", pastParticiple: "dug", meaning: "cavar" },
+            { infinitive: "do", pastSimple: "did", pastParticiple: "done", meaning: "hacer" },
+            { infinitive: "draw", pastSimple: "drew", pastParticiple: "drawn", meaning: "dibujar, atraer" },
+            { infinitive: "dream", pastSimple: "dreamt/dreamed", pastParticiple: "dreamt/dreamed", meaning: "soñar" },
+            { infinitive: "drink", pastSimple: "drank", pastParticiple: "drunk", meaning: "beber" },
+            { infinitive: "drive", pastSimple: "drove", pastParticiple: "driven", meaning: "conducir, guiar" },
+            { infinitive: "dwell", pastSimple: "dwelt", pastParticiple: "dwelt", meaning: "habitar, morar" },
+            { infinitive: "eat", pastSimple: "ate", pastParticiple: "eaten", meaning: "comer" },
+            { infinitive: "fall", pastSimple: "fell", pastParticiple: "fallen", meaning: "caer" },
+            { infinitive: "feed", pastSimple: "fed", pastParticiple: "fed", meaning: "alimentar" },
+            { infinitive: "feel", pastSimple: "felt", pastParticiple: "felt", meaning: "sentir" },
+            { infinitive: "fight", pastSimple: "fought", pastParticiple: "fought", meaning: "luchar, pelear" },
+            { infinitive: "find", pastSimple: "found", pastParticiple: "found", meaning: "encontrar" },
+            { infinitive: "flee", pastSimple: "fled", pastParticiple: "fled", meaning: "huir" },
+            { infinitive: "fling", pastSimple: "flung", pastParticiple: "flung", meaning: "arrojar con fuerza" },
+            { infinitive: "fly", pastSimple: "flew", pastParticiple: "flown", meaning: "volar" },
+            { infinitive: "forbid", pastSimple: "forbade", pastParticiple: "forbidden", meaning: "prohibir" },
+            { infinitive: "forecast", pastSimple: "forecast", pastParticiple: "forecast", meaning: "pronosticar, predecir" },
+            { infinitive: "foresee", pastSimple: "foresaw", pastParticiple: "foreseen", meaning: "prever" },
+            { infinitive: "foretell", pastSimple: "foretold", pastParticiple: "foretold", meaning: "predecir, anunciar" },
+            { infinitive: "forget", pastSimple: "forgot", pastParticiple: "forgotten", meaning: "olvidar" },
+            { infinitive: "forgive", pastSimple: "forgave", pastParticiple: "forgiven", meaning: "perdonar" },
+            { infinitive: "forsake", pastSimple: "forsook", pastParticiple: "forsaken", meaning: "abandonar, renunciar" },
+            { infinitive: "freeze", pastSimple: "froze", pastParticiple: "frozen", meaning: "congelar" },
+            { infinitive: "get", pastSimple: "got", pastParticiple: "got/gotten", meaning: "conseguir, obtener" },
+            { infinitive: "gild", pastSimple: "gilt/gilded", pastParticiple: "gilt/gilded", meaning: "dorar" },
+            { infinitive: "gird", pastSimple: "girt/girded", pastParticiple: "girt/girded", meaning: "ceñir, rodear" },
+            { infinitive: "give", pastSimple: "gave", pastParticiple: "given", meaning: "dar" },
+            { infinitive: "go", pastSimple: "went", pastParticiple: "gone", meaning: "ir" },
+            { infinitive: "grind", pastSimple: "ground", pastParticiple: "ground", meaning: "moler, triturar" },
+            { infinitive: "grow", pastSimple: "grew", pastParticiple: "grown", meaning: "crecer, cultivar" },
+            { infinitive: "hang", pastSimple: "hung", pastParticiple: "hung", meaning: "colgar" },
+            { infinitive: "have", pastSimple: "had", pastParticiple: "had", meaning: "tener, haber" },
+            { infinitive: "hear", pastSimple: "heard", pastParticiple: "heard", meaning: "oír" },
+            { infinitive: "hide", pastSimple: "hid", pastParticiple: "hidden", meaning: "esconder" },
+            { infinitive: "hit", pastSimple: "hit", pastParticiple: "hit", meaning: "golpear" },
+            { infinitive: "hold", pastSimple: "held", pastParticiple: "held", meaning: "sostener, retener" },
+            { infinitive: "hurt", pastSimple: "hurt", pastParticiple: "hurt", meaning: "herir, doler" },
+            { infinitive: "keep", pastSimple: "kept", pastParticiple: "kept", meaning: "guardar, mantener" },
+            { infinitive: "kneel", pastSimple: "knelt", pastParticiple: "knelt", meaning: "arrodillarse" },
+            { infinitive: "knit", pastSimple: "knit", pastParticiple: "knit", meaning: "tejer" },
+            { infinitive: "know", pastSimple: "knew", pastParticiple: "known", meaning: "saber, conocer" },
+            { infinitive: "lay", pastSimple: "laid", pastParticiple: "laid", meaning: "colocar, poner" },
+            { infinitive: "lead", pastSimple: "led", pastParticiple: "led", meaning: "guiar, liderar" },
+            { infinitive: "lean", pastSimple: "leant/leaned", pastParticiple: "leant/leaned", meaning: "apoyarse, inclinarse" },
+            { infinitive: "leap", pastSimple: "leapt/leaped", pastParticiple: "leapt/leaped", meaning: "saltar, brincar" },
+            { infinitive: "learn", pastSimple: "learnt/learned", pastParticiple: "learnt/learned", meaning: "aprender" },
+            { infinitive: "leave", pastSimple: "left", pastParticiple: "left", meaning: "dejar, salir" },
+            { infinitive: "lend", pastSimple: "lent", pastParticiple: "lent", meaning: "prestar" },
+            { infinitive: "let", pastSimple: "let", pastParticiple: "let", meaning: "permitir, dejar" },
+            { infinitive: "lie", pastSimple: "lay", pastParticiple: "lain", meaning: "tumbarse, yacer" },
+            { infinitive: "light", pastSimple: "lit", pastParticiple: "lit", meaning: "encender, iluminar" },
+            { infinitive: "lose", pastSimple: "lost", pastParticiple: "lost", meaning: "perder" },
+            { infinitive: "make", pastSimple: "made", pastParticiple: "made", meaning: "hacer, fabricar" },
+            { infinitive: "mean", pastSimple: "meant", pastParticiple: "meant", meaning: "significar, querer decir" },
+            { infinitive: "meet", pastSimple: "met", pastParticiple: "met", meaning: "quedar, conocer, encontrarse" },
+            { infinitive: "mislay", pastSimple: "mislaid", pastParticiple: "mislaid", meaning: "extraviar" },
+            { infinitive: "mislead", pastSimple: "misled", pastParticiple: "misled", meaning: "despistar, engañar" },
+            { infinitive: "misunderstand", pastSimple: "misunderstood", pastParticiple: "misunderstood", meaning: "entender mal" },
+            { infinitive: "mow", pastSimple: "mowed", pastParticiple: "mown", meaning: "segar, cortar césped" },
+            { infinitive: "outbid", pastSimple: "outbid", pastParticiple: "outbid", meaning: "pujar más alto" },
+            { infinitive: "outdo", pastSimple: "outdid", pastParticiple: "outdone", meaning: "superar, vencer" },
+            { infinitive: "outgrow", pastSimple: "outgrew", pastParticiple: "outgrown", meaning: "quedar grande" },
+            { infinitive: "outrun", pastSimple: "outran", pastParticiple: "outrun", meaning: "correr más que" },
+            { infinitive: "outsell", pastSimple: "outsold", pastParticiple: "outsold", meaning: "vender más que" },
+            { infinitive: "overcome", pastSimple: "overcame", pastParticiple: "overcome", meaning: "superar, vencer" },
+            { infinitive: "overdo", pastSimple: "overdid", pastParticiple: "overdone", meaning: "excederse, hacer de más" },
+            { infinitive: "overdraw", pastSimple: "overdrew", pastParticiple: "overdrawn", meaning: "girar en descubierto" },
+            { infinitive: "overeat", pastSimple: "overate", pastParticiple: "overeaten", meaning: "hartarse, comer de más" },
+            { infinitive: "overhear", pastSimple: "overheard", pastParticiple: "overheard", meaning: "oír por casualidad" },
+            { infinitive: "overlay", pastSimple: "overlaid", pastParticiple: "overlaid", meaning: "recubrir" },
+            { infinitive: "overpay", pastSimple: "overpaid", pastParticiple: "overpaid", meaning: "pagar de más" },
+            { infinitive: "override", pastSimple: "overrode", pastParticiple: "overridden", meaning: "anular, atropellar" },
+            { infinitive: "overrun", pastSimple: "overran", pastParticiple: "overrun", meaning: "infestar, desbordar" },
+            { infinitive: "oversee", pastSimple: "oversaw", pastParticiple: "overseen", meaning: "supervisar" },
+            { infinitive: "oversleep", pastSimple: "overslept", pastParticiple: "overslept", meaning: "quedarse dormido" },
+            { infinitive: "overtake", pastSimple: "overtook", pastParticiple: "overtaken", meaning: "adelantar, sobrepasar" },
+            { infinitive: "overthrow", pastSimple: "overthrew", pastParticiple: "overthrown", meaning: "derrocar, derribar" },
+            { infinitive: "pay", pastSimple: "paid", pastParticiple: "paid", meaning: "pagar" },
+            { infinitive: "prove", pastSimple: "proved", pastParticiple: "proven/proved", meaning: "probar, demostrar" },
+            { infinitive: "put", pastSimple: "put", pastParticiple: "put", meaning: "poner, colocar" },
+            { infinitive: "read", pastSimple: "read (pron. /red/)", pastParticiple: "read (pron. /red/)", meaning: "leer" },
+            { infinitive: "rebuild", pastSimple: "rebuilt", pastParticiple: "rebuilt", meaning: "reconstruir" },
+            { infinitive: "recast", pastSimple: "recast", pastParticiple: "recast", meaning: "refundir" },
+            { infinitive: "redo", pastSimple: "redid", pastParticiple: "redone", meaning: "rehacer" },
+            { infinitive: "reheat", pastSimple: "reheated", pastParticiple: "reheated", meaning: "recalentar" },
+            { infinitive: "remake", pastSimple: "remade", pastParticiple: "remade", meaning: "rehacer, remodelar" },
+            { infinitive: "rend", pastSimple: "rent", pastParticiple: "rent", meaning: "desgarrar" },
+            { infinitive: "repay", pastSimple: "repaid", pastParticiple: "repaid", meaning: "reembolsar, devolver dinero" },
+            { infinitive: "reread", pastSimple: "reread", pastParticiple: "reread", meaning: "releer" },
+            { infinitive: "rerun", pastSimple: "reran", pastParticiple: "rerun", meaning: "volver a emitir" },
+            { infinitive: "resell", pastSimple: "resold", pastParticiple: "resold", meaning: "revender" },
+            { infinitive: "reset", pastSimple: "reset", pastParticiple: "reset", meaning: "restablecer, reiniciar" },
+            { infinitive: "retake", pastSimple: "retook", pastParticiple: "retaken", meaning: "volver a tomar, recuperar" },
+            { infinitive: "retell", pastSimple: "retold", pastParticiple: "retold", meaning: "volver a contar" },
+            { infinitive: "rewrite", pastSimple: "rewrote", pastParticiple: "rewritten", meaning: "reescribir" },
+            { infinitive: "rid", pastSimple: "rid", pastParticiple: "rid", meaning: "librar, deshacerse de" },
+            { infinitive: "ride", pastSimple: "rode", pastParticiple: "ridden", meaning: "montar, cabalgar" },
+            { infinitive: "ring", pastSimple: "rang", pastParticiple: "rung", meaning: "sonar, llamar por teléfono" },
+            { infinitive: "rise", pastSimple: "rose", pastParticiple: "risen", meaning: "subir, elevarse, alzarse" },
+            { infinitive: "run", pastSimple: "ran", pastParticiple: "run", meaning: "correr" },
+            { infinitive: "saw", pastSimple: "sawed", pastParticiple: "sawn", meaning: "serrar" },
+            { infinitive: "say", pastSimple: "said", pastParticiple: "said", meaning: "decir" },
+            { infinitive: "see", pastSimple: "saw", pastParticiple: "seen", meaning: "ver" },
+            { infinitive: "seek", pastSimple: "sought", pastParticiple: "sought", meaning: "buscar, perseguir" },
+            { infinitive: "sell", pastSimple: "sold", pastParticiple: "sold", meaning: "vender" },
+            { infinitive: "send", pastSimple: "sent", pastParticiple: "sent", meaning: "enviar" },
+            { infinitive: "set", pastSimple: "set", pastParticiple: "set", meaning: "establecer, poner, fijar" },
+            { infinitive: "sew", pastSimple: "sewed", pastParticiple: "sewn", meaning: "coser" },
+            { infinitive: "shake", pastSimple: "shook", pastParticiple: "shaken", meaning: "sacudir, agitar" },
+            { infinitive: "shear", pastSimple: "sheared", pastParticiple: "shorn", meaning: "esquilar, cortar" },
+            { infinitive: "shed", pastSimple: "shed", pastParticiple: "shed", meaning: "derramar, desprenderse" },
+            { infinitive: "shine", pastSimple: "shone", pastParticiple: "shone", meaning: "brillar, alumbrar" },
+            { infinitive: "shoe", pastSimple: "shod", pastParticiple: "shod", meaning: "herrar, calzar" },
+            { infinitive: "shoot", pastSimple: "shot", pastParticiple: "shot", meaning: "disparar" },
+            { infinitive: "show", pastSimple: "showed", pastParticiple: "shown", meaning: "mostrar" },
+            { infinitive: "shrink", pastSimple: "shrank", pastParticiple: "shrunk", meaning: "encogerse" },
+            { infinitive: "shrive", pastSimple: "shrove", pastParticiple: "shriven", meaning: "confesar al pecador" },
+            { infinitive: "shut", pastSimple: "shut", pastParticiple: "shut", meaning: "cerrar" },
+            { infinitive: "sing", pastSimple: "sang", pastParticiple: "sung", meaning: "cantar" },
+            { infinitive: "sink", pastSimple: "sank", pastParticiple: "sunk", meaning: "hundirse" },
+            { infinitive: "sit", pastSimple: "sat", pastParticiple: "sat", meaning: "sentarse" },
+            { infinitive: "slay", pastSimple: "slew", pastParticiple: "slain", meaning: "asesinar, matar" },
+            { infinitive: "sleep", pastSimple: "slept", pastParticiple: "slept", meaning: "dormir" },
+            { infinitive: "slide", pastSimple: "slid", pastParticiple: "slid", meaning: "deslizarse" },
+            { infinitive: "sling", pastSimple: "slung", pastParticiple: "slung", meaning: "tirar con honda" },
+            { infinitive: "slink", pastSimple: "slunk", pastParticiple: "slunk", meaning: "moverse sigilosamente" },
+            { infinitive: "slit", pastSimple: "slit", pastParticiple: "slit", meaning: "hender, rajar" },
+            { infinitive: "smell", pastSimple: "smelt/smelled", pastParticiple: "smelt/smelled", meaning: "oler" },
+            { infinitive: "smite", pastSimple: "smote", pastParticiple: "smitten", meaning: "golpear duro" },
+            { infinitive: "sow", pastSimple: "sowed", pastParticiple: "sown", meaning: "sembrar" },
+            { infinitive: "speak", pastSimple: "spoke", pastParticiple: "spoken", meaning: "hablar" },
+            { infinitive: "speed", pastSimple: "sped", pastParticiple: "sped", meaning: "acelerar" },
+            { infinitive: "spell", pastSimple: "spelt/spelled", pastParticiple: "spelt/spelled", meaning: "deletrear" },
+            { infinitive: "spend", pastSimple: "spent", pastParticiple: "spent", meaning: "gastar, pasar tiempo" },
+            { infinitive: "spill", pastSimple: "spilt/spelled", pastParticiple: "spilt/spelled", meaning: "derramar" },
+            { infinitive: "spin", pastSimple: "spun", pastParticiple: "spun", meaning: "girar, hilar" },
+            { infinitive: "spit", pastSimple: "spat", pastParticiple: "spat", meaning: "escupir" },
+            { infinitive: "split", pastSimple: "split", pastParticiple: "split", meaning: "dividir, partir" },
+            { infinitive: "spoil", pastSimple: "spoilt/spoiled", pastParticiple: "spoilt/spoiled", meaning: "estropear, mimar" },
+            { infinitive: "spread", pastSimple: "spread", pastParticiple: "spread", meaning: "extender, esparcir" },
+            { infinitive: "spring", pastSimple: "sprang", pastParticiple: "sprung", meaning: "brotar, saltar" },
+            { infinitive: "stand", pastSimple: "stood", pastParticiple: "stood", meaning: "estar de pie" },
+            { infinitive: "stave", pastSimple: "stove/staved", pastParticiple: "stove/staved", meaning: "reventar, aplastar" },
+            { infinitive: "steal", pastSimple: "stole", pastParticiple: "stolen", meaning: "robar" },
+            { infinitive: "stick", pastSimple: "stuck", pastParticiple: "stuck", meaning: "pegar, adherirse" },
+            { infinitive: "sting", pastSimple: "stung", pastParticiple: "stung", meaning: "picar insecto" },
+            { infinitive: "stink", pastSimple: "stank", pastParticiple: "stunk", meaning: "oler mal, apestar" },
+            { infinitive: "strew", pastSimple: "strewed", pastParticiple: "strewn", meaning: "esparcir" },
+            { infinitive: "stride", pastSimple: "strode", pastParticiple: "stridden", meaning: "caminar a pasos largos" },
+            { infinitive: "strike", pastSimple: "struck", pastParticiple: "struck", meaning: "golpear, declarar huelga" },
+            { infinitive: "string", pastSimple: "strung", pastParticiple: "strung", meaning: "ensartar, encordar" },
+            { infinitive: "strive", pastSimple: "strove", pastParticiple: "striven", meaning: "tratar" },
+            { infinitive: "swear", pastSimple: "swore", pastParticiple: "sworn", meaning: "jurar" },
+            { infinitive: "sweat", pastSimple: "sweat/sweated", pastParticiple: "sweat/sweated", meaning: "sudar" },
+            { infinitive: "sweep", pastSimple: "swept", pastParticiple: "swept", meaning: "barrer" },
+            { infinitive: "Swell", pastSimple: "swelled", pastParticiple: "swollen", meaning: "Hincharse, aumentar" },
+            { infinitive: "swim", pastSimple: "swam", pastParticiple: "swum", meaning: "nadar" },
+            { infinitive: "take", pastSimple: "took", pastParticiple: "taken", meaning: "tomar" },
+            { infinitive: "teach", pastSimple: "taught", pastParticiple: "taught", meaning: "enseñar" },
+            { infinitive: "tear", pastSimple: "tore", pastParticiple: "torn", meaning: "rasgar" },
+            { infinitive: "telecast", pastSimple: "telecast", pastParticiple: "telecast", meaning: "televisar" },
+            { infinitive: "tell", pastSimple: "told", pastParticiple: "told", meaning: "decir" },
+            { infinitive: "think", pastSimple: "thought", pastParticiple: "thought", meaning: "pensar" },
+            { infinitive: "Thrive", pastSimple: "throve/thrived", pastParticiple: "thriven/thrived", meaning: "Desarrollarse, prosperar" },
+            { infinitive: "throw", pastSimple: "threw", pastParticiple: "thrown", meaning: "lanzar" },
+            { infinitive: "Thrust", pastSimple: "thrust", pastParticiple: "thrust", meaning: "empujar" },
+            { infinitive: "tread", pastSimple: "trod", pastParticiple: "trodden", meaning: "pisar, hollar" },
+            { infinitive: "undergo", pastSimple: "underwent", pastParticiple: "undergone", meaning: "someterse a, experimentar" },
+            { infinitive: "understand", pastSimple: "understood", pastParticiple: "understood", meaning: "entender, comprender" },
+            { infinitive: "undertake", pastSimple: "undertook", pastParticiple: "undertaken", meaning: "emprender tarea" },
+            { infinitive: "undo", pastSimple: "undid", pastParticiple: "undone", meaning: "deshacer" },
+            { infinitive: "upset", pastSimple: "upset", pastParticiple: "upset", meaning: "disgustar, alterar" },
+            { infinitive: "wake", pastSimple: "woke", pastParticiple: "woken", meaning: "despertarse" },
+            { infinitive: "wear", pastSimple: "wore", pastParticiple: "worn", meaning: "llevar puesto, vestir" },
+            { infinitive: "weave", pastSimple: "wove", pastParticiple: "woven", meaning: "tejer" },
+            { infinitive: "wed", pastSimple: "wed/wedded", pastParticiple: "wed/wedded", meaning: "casarse" },
+            { infinitive: "weep", pastSimple: "wept", pastParticiple: "wept", meaning: "llorar" },
+            { infinitive: "wet", pastSimple: "wet/wetted", pastParticiple: "wet/wetted", meaning: "mojar" },
+            { infinitive: "win", pastSimple: "won", pastParticiple: "won", meaning: "ganar" },
+            { infinitive: "wind", pastSimple: "wound", pastParticiple: "wound", meaning: "dar cuerda, serpentear" },
+            { infinitive: "withdraw", pastSimple: "withdrew", pastParticiple: "withdrawn", meaning: "retirar dinero, apartarse" },
+            { infinitive: "withhold", pastSimple: "withheld", pastParticiple: "withheld", meaning: "retener, ocultar" },
+            { infinitive: "withstand", pastSimple: "withstood", pastParticiple: "withstood", meaning: "resistir, aguantar" },
+            { infinitive: "wring", pastSimple: "wrung", pastParticiple: "wrung", meaning: "escurrir, retorcer" },
+            { infinitive: "write", pastSimple: "wrote", pastParticiple: "written", meaning: "escribir" }
+        ];
+
+        // BASE DE DATOS DE PHRASAL VERBS COPIADA DE LA ÚLTIMA VERSIÓN
+        const phrasalsDB = [
+            { phrasal: "Add up to", meaning: "Alcanzar un total", example: "The expenses add up to exactly 100 euros." },
+            { phrasal: "Add up", meaning: "Totalizar", example: "Could you please add up these numbers on the receipt?" },
+            { phrasal: "Answer back", meaning: "Contestar de malos modos", example: "Don't answer back when your teacher is correcting you!" },
+            { phrasal: "Answer for", meaning: "Responder de, ser responsable de", example: "You will have to answer for your actions if you break the rules." },
+            { phrasal: "Ask about", meaning: "Preguntar por (un asunto/tema)", example: "The customers came to ask about the new promotion." },
+            { phrasal: "Ask after", meaning: "Preguntar por (la salud/estado de alguien)", example: "She called to ask after my mother who was in hospital." },
+            { phrasal: "Ask back", meaning: "Invitar a volver", example: "They liked our company and asked us back next weekend." },
+            { phrasal: "Ask down", meaning: "Invitar a bajar", example: "My neighbor asked me down to see his new garden pool." },
+            { phrasal: "Ask for", meaning: "Pedir, preguntar por", example: "David went to the reception desk to ask for directions." },
+            { phrasal: "Ask in", meaning: "Invitar a entrar", example: "If she is waiting outside in the rain, ask her in." },
+            { phrasal: "Ask out", meaning: "Invitar a salir (románticamente)", example: "He finally had the courage to ask her out for dinner." },
+            { phrasal: "Ask up to", meaning: "Pedir hasta (un precio/cantidad)", example: "Sellers can ask up to 500 pounds for vintage books." },
+            { phrasal: "Ask up", meaning: "Invitar a subir", example: "She asked me up to her third-floor apartment for a cup of tea." },
+            { phrasal: "Back away", meaning: "Retroceder, alejarse por miedo", example: "The hikers backed away slowly when they saw the bear." },
+            { phrasal: "Back out", meaning: "Volver atrás, retirarse de un acuerdo", example: "It's too late to back out of the contract now." },
+            { phrasal: "Back up", meaning: "Reforzar, hacer copia de seguridad, apoyar", example: "Always back up your homework files on a cloud drive." },
+            { phrasal: "Be about", meaning: "Estar por (un lugar / a punto de hacer algo)", example: "I was about to leave when the phone rang." },
+            { phrasal: "Be away", meaning: "Estar fuera (de viaje o ausente)", example: "Our teacher will be away all of next week." },
+            { phrasal: "Be after", meaning: "Intentar conseguir algo, perseguir", example: "The detective is after the truth about the theft." },
+            { phrasal: "Be against", meaning: "Oponerse a algo", example: "Many local people are against building a new highway." },
+            { phrasal: "Be along", meaning: "Llegar (un transporte o persona)", example: "The next bus should be along in ten minutes." },
+            { phrasal: "Be back", meaning: "Estar de vuelta, regresar", example: "I will be back from the AKACENTER academy at 8 PM." },
+            { phrasal: "Be down", meaning: "Estar deprimido, descender", example: "She has been down ever since she failed the mock test." },
+            { phrasal: "Be down on", meaning: "Tener manía a alguien, desaprobar", example: "The manager is really down on employees who arrive late." },
+            { phrasal: "Be down with", meaning: "Estar enfermo con algo", example: "David is down with a bad cold today and cannot attend." },
+            { phrasal: "Be for", meaning: "Estar a favor de", example: "Are you for or against the new environment policy?" },
+            { phrasal: "Be in", meaning: "Estar en casa o en la oficina", example: "Is the headmaster in today, or is he on holiday?" },
+            { phrasal: "Be into", meaning: "Estar muy interesado en algo, encantar", example: "He is really into heavy metal music and guitar playing." },
+            { phrasal: "Be off", meaning: "Marcharse, estar estropeado (comida)", example: "I must be off now, otherwise I'll miss the train." },
+            { phrasal: "Be on", meaning: "Estar encendido, proyectarse (cine/TV)", example: "What time is the championship match on?" },
+            { phrasal: "Be on about", meaning: "Querer decir, insistir en algo", example: "I have no idea what you are being on about." },
+            { phrasal: "Be out", meaning: "Estar fuera de casa, estar equivocado", example: "My parents are out enjoying dinner at the restaurant." },
+            { phrasal: "Be out of", meaning: "Quedarse sin algo", example: "We are out of sugar, so I need to buy some." },
+            { phrasal: "Be out to", meaning: "Tener la firme intención de", example: "She is out to win the gold medal this season." },
+            { phrasal: "Be over", meaning: "Terminar, acabarse", example: "The storm is finally over, and the sun is shining." },
+            { phrasal: "Be up", meaning: "Estar despierto, haber subido", example: "Are you up already? It's only 6 AM!" },
+            { phrasal: "Be up to", meaning: "Ser capaz de, estar tramando algo", example: "What are those kids being up to in the kitchen?" },
+            { phrasal: "Break down", meaning: "Averiarse, romper a llorar", example: "My car broke down on my way to the exam." },
+            { phrasal: "Call off", meaning: "Cancelar", example: "They had to call off the football match because of rain." },
+            { phrasal: "Carry out", meaning: "Realizar, llevar a cabo", example: "We must carry out the science experiment carefully." },
+            { phrasal: "Check in", meaning: "Registrarse (hotel/aeropuerto)", example: "We need to check in two hours before the flight." },
+            { phrasal: "Clean up", meaning: "Limpiar a fondo", example: "Please clean up your room before guests arrive." },
+            { phrasal: "Come across", meaning: "Encontrarse por casualidad", example: "I came across an old photo while cleaning the desk." },
+            { phrasal: "Deal with", meaning: "Lidiar con, ocuparse de", example: "A manager has to deal with many customer complaints." },
+            { phrasal: "End up", meaning: "Terminar (en una situación o lugar no previsto)", example: "If you don't study, you will end up failing." },
+            { phrasal: "Fall apart", meaning: "Desmoronarse, romperse en pedazos", example: "This cheap book is falling apart after just one read." },
+            { phrasal: "Get along", meaning: "Llevarse bien", example: "Fortunately, I get along very well with my sister." },
+            { phrasal: "Give up", meaning: "Rendirse, dejar un hábito", example: "Never give up on your goals, no matter how hard they are." },
+            { phrasal: "Go on", meaning: "Continuar, seguir", example: "Please go on reading; I want to hear the end of the story." },
+            { phrasal: "Hold on", meaning: "Esperar un momento, resistir", example: "Hold on a minute, I need to tie my shoelace." },
+            { phrasal: "Keep up", meaning: "Mantener el ritmo", example: "You are running too fast; I can't keep up with you!" },
+            { phrasal: "Look after", meaning: "Cuidar de", example: "Can you look after my dog while I am on holiday?" },
+            { phrasal: "Look forward to", meaning: "Estar ansioso por, esperar con ilusión", example: "I look forward to meeting you soon." },
+            { phrasal: "Make up", meaning: "Inventar, reconciliarse", example: "She made up a story because she forgot her homework." },
+            { phrasal: "Pass out", meaning: "Desmayarse", example: "It was so hot in the crowded bus that he passed out." },
+            { phrasal: "Put off", meaning: "Posponer", example: "Never put off until tomorrow what you can do today." },
+            { phrasal: "Run out of", meaning: "Quedarse sin algo", example: "We ran out of milk, so we must go to the supermarket." },
+            { phrasal: "Set up", meaning: "Fundar, configurar un dispositivo", example: "I need to set up my new computer today." },
+            { phrasal: "Take off", meaning: "Despegar (avión), quitarse ropa", example: "The plane took off exactly on schedule." },
+            { phrasal: "Turn down", meaning: "Rechazar una oferta, bajar volumen", example: "He turned down the job offer because the salary was too low." },
+            { phrasal: "Walk through", meaning: "Ensayar por primera vez, explicar paso a paso", example: "Let me walk you through the login process." },
+            { phrasal: "Warm up", meaning: "Calentar (deportes/motor)", example: "It is important to warm up before lifting weights." },
+            { phrasal: "Wash up", meaning: "Lavar los platos", example: "I will cook if you agree to wash up afterwards." },
+            { phrasal: "Wear away / down", meaning: "Desgastar", example: "The sea waves are slowly wearing away the cliff rocks." },
+            { phrasal: "Wear off", meaning: "Disminuir, desaparecer (efecto)", example: "The painkiller is starting to wear off." },
+            { phrasal: "Wear on", meaning: "Transcurrir lentamente (tiempo)", example: "As the lecture wore on, some students fell asleep." },
+            { phrasal: "Work out", meaning: "Hacer ejercicio, calcular/resolver", example: "They work out at the gym three times a week." },
+            { phrasal: "Work under", meaning: "Trabajar a las órdenes de", example: "David enjoys working under his current director." },
+            { phrasal: "Write down", meaning: "Anotar", example: "Write down my phone number so you don't forget it." },
+            { phrasal: "X out", meaning: "Tachar, borrar, eliminar un elemento", example: "Just X out the wrong answers on the draft sheet." },
+            { phrasal: "Yak on (about)", meaning: "Hablar incesantemente de forma molesta", example: "She yakked on about her trip all evening." },
+            { phrasal: "Yammer on (about)", meaning: "Parlotear de forma quejumbrosa", example: "Stop yammering on about the cold weather!" },
+            { phrasal: "Yield to", meaning: "Ceder ante alguien o algo", example: "The driver refused to yield to the pedestrian." },
+            { phrasal: "Zip up", meaning: "Abrocharse la cremallera", example: "Zip up your jacket; it's very cold outside." },
+            { phrasal: "Zoom in on", meaning: "Focalizar, concentrarse en, aumentar zoom", example: "Let's zoom in on the most important B2 connectors." },
+            { phrasal: "Zone out / Zonk out", meaning: "Dejar de prestar atención / Quedarse dormido", example: "I zoned out for a moment during the long monologue." }
+        ];
+
+        // CHULETA DATA POR BLOQUE TEMPORAL
+        const cheatSheetData = {
+            past: {
+                title: "Chuleta de Oro - PASADOS (Past)",
+                html: `<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4">
+                    <p class="text-xs text-indigo-300 font-semibold uppercase tracking-wider mb-1">¡Claves de Descarte!</p>
+                    <p class="text-sm text-indigo-200">Encuentra los conectores de la frase (While, As soon as, By the time, Because) para saber qué película mental se está proyectando.</p>
+                </div>`
+            },
+            present: {
+                title: "Chuleta de Oro - PRESENTES (Present)",
+                html: `<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4">
+                    <p class="text-xs text-indigo-300 font-semibold uppercase tracking-wider mb-1">¡Claves de Descarte!</p>
+                    <p class="text-sm text-indigo-200">Distingue entre hábitos rutinarios, lo que está pasando en directo y los lazos que unen el pasado con tu realidad actual.</p>
+                </div>`
+            },
+            future: {
+                title: "Chuleta de Oro - FUTUROS (Future)",
+                html: `<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4">
+                    <p class="text-xs text-indigo-300 font-semibold uppercase tracking-wider mb-1">¡Claves de Descarte!</p>
+                    <p class="text-sm text-indigo-200">Decide si es una predicción, un plan premeditado, una acción suspendida en el aire o una meta ya finalizada.</p>
+                </div>`
+            }
+        };
+
+        // VARIABLES DE ESTADO DEL NEGOCIO
+        let activeView = 'theory'; 
+        let currentTenseGroup = 'past'; 
+        let selectedActivityId = 1; 
+        let selectedVerbLetter = 'TODOS'; 
+        let selectedPhrasalLetter = 'TODOS'; 
+
+        // Registro de progresos
+        let completedActivities = {
+            past: { fill: {}, reading: {}, listening: {} },
+            present: { fill: {}, reading: {}, listening: {} },
+            future: { fill: {}, reading: {}, listening: {} }
+        };
+
+        // DOM READY
+        window.onload = function() {
+            initApp();
+        };
+
+        // INICIALIZACIÓN DE LA PLATAFORMA
+        function initApp() {
+            irregularVerbsDB.sort((a, b) => a.infinitive.toLowerCase().localeCompare(b.infinitive.toLowerCase()));
+            phrasalsDB.sort((a, b) => a.phrasal.toLowerCase().localeCompare(b.phrasal.toLowerCase()));
+
+            renderAlphabetStrips();
+            renderIrregularVerbsTable();
+            renderPhrasalsTable();
+
+            switchView('theory');
+            switchTheorySubTab('theory-past');
+        }
+
+        // GENERACIÓN DE LOS BOTONES A-Z
+        function renderAlphabetStrips() {
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            
+            // Verbos
+            const verbStrip = document.getElementById('verb-alphabet-strip');
+            verbStrip.innerHTML = '';
+            const verbAllBtn = document.createElement('button');
+            verbAllBtn.id = "verb-letter-TODOS";
+            verbAllBtn.onclick = () => setVerbLetterFilter('TODOS');
+            verbAllBtn.innerText = "TODOS";
+            verbAllBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-violet-600 text-white border border-violet-500 shadow-lg shadow-violet-500/20";
+            verbStrip.appendChild(verbAllBtn);
+
+            alphabet.forEach(letter => {
+                const btn = document.createElement('button');
+                btn.id = `verb-letter-${letter}`;
+                btn.onclick = () => setVerbLetterFilter(letter);
+                btn.innerText = letter;
+                btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700";
+                verbStrip.appendChild(btn);
+            });
+
+            // Phrasals
+            const phrasalStrip = document.getElementById('phrasal-alphabet-strip');
+            phrasalStrip.innerHTML = '';
+            const phrasalAllBtn = document.createElement('button');
+            phrasalAllBtn.id = "phrasal-letter-TODOS";
+            phrasalAllBtn.onclick = () => setPhrasalLetterFilter('TODOS');
+            phrasalAllBtn.innerText = "TODOS";
+            phrasalAllBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-pink-600 text-white border border-pink-500 shadow-lg shadow-pink-500/20";
+            phrasalStrip.appendChild(phrasalAllBtn);
+
+            alphabet.forEach(letter => {
+                const btn = document.createElement('button');
+                btn.id = `phrasal-letter-${letter}`;
+                btn.onclick = () => setPhrasalLetterFilter(letter);
+                btn.innerText = letter;
+                btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700";
+                phrasalStrip.appendChild(btn);
+            });
+        }
+
+        // CONTROLADOR DE NAVEGACIÓN PRINCIPAL
+        function switchView(viewName) {
+            activeView = viewName;
+            stopListeningAudio(); // Parar audios por seguridad
+
+            const theorySec = document.getElementById('theory-section');
+            const practiceSec = document.getElementById('practice-section');
+            const phrasalsSec = document.getElementById('phrasals-section');
+            const verbsSec = document.getElementById('verbs-section');
+
+            theorySec.classList.add('hidden');
+            practiceSec.classList.add('hidden');
+            phrasalsSec.classList.add('hidden');
+            verbsSec.classList.add('hidden');
+
+            const mainTabs = ['theory', 'past', 'present', 'future', 'phrasals', 'verbs'];
+            mainTabs.forEach(tab => {
+                const btn = document.getElementById(`tab-btn-${tab}`);
+                if (btn) {
+                    btn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400 hover:bg-slate-900 hover:text-slate-200 hover:border-slate-700";
+                }
+            });
+
+            const activeBtn = document.getElementById(`tab-btn-${viewName}`);
+            
+            if (viewName === 'theory') {
+                theorySec.classList.remove('hidden');
+                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-indigo-500/30 bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/25";
+            } 
+            else if (viewName === 'phrasals') {
+                phrasalsSec.classList.remove('hidden');
+                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-pink-500/30 bg-gradient-to-tr from-pink-600 to-fuchsia-600 text-white shadow-lg shadow-pink-500/25";
+            } 
+            else if (viewName === 'verbs') {
+                verbsSec.classList.remove('hidden');
+                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-violet-500/30 bg-gradient-to-tr from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/25";
+            } 
+            else {
+                practiceSec.classList.remove('hidden');
+                currentTenseGroup = viewName;
+                selectedActivityId = 1;
+
+                if (viewName === 'past') {
+                    activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-rose-500/30 bg-gradient-to-tr from-rose-600 to-orange-600 text-white shadow-lg shadow-rose-500/25";
+                } else if (viewName === 'present') {
+                    activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-emerald-500/30 bg-gradient-to-tr from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25";
+                } else {
+                    activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-sky-500/30 bg-gradient-to-tr from-sky-600 to-blue-600 text-white shadow-lg shadow-sky-500/25";
+                }
+
+                setCompetenceMode('fill'); // Cargar Gap-Fill por defecto
+                updateCheatSheetUI();
+                document.getElementById('feedback-panel').classList.add('hidden');
+            }
+        }
+
+        // TABS INTERNAS DE TEORÍA
+        function switchTheorySubTab(subTabId) {
+            const subs = ['theory-past', 'theory-present', 'theory-future'];
+            subs.forEach(s => {
+                document.getElementById(s).classList.add('hidden');
+                const btn = document.getElementById(`subtab-btn-${s}`);
+                btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400 hover:text-slate-200";
+            });
+
+            document.getElementById(subTabId).classList.remove('hidden');
+            const activeBtn = document.getElementById(`subtab-btn-${subTabId}`);
+            
+            if (subTabId === 'theory-past') {
+                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-indigo-500/30 bg-indigo-950/40 text-indigo-300";
+            } else if (subTabId === 'theory-present') {
+                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-emerald-500/30 bg-emerald-950/40 text-emerald-300";
+            } else {
+                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-rose-500/30 bg-rose-950/40 text-rose-300";
+            }
+        }
+
+        // CAMBIO DE MODALIDAD DE COMPETENCIA (GAP-FILL, READING, LISTENING)
+        function setCompetenceMode(mode) {
+            activeCompetence = mode;
+            stopListeningAudio();
+
+            const modes = ['fill', 'reading', 'listening'];
+            modes.forEach(m => {
+                const btn = document.getElementById(`comp-btn-${m}`);
+                btn.className = "py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 text-slate-400 hover:bg-slate-900";
+            });
+
+            const activeBtn = document.getElementById(`comp-btn-${mode}`);
+            activeBtn.className = "py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/25";
+
+            const sideTitle = document.getElementById('sidebar-activity-title');
+            const counter = document.getElementById('activity-counter-badge');
+            
+            if (mode === 'fill') {
+                sideTitle.innerText = "📝 Historias Gap-Fill";
+                counter.innerText = "5 Retos";
+            } else if (mode === 'reading') {
+                sideTitle.innerText = "📖 Comprensión Lectora";
+                counter.innerText = "2 Ejercicios";
+            } else {
+                sideTitle.innerText = "🎧 Prácticas de Listening";
+                counter.innerText = "5 Audios";
+            }
+
+            selectedActivityId = 1; // Resetear al primer ejercicio de la lista
+            renderActivitiesList();
+            loadActiveExercise(selectedActivityId);
+            document.getElementById('feedback-panel').classList.add('hidden');
+        }
+
+        // RENDER DE LA LISTA LATERAL DINÁMICA
+        function renderActivitiesList() {
+            const container = document.getElementById('story-selector-list');
+            container.innerHTML = '';
+
+            let list = [];
+            if (activeCompetence === 'fill') {
+                list = storiesDB[currentTenseGroup];
+            } else if (activeCompetence === 'reading') {
+                list = readingsDB[currentTenseGroup];
+            } else {
+                list = listeningsDB[currentTenseGroup];
+            }
+
+            list.forEach(item => {
+                const isCompleted = completedActivities[currentTenseGroup][activeCompetence][item.id] !== undefined;
+                const score = isCompleted ? completedActivities[currentTenseGroup][activeCompetence][item.id] : 0;
+                const isActive = item.id === selectedActivityId;
+
+                const button = document.createElement('button');
+                button.onclick = () => selectExercise(item.id);
+                button.className = `w-full text-left p-3.5 rounded-xl border transition-all duration-200 flex flex-col gap-1.5 ${
+                    isActive 
+                    ? 'bg-gradient-to-r from-indigo-900/50 to-slate-900 border-indigo-500 shadow-lg shadow-indigo-500/10' 
+                    : 'bg-slate-950/40 border-slate-800/80 hover:bg-slate-900 hover:border-slate-700'
+                }`;
+
+                button.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest ${isActive ? 'text-indigo-400' : 'text-slate-500'}">Reto ${item.id}</span>
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">${activeCompetence.toUpperCase()}</span>
+                    </div>
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-sm font-bold text-slate-200 truncate ${isActive ? 'text-indigo-200' : ''}">${item.title}</span>
+                        ${isCompleted 
+                            ? `<span class="text-xs font-bold text-emerald-400 flex items-center gap-1 shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                ${score}%
+                               </span>`
+                            : `<span class="text-xs font-semibold text-yellow-600 shrink-0">Pendiente</span>`
+                        }
+                    </div>
+                `;
+                container.appendChild(button);
+            });
+        }
+
+        function selectExercise(id) {
+            selectedActivityId = id;
+            renderActivitiesList();
+            loadActiveExercise(id);
+            document.getElementById('feedback-panel').classList.add('hidden');
+        }
+
+        // CARGA EL CONTENIDO DEL EJERCICIO SELECCIONADO EN EL LIENZO CENTRAL
+        function loadActiveExercise(id) {
+            const player = document.getElementById('listening-player-container');
+            player.classList.add('hidden'); // Ocultar por defecto
+
+            let db = [];
+            if (activeCompetence === 'fill') {
+                db = storiesDB[currentTenseGroup];
+            } else if (activeCompetence === 'reading') {
+                db = readingsDB[currentTenseGroup];
+            } else {
+                db = listeningsDB[currentTenseGroup];
+            }
+
+            const item = db.find(x => x.id === id);
+            if (!item) return;
+
+            // Configurar cabeceras
+            document.getElementById('story-active-badge').innerText = `${activeCompetence.toUpperCase()} - Reto ${item.id}`;
+            document.getElementById('story-genre-badge').innerText = currentTenseGroup.toUpperCase();
+            document.getElementById('story-title').innerText = item.title;
+
+            // Configurar estado completado
+            const isCompleted = completedActivities[currentTenseGroup][activeCompetence][item.id] !== undefined;
+            const statusText = document.getElementById('story-status-text');
+            if (isCompleted) {
+                statusText.innerText = `Completado (${completedActivities[currentTenseGroup][activeCompetence][item.id]}%)`;
+                statusText.className = "text-sm font-bold text-emerald-400";
+            } else {
+                statusText.innerText = "Pendiente de realizar";
+                statusText.className = "text-sm font-bold text-yellow-500";
+            }
+
+            const textContainer = document.getElementById('story-text-container');
+            textContainer.innerHTML = '';
+
+            // CARGA SEGÚN LA MODALIDAD
+            if (activeCompetence === 'fill') {
+                document.getElementById('story-intro').innerText = item.introduction;
+                const p = document.createElement('p');
+                p.className = 'leading-relaxed text-slate-300 select-text';
+
+                item.text.forEach((piece, index) => {
+                    p.appendChild(document.createTextNode(piece));
+                    if (index < item.blanks.length) {
+                        const blank = item.blanks[index];
+                        const inputWrapper = document.createElement('span');
+                        inputWrapper.className = 'inline-flex flex-col items-center mx-1 relative';
+
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.id = `input-${currentTenseGroup}-${item.id}-${blank.index}`;
+                        input.placeholder = `...`;
+                        input.className = 'bg-slate-950 border border-slate-700/80 rounded px-2.5 py-1 text-sm font-bold text-center text-white focus:outline-none focus:border-indigo-500 transition-all duration-150 w-36 h-8 placeholder-slate-600 focus:ring-1 focus:ring-indigo-500';
+                        input.autocomplete = 'off';
+
+                        const verbLabel = document.createElement('span');
+                        verbLabel.className = 'text-[10px] font-bold text-indigo-400/95 tracking-wide mt-0.5 uppercase';
+                        verbLabel.innerText = `(${blank.verb})`;
+
+                        inputWrapper.appendChild(input);
+                        inputWrapper.appendChild(verbLabel);
+                        p.appendChild(inputWrapper);
+                    }
+                });
+                textContainer.appendChild(p);
+            } 
+            else if (activeCompetence === 'reading') {
+                document.getElementById('story-intro').innerText = "Lee el texto en inglés y responde a las preguntas de opción múltiple con la conjugación o comprensión adecuada.";
+                
+                // Bloque de lectura
+                const readingBox = document.createElement('div');
+                readingBox.className = 'p-6 bg-slate-950/40 border border-slate-800 rounded-2xl text-slate-300 text-sm leading-relaxed mb-6 italic select-text';
+                readingBox.innerText = item.text;
+                textContainer.appendChild(readingBox);
+
+                // Preguntas
+                item.questions.forEach((q, qIndex) => {
+                    const qCard = document.createElement('div');
+                    qCard.className = 'p-5 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col gap-3';
+                    qCard.innerHTML = `<p class="text-sm font-extrabold text-white">${qIndex + 1}. ${q.question}</p>`;
+
+                    const optContainer = document.createElement('div');
+                    optContainer.className = 'flex flex-col gap-2';
+
+                    q.options.forEach((opt, optIndex) => {
+                        const label = document.createElement('label');
+                        label.className = 'flex items-center gap-3 p-3 bg-slate-950 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all text-xs';
+                        label.innerHTML = `
+                            <input type="radio" name="reading-q-${qIndex}" value="${optIndex}" class="accent-indigo-500 h-4 w-4 shrink-0">
+                            <span class="text-slate-300 font-semibold">${opt}</span>
+                        `;
+                        optContainer.appendChild(label);
+                    });
+
+                    qCard.appendChild(optContainer);
+                    textContainer.appendChild(qCard);
+                });
+            } 
+            else if (activeCompetence === 'listening') {
+                // Activar e inyectar el reproductor
+                player.classList.remove('hidden');
+                document.getElementById('story-intro').innerText = "Reproduce el audio para escuchar al profesor nativo. Puedes regular la velocidad y responder el reto.";
+                document.getElementById('listening-transcript-text').innerText = item.audioText;
+                
+                // Preguntas de audición
+                item.questions.forEach((q, qIndex) => {
+                    const qCard = document.createElement('div');
+                    qCard.className = 'p-5 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col gap-3';
+                    qCard.innerHTML = `<p class="text-sm font-extrabold text-white">${qIndex + 1}. ${q.question}</p>`;
+
+                    const optContainer = document.createElement('div');
+                    optContainer.className = 'flex flex-col gap-2';
+
+                    q.options.forEach((opt, optIndex) => {
+                        const label = document.createElement('label');
+                        label.className = 'flex items-center gap-3 p-3 bg-slate-950 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all text-xs';
+                        label.innerHTML = `
+                            <input type="radio" name="listening-q-${qIndex}" value="${optIndex}" class="accent-indigo-500 h-4 w-4 shrink-0">
+                            <span class="text-slate-300 font-semibold">${opt}</span>
+                        `;
+                        optContainer.appendChild(label);
+                    });
+
+                    qCard.appendChild(optContainer);
+                    textContainer.appendChild(qCard);
+                });
+            }
+        }
+
+        // ================= SISTEMA NATIVO DE AUDIO (WEB SPEECH API) =================
+        let synth = window.speechSynthesis;
+        let activeUtterance = null;
+        let progressInterval = null;
+
+        function playListeningAudio() {
+            if (!synth) {
+                alert("La síntesis de voz no está soportada en tu navegador.");
+                return;
+            }
+
+            synth.cancel(); // Parar audios en cola
+            clearInterval(progressInterval);
+
+            let db = listeningsDB[currentTenseGroup];
+            const item = db.find(x => x.id === selectedActivityId);
+            if (!item) return;
+
+            const textToSpeak = item.audioText;
+            activeUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            activeUtterance.lang = 'en-GB'; // Acento británico para el Oxford B2
+            
+            // Forzar velocidad elegida
+            const speed = parseFloat(document.getElementById('listening-speed').value);
+            activeUtterance.rate = speed;
+
+            // Encontrar voz británica nativa si existe
+            const voices = synth.getVoices();
+            const ukVoice = voices.find(voice => voice.lang.includes('en-GB') || voice.lang.includes('en-US'));
+            if (ukVoice) {
+                activeUtterance.voice = ukVoice;
+            }
+
+            // Barra de progreso simulada interactiva
+            const progress = document.getElementById('listening-progress-bar');
+            const playBtn = document.getElementById('btn-audio-play');
+            const statusLbl = document.getElementById('player-status-lbl');
+            
+            playBtn.innerText = "⏸";
+            statusLbl.innerText = "Reproduciendo audio oficial...";
+
+            let start = Date.now();
+            const estimatedDuration = (textToSpeak.split(" ").length / (150 * speed)) * 60 * 1000; // estimación de ms
+
+            progressInterval = setInterval(() => {
+                let elapsed = Date.now() - start;
+                let pct = Math.min((elapsed / estimatedDuration) * 100, 99);
+                progress.style.width = `${pct}%`;
+            }, 300);
+
+            activeUtterance.onend = function() {
+                clearInterval(progressInterval);
+                progress.style.width = "100%";
+                playBtn.innerText = "▶";
+                statusLbl.innerText = "Audio finalizado";
+            };
+
+            activeUtterance.onerror = function() {
+                clearInterval(progressInterval);
+                playBtn.innerText = "▶";
+                statusLbl.innerText = "Listo para reproducir";
+            };
+
+            synth.speak(activeUtterance);
+        }
+
+        function stopListeningAudio() {
+            if (synth) {
+                synth.cancel();
+            }
+            clearInterval(progressInterval);
+            const progress = document.getElementById('listening-progress-bar');
+            if (progress) progress.style.width = "0%";
+            const playBtn = document.getElementById('btn-audio-play');
+            if (playBtn) playBtn.innerText = "▶";
+            const statusLbl = document.getElementById('player-status-lbl');
+            if (statusLbl) statusLbl.innerText = "Listo para reproducir";
+        }
+
+        // ================= VERIFICACIÓN DE RESPUESTAS ADAPTATIVA =================
+        function checkAnswers() {
+            let db = [];
+            if (activeCompetence === 'fill') {
+                db = storiesDB[currentTenseGroup];
+            } else if (activeCompetence === 'reading') {
+                db = readingsDB[currentTenseGroup];
+            } else {
+                db = listeningsDB[currentTenseGroup];
+            }
+
+            const item = db.find(x => x.id === selectedActivityId);
+            if (!item) return;
+
+            let correctCount = 0;
+            let totalQuestions = 0;
+            const explanationList = document.getElementById('explanation-list');
+            explanationList.innerHTML = '';
+
+            if (activeCompetence === 'fill') {
+                totalQuestions = item.blanks.length;
+
+                item.blanks.forEach(blank => {
+                    const input = document.getElementById(`input-${currentTenseGroup}-${item.id}-${blank.index}`);
+                    if (!input) return;
+
+                    const userVal = input.value.trim().toLowerCase();
+                    const isCorrect = blank.answers.some(ans => ans.trim().toLowerCase() === userVal);
+
+                    const explanationDiv = document.createElement('div');
+                    explanationDiv.className = `p-4 rounded-xl border text-xs leading-relaxed transition-all duration-300 ${
+                        isCorrect ? 'bg-emerald-950/10 border-emerald-500/30 text-emerald-300' : 'bg-rose-950/10 border-rose-500/30 text-rose-300'
+                    }`;
+
+                    if (isCorrect) {
+                        correctCount++;
+                        input.className = 'bg-slate-950 border-2 border-emerald-500 rounded px-2.5 py-1 text-sm font-bold text-center text-emerald-300 focus:outline-none transition-all duration-150 w-36 h-8';
+                        explanationDiv.innerHTML = `
+                            <p class="font-bold">Espacio ${blank.index + 1} (${blank.verb}): <span class="text-white font-mono bg-emerald-900/30 px-1.5 py-0.5 rounded">${blank.answers[0]}</span> (✔ Correcto)</p>
+                            <p class="text-slate-400 mt-1">${blank.explanation}</p>
+                        `;
+                    } else {
+                        input.className = 'bg-slate-950 border-2 border-rose-500 rounded px-2.5 py-1 text-sm font-bold text-center text-rose-300 focus:outline-none transition-all duration-150 w-36 h-8 animate-shake';
+                        explanationDiv.innerHTML = `
+                            <p class="font-bold text-slate-200">Espacio ${blank.index + 1} (${blank.verb}): Escribiste "<span class="line-through text-rose-400">${userVal || '(vacío)'}</span>"</p>
+                            <p class="text-white font-semibold mt-1">Respuesta correcta: <span class="font-mono bg-slate-900 px-1.5 py-0.5 rounded text-indigo-300">${blank.answers.join(' / ')}</span></p>
+                            <p class="text-slate-400 mt-1"><strong>La razón:</strong> ${blank.explanation}</p>
+                            <button onclick="consultAITeacher('${blank.verb}', '${userVal || 'nada'}', '${blank.answers[0]}', '${blank.explanation.replace(/'/g, "\\'")}')" class="mt-2 px-3 py-1 bg-indigo-500/20 hover:bg-indigo-500 hover:text-white border border-indigo-500/30 rounded text-[11px] font-semibold transition-all">
+                                🔍 Ver análisis de la Profe IA
+                            </button>
+                        `;
+                    }
+                    explanationList.appendChild(explanationDiv);
+                });
+            } 
+            else {
+                // Modos Reading y Listening
+                totalQuestions = item.questions.length;
+
+                item.questions.forEach((q, qIndex) => {
+                    const radios = document.getElementsByName(`${activeCompetence}-q-${qIndex}`);
+                    let selectedVal = -1;
+                    radios.forEach(r => {
+                        if (r.checked) selectedVal = parseInt(r.value);
+                    });
+
+                    const isCorrect = selectedVal === q.correctIndex;
+                    const explanationDiv = document.createElement('div');
+                    explanationDiv.className = `p-4 rounded-xl border text-xs leading-relaxed transition-all duration-300 ${
+                        isCorrect ? 'bg-emerald-950/10 border-emerald-500/30 text-emerald-300' : 'bg-rose-950/10 border-rose-500/30 text-rose-300'
+                    }`;
+
+                    if (isCorrect) {
+                        correctCount++;
+                        explanationDiv.innerHTML = `
+                            <p class="font-bold">Pregunta ${qIndex + 1}: ✔ ¡Correcto!</p>
+                            <p class="text-slate-400 mt-1">${q.explanation}</p>
+                        `;
+                    } else {
+                        const writtenAns = selectedVal !== -1 ? q.options[selectedVal] : "(Sin responder)";
+                        explanationDiv.innerHTML = `
+                            <p class="font-bold text-slate-200">Pregunta ${qIndex + 1}: Elegiste "${writtenAns}"</p>
+                            <p class="text-white font-semibold mt-1">Respuesta correcta: <span class="font-mono bg-slate-900 px-1.5 py-0.5 rounded text-indigo-300">${q.options[q.correctIndex]}</span></p>
+                            <p class="text-slate-400 mt-1"><strong>La razón:</strong> ${q.explanation}</p>
+                            <button onclick="consultAITeacher('Opción Múltiple', '${writtenAns}', '${q.options[q.correctIndex]}', '${q.explanation.replace(/'/g, "\\'")}')" class="mt-2 px-3 py-1 bg-indigo-500/20 hover:bg-indigo-500 hover:text-white border border-indigo-500/30 rounded text-[11px] font-semibold transition-all">
+                                🔍 Ver análisis de la Profe IA
+                            </button>
+                        `;
+                    }
+                    explanationList.appendChild(explanationDiv);
+                });
+            }
+
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            completedActivities[currentTenseGroup][activeCompetence][item.id] = percentage;
+
+            renderActivitiesList();
+            updateGlobalStats();
+
+            // Desplegar reporte
+            const feedbackPanel = document.getElementById('feedback-panel');
+            feedbackPanel.classList.remove('hidden');
+
+            const scoreRatio = document.getElementById('feedback-score-ratio');
+            scoreRatio.innerText = `${correctCount} / ${totalQuestions}`;
+            scoreRatio.className = `text-4xl font-black mb-2 ${correctCount === totalQuestions ? 'text-emerald-400' : 'text-indigo-400'}`;
+
+            const scoreBar = document.getElementById('feedback-score-bar');
+            scoreBar.style.width = `${percentage}%`;
+            scoreBar.className = correctCount === totalQuestions ? 'bg-emerald-500 h-2 rounded-full' : 'bg-indigo-500 h-2 rounded-full';
+
+            const feedbackText = document.getElementById('feedback-text');
+            if (correctCount === totalQuestions) {
+                feedbackText.innerHTML = "<strong>¡Excelente trabajo David!</strong> Nivel de examen perfecto. Dominas esta competencia al 100%.";
+                triggerConfetti();
+            } else if (correctCount >= totalQuestions / 2) {
+                feedbackText.innerHTML = "<strong>¡Buen intento!</strong> Vas por el camino correcto pero te quedan algunos detalles finos por pulir. ¡Ánimo!";
+            } else {
+                feedbackText.innerHTML = "<strong>Sección para repasar.</strong> Te recomendamos consultar las explicaciones de la Profe IA abajo para solventar las dudas.";
+            }
+
+            feedbackPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetCurrentExercise() {
+            stopListeningAudio();
+            loadActiveExercise(selectedActivityId);
+            document.getElementById('feedback-panel').classList.add('hidden');
+        }
+
+        // MOSTRAR EXPLICACIONES DINÁMICAS (PROFE IA OFFLINE SEGURO)
+        function consultAITeacher(verb, userAns, correctAns, reasoning) {
+            const modal = document.getElementById('ai-teacher-modal');
+            const modalCard = document.getElementById('ai-teacher-modal-card');
+            const container = document.getElementById('ai-modal-response-container');
+
+            document.getElementById('ai-modal-verb').innerText = verb;
+            document.getElementById('ai-modal-user').innerText = userAns;
+            document.getElementById('ai-modal-correct').innerText = correctAns;
+
+            container.innerHTML = `
+                <p class="font-semibold text-indigo-300">¡Hola David! Analicemos este punto juntos para tu examen:</p>
+                <p class="text-xs text-slate-300 leading-relaxed mt-2 bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    Tu respuesta fue <strong>"${userAns}"</strong>, pero la opción óptima para el estándar de Oxford es <strong>"${correctAns}"</strong>.
+                </p>
+                <p class="text-xs text-slate-400 leading-relaxed mt-2">
+                    <strong>Análisis del conector:</strong> ${reasoning}
+                </p>
+                <div class="border-t border-slate-800 mt-4 pt-3 flex items-center gap-2">
+                    <span class="text-lg">💡</span>
+                    <p class="text-[11px] text-indigo-400 italic font-semibold">Consejo Profe IA: Las sutilezas de tiempo definen los límites del nivel B2. ¡Fíjate en las palabras chivato!</p>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalCard.classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closeAITeacherModal() {
+            const modal = document.getElementById('ai-teacher-modal');
+            const modalCard = document.getElementById('ai-teacher-modal-card');
+            modal.classList.add('opacity-0');
+            modalCard.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function updateGlobalStats() {
+            let total = 0;
+            let completed = 0;
+            let scoreSum = 0;
+
+            const categories = ['fill', 'reading', 'listening'];
+            categories.forEach(cat => {
+                let db = [];
+                if (cat === 'fill') db = storiesDB[currentTenseGroup];
+                else if (cat === 'reading') db = readingsDB[currentTenseGroup];
+                else db = listeningsDB[currentTenseGroup];
+
+                total += db.length;
+
+                db.forEach(item => {
+                    const pct = completedActivities[currentTenseGroup][cat][item.id];
+                    if (pct !== undefined) {
+                        completed++;
+                        scoreSum += pct;
+                    }
+                });
+            });
+
+            document.getElementById('global-progress').innerText = `${completed} / ${total} Retos`;
+            const accuracy = completed > 0 ? Math.round(scoreSum / completed) : 0;
+            document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('stat-total-correct').innerText = completed;
+        }
+
+        function updateCheatSheetUI() {
+            const data = cheatSheetData[currentTenseGroup];
+            if (data) {
+                document.getElementById('cheat-sheet-main-title').innerText = data.title;
+                document.getElementById('cheat-sheet-content-container').innerHTML = data.html;
+            }
+        }
+
+        // ================= SISTEMA DE VERBOS IRREGULARES =================
+        function renderIrregularVerbsTable() {
+            const tbody = document.getElementById('irregular-verbs-table-body');
+            tbody.innerHTML = '';
+            let count = 0;
+
+            irregularVerbsDB.forEach(verb => {
+                if (selectedVerbLetter !== 'TODOS' && !verb.infinitive.toLowerCase().startsWith(selectedVerbLetter.toLowerCase())) return;
+                count++;
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/60 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-white font-mono text-sm">${verb.infinitive}</td>
+                    <td class="p-4 text-slate-300 font-mono text-sm">${verb.pastSimple}</td>
+                    <td class="p-4 text-indigo-300 font-mono text-sm">${verb.pastParticiple}</td>
+                    <td class="p-4 text-slate-400 font-medium">${verb.meaning}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function setVerbLetterFilter(letter) {
+            selectedVerbLetter = letter;
+            const alphabet = ["TODOS", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")];
+            alphabet.forEach(x => {
+                const btn = document.getElementById(`verb-letter-${x}`);
+                if (btn) btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700";
+            });
+            const activeBtn = document.getElementById(`verb-letter-${letter}`);
+            if (activeBtn) activeBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-violet-600 text-white border border-violet-500 shadow-lg shadow-violet-500/20";
+            renderIrregularVerbsTable();
+        }
+
+        function filterVerbs() {
+            const query = document.getElementById('verb-search-input').value.trim().toLowerCase();
+            const rows = document.getElementById('irregular-verbs-table-body').getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const inf = row.cells[0].textContent.toLowerCase();
+                const past = row.cells[1].textContent.toLowerCase();
+                const part = row.cells[2].textContent.toLowerCase();
+                const mean = row.cells[3].textContent.toLowerCase();
+                if (inf.includes(query) || past.includes(query) || part.includes(query) || mean.includes(query)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+
+        function exportVerbsToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Infinitive,Simple Past,Past Participle,Spanish Meaning\n";
+            irregularVerbsDB.forEach(verb => {
+                csvContent += `${verb.infinitive},${verb.pastSimple},${verb.pastParticiple},"${verb.meaning}"\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "LISTA_VERBOS_IRREGULARES_DAVID.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // ================= SISTEMA DE PHRASAL VERBS =================
+        function renderPhrasalsTable() {
+            const tbody = document.getElementById('phrasals-table-body');
+            tbody.innerHTML = '';
+            let count = 0;
+
+            phrasalsDB.forEach(pv => {
+                if (selectedPhrasalLetter !== 'TODOS' && !pv.phrasal.toLowerCase().startsWith(selectedPhrasalLetter.toLowerCase())) return;
+                count++;
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/60 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-pink-300 font-mono text-sm">${pv.phrasal}</td>
+                    <td class="p-4 text-slate-300 font-medium">${pv.meaning}</td>
+                    <td class="p-4 text-slate-400 italic font-medium">${pv.example}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            document.getElementById('phrasal-total-count-badge').innerText = `${phrasalsDB.length} Phrasals`;
+        }
+
+        function setPhrasalLetterFilter(letter) {
+            selectedPhrasalLetter = letter;
+            const alphabet = ["TODOS", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")];
+            alphabet.forEach(x => {
+                const btn = document.getElementById(`phrasal-letter-${x}`);
+                if (btn) btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700";
+            });
+            const activeBtn = document.getElementById(`phrasal-letter-${letter}`);
+            if (activeBtn) activeBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-pink-600 text-white border border-pink-500 shadow-lg shadow-pink-500/20";
+            renderPhrasalsTable();
+        }
+
+        function filterPhrasals() {
+            const query = document.getElementById('phrasal-search-input').value.trim().toLowerCase();
+            const rows = document.getElementById('phrasals-table-body').getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const phrasal = row.cells[0].textContent.toLowerCase();
+                const meaning = row.cells[1].textContent.toLowerCase();
+                const example = row.cells[2].textContent.toLowerCase();
+                if (phrasal.includes(query) || meaning.includes(query) || example.includes(query)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+
+        function exportPhrasalsToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Phrasal Verb,Spanish Meaning,Example\n";
+            phrasalsDB.forEach(pv => {
+                csvContent += `"${pv.phrasal}","${pv.meaning}","${pv.example}"\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "LISTA_PHRASAL_VERBS_B2_DAVID.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
