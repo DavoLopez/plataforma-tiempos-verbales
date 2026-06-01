@@ -48,6 +48,15 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
 
+    <!-- NOTIFICACIONES PREMIUM INTEGRADAS (REEMPLAZA ALERTS) -->
+    <div id="custom-toast" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-slate-900 border border-slate-700/80 text-slate-200 px-6 py-4 rounded-2xl shadow-2xl z-50 max-w-md w-full flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none">
+        <span id="toast-icon" class="text-xl">💡</span>
+        <div class="flex-1">
+            <p id="toast-text" class="text-xs font-semibold leading-relaxed">Mensaje del sistema...</p>
+        </div>
+        <button onclick="hideToast()" class="text-slate-400 hover:text-white text-xs font-bold px-2 py-1 bg-slate-800 rounded-lg">Cerrar</button>
+    </div>
+
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40 px-4 py-4 md:px-8">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -122,14 +131,14 @@
     <!-- CUERPO PRINCIPAL -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 md:px-8">
         
-        <!-- ================= SECCIÓN 1: TEORÍA DETALLADA ================= -->
+        <!-- ================= SECCIÓN 1: TEORÍA DETALLADA (LOS 12 TIEMPOS VERBALES) ================= -->
         <section id="theory-section" class="hidden animate-fade-in space-y-6">
             <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
                 <div class="flex items-center gap-3 mb-4">
                     <span class="p-2 bg-indigo-500/10 rounded-xl text-indigo-400 text-xl">📚</span>
                     <div>
-                        <h2 class="text-2xl font-bold text-white tracking-tight">Manual de tiempos verbales - B2</h2>
-                        <p class="text-sm text-slate-400">Los 12 tiempos verbales explicados sin rodeos académicos, listos para arrasar en el examen Oxford.</p>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Manual Definitivo de los 12 Tiempos Verbales B2</h2>
+                        <p class="text-sm text-slate-400">La guía estructural definitiva explicada para dominar las sutilezas gramaticales del examen de Oxford.</p>
                     </div>
                 </div>
 
@@ -140,7 +149,7 @@
                     <button onclick="switchTheorySubTab('theory-future')" id="subtab-btn-theory-future" class="px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400">🚀 Tiempos de Futuro</button>
                 </div>
 
-                <!-- CONTENIDOS DE TEORÍA -->
+                <!-- 1. PASADO TEORÍA (4 TIEMPOS) -->
                 <div id="theory-past" class="theory-sub-content space-y-6 hidden">
                     <!-- Past Simple -->
                     <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
@@ -153,11 +162,11 @@
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed">El "Efecto Dominó". Acciones completadas en el pasado. Se utiliza para contar sucesos continuos y puntuales.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed">El "Efecto Dominó". Acciones que empezaron y terminaron en el pasado de forma puntual o secuencial.</p>
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed"><em>Yesterday, last night, in 2010, ago, as soon as</em>.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Yesterday, last night, in 2010, ago, as soon as, when (interrupción).</em></p>
                             </div>
                         </div>
                     </div>
@@ -171,39 +180,133 @@
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed">El decorado de la escena. Una acción larga que estaba ocurriendo en el pasado de fondo cuando de repente algo puntual la interrumpe.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed">El decorado de fondo. Acciones largas o paralelas que estaban ocurriendo en un momento determinado del pasado.</p>
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed"><em>While, as, at 5 PM yesterday, when</em>.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>While, as, at 5 PM yesterday, at that moment.</em></p>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div id="theory-present" class="theory-sub-content space-y-6 hidden">
+                    <!-- Past Perfect Simple -->
                     <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">3. Present Simple <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-medium">Rutina y Hecho</span></h3>
+                        <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">3. Past Perfect Simple <span class="text-xs bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded font-medium">El Pasado del Pasado</span></h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
-                                <p class="text-sm font-semibold text-slate-200">Sujeto + Verb (base / -s)</p>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + had + Participio (3ª Columna)</p>
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed">Tus costumbres, verdades universales, horarios o estados permanentes en tu vida.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed">La caja del pasado previo. Se utiliza para ubicar una acción que ocurrió cronológicamente antes de otra también pasada.</p>
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed"><em>Always, usually, twice a week, every</em>.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>By the time, already, before, after, never/ever (en pasado).</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Past Perfect Continuous -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">4. Past Perfect Continuous <span class="text-xs bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded font-medium">La Huella Física</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + had been + Verb-ing</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">El cansancio justificado. Destaca la duración de un proceso continuo que se extendió hasta un momento concreto del pasado.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>For hours (previo), all morning, because (síntoma de cansancio pasado).</em></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="theory-future" class="theory-sub-content space-y-6 hidden">
+                <!-- 2. PRESENTE TEORÍA (4 TIEMPOS) -->
+                <div id="theory-present" class="theory-sub-content space-y-6 hidden">
+                    <!-- Present Simple -->
                     <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">4. Future Simple (Will) <span class="text-xs bg-rose-500/10 text-rose-300 px-2 py-0.5 rounded font-medium">La Promesa o Intuición</span></h3>
+                        <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">5. Present Simple <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-medium">Rutinas y Hechos</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + Verb (añade -s/es en 3ª pers.)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Costumbres diarias, leyes naturales de la física, horarios fijos de transporte o estados que son permanentes.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Always, usually, twice a week, every Monday, normally, timetables.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Present Continuous -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">6. Present Continuous <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-medium">El Directo en Curso</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + am / is / are + Verb-ing</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Acción ocurriendo en este mismo segundo ("ahora mismo") o cambios temporales fuera de tu rutina habitual esta semana.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Right now, at the moment, currently, this week, Look! Listen!</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Present Perfect Simple -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">7. Present Perfect Simple <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-medium">Experiencias y Logros</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + have / has + Participio (3ª Columna)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Unión del pasado con el presente. Hitos terminados en un momento no especificado cuyas consecuencias influyen en tu hoy.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Already, just, yet (negativa/pregunta), ever, never, so far, recently.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Present Perfect Continuous -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">8. Present Perfect Continuous <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-medium">Esfuerzo Prolongado</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + have / has been + Verb-ing</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Enfatiza la duración e insistencia de una acción inacabada que empezó en el pasado y sigue desarrollándose de forma continua hoy.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>For (durante), since (desde), lately, how long? (preguntas de duración).</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. FUTURO TEORÍA (4 TIEMPOS) -->
+                <div id="theory-future" class="theory-sub-content space-y-6 hidden">
+                    <!-- Future Simple -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">9. Future Simple (Will) <span class="text-xs bg-rose-500/10 text-rose-300 px-2 py-0.5 rounded font-medium">La Opinión o Promesa</span></h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
@@ -211,11 +314,65 @@
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed">Decisiones improvisadas, promesas inquebrantables, o predicciones basadas puramente en tu opinión subjetiva.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed">Decisiones espontáneas e imprevistas tomadas en el mismo instante del habla, promesas formales, o suposiciones futuras basadas en creencias subjetivas.</p>
                             </div>
                             <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed"><em>I think, probably, promise, next year</em>.</p>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>I think, probably, perhaps, tomorrow, next week, promise, predict.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Future: Be Going To -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">10. Future with Be Going To <span class="text-xs bg-rose-500/10 text-rose-300 px-2 py-0.5 rounded font-medium">Intención y Evidencia</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + am/is/are + going to + Verb (Inf.)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Planes premeditados antes de expresarlos (intenciones firmes) o predicciones muy certeras porque dispones de una prueba o evidencia física visible ahora mismo.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>Look at! (evidencia física), I have decided to..., my intention is.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Future Continuous -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">11. Future Continuous <span class="text-xs bg-rose-500/10 text-rose-300 px-2 py-0.5 rounded font-medium">La Foto del Mañana</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + will be + Verb-ing</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">Imaginar una fotografía del futuro. Te visualizas suspendido a mitad de camino en el desarrollo de una acción larga.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>This time next week, tomorrow at 5 PM, in ten years' time.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Future Perfect Simple -->
+                    <div class="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">12. Future Perfect Simple <span class="text-xs bg-rose-500/10 text-rose-300 px-2 py-0.5 rounded font-medium">Meta Conseguida</span></h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Fórmula Visual</h4>
+                                <p class="text-sm font-semibold text-slate-200">Sujeto + will have + Participio (3ª Columna)</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">La Película Mental 🎬</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">La fecha de vencimiento. Te adelantas en el tiempo hasta una fecha límite en el futuro y miras hacia atrás para comprobar qué meta ya habrás conseguido.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">Chivato B2 🕵️‍♂️</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed"><em>By Sunday, by the time she arrives, by the end of this year.</em></p>
                             </div>
                         </div>
                     </div>
@@ -596,13 +753,29 @@
 
     <!-- PIE DE PÁGINA -->
     <footer class="border-t border-slate-800/80 bg-slate-950 py-4 text-center text-xs text-slate-500 mt-auto">
-        Plataforma integral de tiempos verbales • Éxito garantizado para David en el B2 de Oxford • © 2026.
+        Plataforma de tiempos verbales • Éxito para David en el B2 de Oxford • © 2026.
     </footer>
 
     <!-- LÓGICA DE CONTROL DE LA PLATAFORMA -->
     <script>
         // VARIABLE DE ESTADO COMPETENCIA (fill, reading, listening)
         let activeCompetence = 'fill'; 
+
+        // SISTEMA DE TOAST PREMIUM (REEMPLAZO DE ALERT NATIVO)
+        function showToast(message, icon = "💡") {
+            const toast = document.getElementById('custom-toast');
+            document.getElementById('toast-text').innerText = message;
+            document.getElementById('toast-icon').innerText = icon;
+            toast.classList.remove('pointer-events-none', 'opacity-0');
+            toast.classList.add('opacity-100');
+            setTimeout(hideToast, 5000); // Se esconde en 5 segundos
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('custom-toast');
+            toast.classList.add('opacity-0', 'pointer-events-none');
+            toast.classList.remove('opacity-100');
+        }
 
         // ================= BASE DE DATOS DE EJERCICIOS (ESTÁTICA, ESTABLE Y AMPLIA) =================
 
@@ -657,7 +830,7 @@
                     genre: "Comedia",
                     introduction: "Un desastroso chef intenta hornear el pastel de bodas más grande de Vecindario.",
                     text: [
-                        "Yesterday morning, chef Marco ", " a premium wedding cake. He ", " his assistant's instructions because he ", " he was a genius. While the cake ", " in the oven, he realized that he ", " salt instead of sugar! By the time he open the oven door, the cake ", " completely. Marco was furious because he ", " his brand-new kitchen for hours. Suddenly, the bride ", " in, looked at the disaster, and ", " laughing. Marco realized he ", " his career."
+                        "Yesterday morning, chef Marco ", " a premium wedding cake. He ", " his assistant's instructions because he ", " he was a genius. While the cake ", " in the oven, he realized that he ", " salt instead of sugar! By the time he opened the oven door, the cake ", " completely. Marco was furious because he ", " his brand-new kitchen for hours. Suddenly, the bride ", " in, looked at the disaster, and ", " laughing. Marco realized he ", " his career."
                     ],
                     blanks: [
                         { index: 0, verb: "prepare", answers: ["was preparing"], hint: "Escenario o acción de fondo.", explanation: "Estaba en proceso de preparación como marco de la historia: Past Continuous." },
@@ -704,14 +877,14 @@
                     blanks: [
                         { index: 0, verb: "work", answers: ["had been working"], hint: "Duración de carrera previa.", explanation: "Había estado trabajando durante 10 años antes de renunciar: Past Perfect Continuous." },
                         { index: 1, verb: "hate", answers: ["hated"], hint: "Verbo de estado pasado.", explanation: "Odiaba su trabajo (estado emocional): Past Simple." },
-                        { index: 2, verb: "become", answers: ["had become"], hint: "Estado previo consolido.", explanation: "El trabajo se había vuelto aburrido antes de que decidiera dejarlo: Past Perfect Simple." },
+                        { index: 2, verb: "become", answers: ["had become"], hint: "Estado previo consido.", explanation: "El trabajo se había vuelto aburrido antes de que decidiera dejarlo: Past Perfect Simple." },
                         { index: 3, verb: "submit", answers: ["submitted"], hint: "Reacción secuencial.", explanation: "En cuanto entregó su carta (hecho puntual): Past Simple." },
                         { index: 4, verb: "buy", answers: ["bought"], hint: "Siguiente paso consecutiva.", explanation: "Compró el billete de avión: Past Simple." },
                         { index: 5, verb: "not support", answers: ["did not support", "didn't support"], hint: "Falta de apoyo puntual.", explanation: "Hecho negativo puntual en el pasado: Past Simple." },
                         { index: 6, verb: "lose", answers: ["had lost"], hint: "Hecho de pérdida anterior.", explanation: "Había extraviado el pasaporte antes de pasar por aduana: Past Perfect Simple." },
                         { index: 7, verb: "save", answers: ["had saved"], hint: "Acción de previsión previa.", explanation: "Había guardado una copia en la nube con antelación: Past Perfect Simple." },
                         { index: 8, verb: "launch", answers: ["launched"], hint: "Hito puntual completado.", explanation: "Fundó su empresa como acción puntual cerrada en el pasado: Past Simple." },
-                        { index: 9, verb: "always want", answers: ["had always wanted"], hint: "Deseo prolongado del pasado del pasado.", explanation: "Era algo que siempre había querido hacer antes de dar el paso: Past Perfect Simple." }
+                        { index: 9, verb: "always want", answers: ["had always wanted"], hint: "Deseo prolongado.", explanation: "Era algo que siempre había querido hacer antes de dar el paso: Past Perfect Simple." }
                     ]
                 }
             ],
@@ -743,7 +916,7 @@
                     genre: "Trabajo",
                     introduction: "Conoce el día a día de un nómada digital que trabaja en Vecindario.",
                     text: [
-                        "Alex is a software engineer who ", " in Vecindario this winter. He usually ", " at 8:00 AM. Currently, he ", " on a major project for an American startup. He ", " three different coworking hubs so far, and he loves them. Since he arrived, he ", " Spanish vocabulary every day. At this moment, his team ", " an urgent bug. He ", " his computer for six hours today. Alex enjoys this lifestyle because he ", " free to plan his schedule. Now, he ", " a coffee breaks to stretch."
+                        "Alex is a software engineer who ", " in Vecindario this winter. He usually ", " at 8:00 AM. Currently, he ", " on a major project for an American startup. He ", " three different coworking hubs so far, and he loves them. Since he arrived, he ", " Spanish vocabulary every day. At this moment, his team ", " an urgent bug. He ", " his computer for six hours today. Alex enjoys this lifestyle because he ", " free to plan his schedule. Now, he ", " a coffee break to stretch."
                     ],
                     blanks: [
                         { index: 0, verb: "live", answers: ["is living"], hint: "Situación provisional.", explanation: "Vivir allí este invierno es provisional: Present Continuous." },
@@ -773,7 +946,7 @@
                         { index: 3, verb: "rescue", answers: ["has rescued"], hint: "Hito acumulado.", explanation: "Logro de rescates en un tiempo no cerrado (este año): Present Perfect Simple." },
                         { index: 4, verb: "ask", answers: ["has been asking"], hint: "Demanda continua reciente.", explanation: "El director lleva pidiendo ayuda de forma repetida últimamente: Present Perfect Continuous." },
                         { index: 5, verb: "work", answers: ["have been working", "have worked"], hint: "Interrogativa de duración.", explanation: "¿Cuánto tiempo llevas colaborando?: Present Perfect Continuous." },
-                        { index: 6, verb: "think", answers: ["have been thinking"], hint: "Reflexión prolongada hasta hoy.", explanation: "'Since' demanda un proceso que empezó en el pasado y sigue rondando: Present Perfect Continuous." },
+                        { index: 6, verb: "think", answers: ["have been thinking"], hint: "Reflexión prolongada.", explanation: "'Since' demanda un proceso que empezó en el pasado y sigue rondando: Present Perfect Continuous." },
                         { index: 7, verb: "build", answers: ["are building"], hint: "Acción provisional actual.", explanation: "'Currently' indica construcción en curso: Present Continuous." },
                         { index: 8, verb: "need", answers: ["need"], hint: "Necesidad de estado.", explanation: "Verbo de estado 'need' en presente: Present Simple." },
                         { index: 9, verb: "love", answers: ["love"], hint: "Preferencia emocional.", explanation: "Verbo de estado de emoción: Present Simple." }
@@ -1286,7 +1459,7 @@
             { infinitive: "remake", pastSimple: "remade", pastParticiple: "remade", meaning: "rehacer, remodelar" },
             { infinitive: "rend", pastSimple: "rent", pastParticiple: "rent", meaning: "desgarrar" },
             { infinitive: "repay", pastSimple: "repaid", pastParticiple: "repaid", meaning: "reembolsar, devolver dinero" },
-            { infinitive: "reread", pastSimple: "reread", pastParticiple: "reread", meaning: "releer" },
+            { infinitive: "reread", pastSimple: "reread", pastParticiple: "reread", meaning: "reeleer" },
             { infinitive: "rerun", pastSimple: "reran", pastParticiple: "rerun", meaning: "volver a emitir" },
             { infinitive: "resell", pastSimple: "resold", pastParticiple: "resold", meaning: "revender" },
             { infinitive: "reset", pastSimple: "reset", pastParticiple: "reset", meaning: "restablecer, reiniciar" },
@@ -1465,7 +1638,7 @@
             { phrasal: "Zone out / Zonk out", meaning: "Dejar de prestar atención / Quedarse dormido", example: "I zoned out for a moment during the long monologue." }
         ];
 
-        // CHULETA DATA POR BLOQUE TEMPORAL
+        // CHULETA DATA POR BLOQUE TEMPORAL (Actualizado para David)
         const cheatSheetData = {
             past: {
                 title: "Chuleta de Oro - PASADOS (Past)",
@@ -1568,7 +1741,7 @@
         // CONTROLADOR DE NAVEGACIÓN PRINCIPAL
         function switchView(viewName) {
             activeView = viewName;
-            stopListeningAudio(); // Parar audios por seguridad
+            stopListeningAudio(); 
 
             const theorySec = document.getElementById('theory-section');
             const practiceSec = document.getElementById('practice-section');
@@ -1615,7 +1788,7 @@
                     activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-sky-500/30 bg-gradient-to-tr from-sky-600 to-blue-600 text-white shadow-lg shadow-sky-500/25";
                 }
 
-                setCompetenceMode('fill'); // Cargar Gap-Fill por defecto
+                setCompetenceMode('fill'); 
                 updateCheatSheetUI();
                 document.getElementById('feedback-panel').classList.add('hidden');
             }
@@ -1670,7 +1843,7 @@
                 counter.innerText = "5 Audios";
             }
 
-            selectedActivityId = 1; // Resetear al primer ejercicio de la lista
+            selectedActivityId = 1; 
             renderActivitiesList();
             loadActiveExercise(selectedActivityId);
             document.getElementById('feedback-panel').classList.add('hidden');
@@ -1733,7 +1906,7 @@
         // CARGA EL CONTENIDO DEL EJERCICIO SELECCIONADO EN EL LIENZO CENTRAL
         function loadActiveExercise(id) {
             const player = document.getElementById('listening-player-container');
-            player.classList.add('hidden'); // Ocultar por defecto
+            player.classList.add('hidden'); 
 
             let db = [];
             if (activeCompetence === 'fill') {
@@ -1867,11 +2040,11 @@
 
         function playListeningAudio() {
             if (!synth) {
-                alert("La síntesis de voz no está soportada en tu navegador.");
+                showToast("La síntesis de voz no está soportada en tu navegador actual.", "⚠️");
                 return;
             }
 
-            synth.cancel(); // Parar audios en cola
+            synth.cancel(); 
             clearInterval(progressInterval);
 
             let db = listeningsDB[currentTenseGroup];
@@ -1880,7 +2053,7 @@
 
             const textToSpeak = item.audioText;
             activeUtterance = new SpeechSynthesisUtterance(textToSpeak);
-            activeUtterance.lang = 'en-GB'; // Acento británico para el Oxford B2
+            activeUtterance.lang = 'en-GB'; 
             
             // Forzar velocidad elegida
             const speed = parseFloat(document.getElementById('listening-speed').value);
@@ -1902,7 +2075,7 @@
             statusLbl.innerText = "Reproduciendo audio oficial...";
 
             let start = Date.now();
-            const estimatedDuration = (textToSpeak.split(" ").length / (150 * speed)) * 60 * 1000; // estimación de ms
+            const estimatedDuration = (textToSpeak.split(" ").length / (150 * speed)) * 60 * 1000; 
 
             progressInterval = setInterval(() => {
                 let elapsed = Date.now() - start;
@@ -2151,11 +2324,9 @@
         function renderIrregularVerbsTable() {
             const tbody = document.getElementById('irregular-verbs-table-body');
             tbody.innerHTML = '';
-            let count = 0;
 
             irregularVerbsDB.forEach(verb => {
                 if (selectedVerbLetter !== 'TODOS' && !verb.infinitive.toLowerCase().startsWith(selectedVerbLetter.toLowerCase())) return;
-                count++;
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-900/60 transition-colors";
                 tr.innerHTML = `
@@ -2215,11 +2386,9 @@
         function renderPhrasalsTable() {
             const tbody = document.getElementById('phrasals-table-body');
             tbody.innerHTML = '';
-            let count = 0;
 
             phrasalsDB.forEach(pv => {
                 if (selectedPhrasalLetter !== 'TODOS' && !pv.phrasal.toLowerCase().startsWith(selectedPhrasalLetter.toLowerCase())) return;
-                count++;
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-900/60 transition-colors";
                 tr.innerHTML = `
@@ -2272,6 +2441,29 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function toggleCheatSheet() {
+            const sidebar = document.getElementById('cheat-sheet-sidebar');
+            const overlay = document.getElementById('cheat-sheet-overlay');
+
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 50);
+            } else {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
         }
     </script>
 </body>
