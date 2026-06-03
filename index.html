@@ -688,23 +688,33 @@
     <!-- CHULETA DE ESTUDIO LATERAL -->
     <div id="cheat-sheet-sidebar" class="fixed inset-y-0 right-0 w-full max-w-lg bg-slate-900 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
         <div class="p-6 border-b border-slate-800 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                </span>
-                <h3 class="text-base font-bold text-white uppercase tracking-wider" id="cheat-sheet-main-title">Chuleta de Oro</h3>
-            </div>
-            <button onclick="toggleCheatSheet()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+            <h3 class="text-base font-bold text-white uppercase tracking-wider">Chuleta: Resumen 12 Tiempos</h3>
+            <button onclick="toggleCheatSheet()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">X</button>
         </div>
-
-        <div class="p-6 overflow-y-auto flex-1 space-y-6" id="cheat-sheet-content-container">
-            <!-- Rellenado dinámico -->
+        <div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs text-slate-300">
+            <!-- ESTRUCTURA TOTAL -->
+            <div class="space-y-4">
+                <h4 class="font-bold text-indigo-400 border-b border-indigo-500/30 pb-2">🕒 PASADO</h4>
+                <p><strong>Simple:</strong> Subj + Verbo pasado /ed. (Acción terminada)</p>
+                <p><strong>Cont:</strong> Subj + was/were + Verbo -ing. (Acción en proceso pasado)</p>
+                <p><strong>Perf:</strong> Subj + had + Verbo participio. (Pasado del pasado)</p>
+                <p><strong>Perf Cont:</strong> Subj + had been + Verbo -ing. (Duración en pasado)</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-emerald-400 border-b border-emerald-500/30 pb-2">⏳ PRESENTE</h4>
+                <p><strong>Simple:</strong> Subj + Verbo (s/es). (Rutina/Hecho)</p>
+                <p><strong>Cont:</strong> Subj + am/is/are + Verbo -ing. (Ahora mismo)</p>
+                <p><strong>Perf:</strong> Subj + have/has + Verbo participio. (Experiencia/Logro)</p>
+                <p><strong>Perf Cont:</strong> Subj + have/has been + Verbo -ing. (Duración hasta hoy)</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-rose-400 border-b border-rose-500/30 pb-2">🚀 FUTURO</h4>
+                <p><strong>Simple (Will):</strong> Subj + will + Verbo (Opinión/Promesa)</p>
+                <p><strong>Cont:</strong> Subj + will be + Verbo -ing. (Acción suspendida)</p>
+                <p><strong>Perf:</strong> Subj + will have + Verbo participio. (Meta cumplida futura)</p>
+                <p><strong>Perf Cont:</strong> Subj + will have been + Verbo -ing.</p>
+                <p><strong>Going to:</strong> Subj + am/is/are + going to + V. (Plan/Intención)</p>
+            </div>
         </div>
     </div>
     
