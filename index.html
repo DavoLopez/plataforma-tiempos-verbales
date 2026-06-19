@@ -90,44 +90,49 @@
         </div>
     </header>
 
-    <!-- ESTÉTICA PREMIUM: MENÚ DE 6 BOTONES PRINCIPALES -->
+    <!-- ESTÉTICA PREMIUM: MENÚ DE 8 BOTONES PRINCIPALES -->
     <div class="max-w-7xl mx-auto px-4 md:px-8 mt-6">
         <div class="bg-slate-900/60 p-2 rounded-2xl border border-slate-800/80 backdrop-blur-md">
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
                 <!-- 1. TEORÍA -->
                 <button onclick="switchView('theory')" id="tab-btn-theory" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">📚</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Teoría Completa</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Teoría Completa</span>
                 </button>
                 <!-- 2. PASADO -->
                 <button onclick="switchView('past')" id="tab-btn-past" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">🕒</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Pasado</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Pasado</span>
                 </button>
                 <!-- 3. PRESENTE -->
                 <button onclick="switchView('present')" id="tab-btn-present" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">⏳</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Presente</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Presente</span>
                 </button>
                 <!-- 4. FUTURO -->
                 <button onclick="switchView('future')" id="tab-btn-future" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">🚀</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Futuro</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Futuro</span>
                 </button>
                 <!-- 5. PHRASAL VERBS -->
                 <button onclick="switchView('phrasals')" id="tab-btn-phrasals" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">🔄</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Phrasal Verbs</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Phrasals</span>
                 </button>
                 <!-- 6. VERBOS IRREGULARES -->
                 <button onclick="switchView('verbs')" id="tab-btn-verbs" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">📋</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Verbos Irregulares</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Verbos Irregulares</span>
                 </button>
                 <!-- 7. CONDICIONALES -->
                 <button onclick="switchView('conditionals')" id="tab-btn-conditionals" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
                     <span class="text-xl mb-1 group-hover:scale-110 transition-transform">⚖️</span>
-                    <span class="text-xs font-bold uppercase tracking-wider">Condicionales</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center">Condicionales</span>
+                </button>
+                <!-- 8. FUTURO Y PROBABILIDAD -->
+                <button onclick="switchView('future-prob')" id="tab-btn-future-prob" class="group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-slate-800 bg-slate-950/40 text-slate-400">
+                    <span class="text-xl mb-1 group-hover:scale-110 transition-transform">✨</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-center text-emerald-400 font-bold">Futuro & Probabilidades</span>
                 </button>
             </div>
         </div>
@@ -689,135 +694,211 @@
         </section>
 
         <!-- ================= SECCIÓN 5: CONDICIONALES DETALLADA ================= -->
-<section id="conditionals-section" class="hidden animate-fade-in space-y-6">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
-        <h2 class="text-3xl font-bold text-white mb-8 border-b border-slate-700 pb-4">Dominio de los Condicionales (B2)</h2>
+        <section id="conditionals-section" class="hidden animate-fade-in space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <h2 class="text-3xl font-bold text-white mb-8 border-b border-slate-700 pb-4">Dominio de los Condicionales (B2)</h2>
 
-        <div class="mb-10">
-            <h3 class="text-xl font-bold text-orange-400 mb-3">REGLA GENERAL</h3>
-            <p class="text-slate-300 mb-4"> Conditional sentences usually have two parts or clauses: <code class="bg-slate-800 px-1 rounded">the if-clause</code> and <code class="bg-slate-800 px-1 rounded">the result clause</code>.<br>
-             When the if-clause come first, it is followed by a comma. </p> <br>
-             1. <code class="bg-slate-800 px-1 rounded">If </code> you want to take up a new sport<code class="bg-slate-800 px-1 rounded">,</code> get in touch with you local leisure centre.<br>
-             2. Get in touch your local leisure centre <code class="bg-slate-800 px-1 rounded">if</code> you want to take up a new sport.<br><br>
-            <code class="bg-slate-800 px-1 rounded">Unless</code> means <code class="bg-slate-800 px-1 rounded">If/ if not</code> or <code class="bg-slate-800 px-1 rounded">except if. </code> 
-        Ejemplos:<br>
-             1. You don't pay taxes <code class="bg-slate-800 px-1 rounded">unless</code> you earn more than 20k a year.<br>
-             2. They can't arrest him <code class="bg-slate-800 px-1 rounded">unless</code> they have a warrant.<br><br>
-        </div>
-             
-      
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold text-orange-400 mb-3">REGLA GENERAL</h3>
+                    <p class="text-slate-300 mb-4"> Conditional sentences usually have two parts or clauses: <code class="bg-slate-800 px-1 rounded">the if-clause</code> and <code class="bg-slate-800 px-1 rounded">the result clause</code>.<br>
+                     When the if-clause come first, it is followed by a comma. </p> <br>
+                     1. <code class="bg-slate-800 px-1 rounded">If </code> you want to take up a new sport<code class="bg-slate-800 px-1 rounded">,</code> get in touch with you local leisure centre.<br>
+                     2. Get in touch your local leisure centre <code class="bg-slate-800 px-1 rounded">if</code> you want to take up a new sport.<br><br>
+                    <code class="bg-slate-800 px-1 rounded">Unless</code> means <code class="bg-slate-800 px-1 rounded">If/ if not</code> or <code class="bg-slate-800 px-1 rounded">except if. </code> 
+                Ejemplos:<br>
+                     1. You don't pay taxes <code class="bg-slate-800 px-1 rounded">unless</code> you earn more than 20k a year.<br>
+                     2. They can't arrest him <code class="bg-slate-800 px-1 rounded">unless</code> they have a warrant.<br><br>
+                </div>
 
-        <!-- ZERO CONDITIONAL -->
-        <div class="mb-10">
-            <h3 class="text-xl font-bold text-orange-400 mb-3">Zero Conditional: Verdades Generales</h3>
-            <p class="text-slate-300 mb-4">Se utiliza para hechos científicos o situaciones que son siempre ciertas. Estructura: <code class="bg-slate-800 px-1 rounded">If + Present Simple, Present Simple</code>.</p>
-            <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
-                <li>If you heat ice, it melts.</li>
-                <li>If it rains, the grass gets wet.</li>
-                <li>If you don't eat, you get hungry.</li>
-            </ul>
-            <div class="bg-slate-950 p-4 rounded-lg">
+                <!-- ZERO CONDITIONAL -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold text-orange-400 mb-3">Zero Conditional: Verdades Generales</h3>
+                    <p class="text-slate-300 mb-4">Se utiliza para hechos científicos o situaciones que son siempre ciertas. Estructura: <code class="bg-slate-800 px-1 rounded">If + Present Simple, Present Simple</code>.</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
+                        <li>If you heat ice, it melts.</li>
+                        <li>If it rains, the grass gets wet.</li>
+                        <li>If you don't eat, you get hungry.</li>
+                    </ul>
+                    <div class="bg-slate-950 p-4 rounded-lg">
+                        <p class="font-semibold text-white">Ejercicios:</p>
+                        <ol class="list-decimal list-inside text-sm text-slate-300">
+                            <li>If you (mix) red and blue, you get purple.</li>
+                            <li>If the sun (go) down, it gets dark.</li>
+                            <li>If you (press) this button, the light turns on.</li>
+                            <li>Water (boil) if it reaches 100 degrees.</li>
+                            <li>If you (drop) an object, it falls.</li>
+                        </ol>
+                    </div>
+                </div>
+           
+                <!-- FIRST CONDITIONAL -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold text-orange-400 mb-3">First Conditional: Posibilidad Real</h3>
+                    <p class="text-slate-300 mb-4">Para situaciones probables en el futuro. Estructura: <code class="bg-slate-800 px-1 rounded">If + Present Simple, Will + Verb</code>.</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
+                        <li>If it is sunny tomorrow, we will go to the beach.</li>
+                        <li>If you study hard, you will pass the exam.</li>
+                        <li>If I have enough money, I will buy that car.</li>
+                    </ul>
+                    <div class="bg-slate-950 p-4 rounded-lg">
+                        <p class="font-semibold text-white">Ejercicios:</p>
+                        <ol class="list-decimal list-inside text-sm text-slate-300">
+                            <li>If he (arrive) late, we will start without him.</li>
+                            <li>We (go) to the park if the weather is nice.</li>
+                            <li>If you (not / hurry), you will miss the bus.</li>
+                            <li>If I (find) your keys, I will call you.</li>
+                            <li>They (be) angry if we don't invite them.</li>
+                        </ol>
+                    </div>
+                    <code class="bg-slate-800 px-1 rounded">FUTURE TIME CLAUSES</code><br>
+                    <p class="text-sm text-slate-300 mt-2">We use the present tense after <code class="bg-slate-800 px-1 rounded">when, as soon as, until, before, after</code> to talk about the future.<br><br>
+                    Ejemplos:<br>
+                    I will not have dinner <code class="bg-slate-800 px-1 rounded">until</code> I finish my Homeworks.<br>
+                    <code class="bg-slate-800 px-1 rounded">As soon as</code> you finish the test, call me.<br>
+                    <code class="bg-slate-800 px-1 rounded">After/when</code> I finish my degree, I will move to England.<br> 
+                    </p>
+                </div>
 
-                <p class="font-semibold text-white">Ejercicios:</p>
+                <!-- SECOND CONDITIONAL -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold text-orange-400 mb-3">Second Conditional: Hipotético Presente</h3>
+                    <p class="text-slate-300 mb-4">Para situaciones imaginarias o poco probables en el presente. Estructura: <code class="bg-slate-800 px-1 rounded">If + Past Simple, Would + Infinitive</code>.</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
+                        <li>If I won the lottery, I would travel the world.</li>
+                        <li>If I were you, I would take that job.</li>
+                        <li>If she had more time, she would learn French.</li>
+                    </ul>
+                    <div class="bg-slate-950 p-4 rounded-lg">
+                        <p class="font-semibold text-white">Ejercicios:</p>
+                        <ol class="list-decimal list-inside text-sm text-slate-300">
+                            <li>If I (be) you, I would apologize.</li>
+                            <li>He (travel) more if he had more money.</li>
+                            <li>If we (have) a bigger house, we would host a party.</li>
+                            <li>What would you do if you (see) a ghost?</li>
+                            <li>If she (know) the answer, she would tell us.</li>
+                        </ol>
+                    </div>
+                </div>
 
-                <ol class="list-decimal list-inside text-sm text-slate-300">
-
-                    <li>If you (mix) red and blue, you get purple.</li>
-
-                    <li>If the sun (go) down, it gets dark.</li>
-
-                    <li>If you (press) this button, the light turns on.</li>
-
-                    <li>Water (boil) if it reaches 100 degrees.</li>
-
-                    <li>If you (drop) an object, it falls.</li>
-
-                </ol>
-
+                <!-- THIRD CONDITIONAL -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold text-orange-400 mb-3">Third Conditional: Arrepentimiento Pasado</h3>
+                    <p class="text-slate-300 mb-4">Para situaciones pasadas que no ocurrieron. Estructura: <code class="bg-slate-800 px-1 rounded">If + Past Perfect, Would Have + P.P.</code>.</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
+                        <li>If I had studied, I would have passed.</li>
+                        <li>If you had told me, I would have helped you.</li>
+                        <li>If we hadn't missed the train, we would have arrived on time.</li>
+                    </ul>
+                    <div class="bg-slate-950 p-4 rounded-lg">
+                        <p class="font-semibold text-white">Ejercicios:</p>
+                        <ol class="list-decimal list-inside text-sm text-slate-300">
+                            <li>If I (see) him, I would have said hello.</li>
+                            <li>She would have called if she (have) your number.</li>
+                            <li>If they (not / eat) so much, they wouldn't have felt sick.</li>
+                            <li>We (win) the match if we had trained more.</li>
+                            <li>If you (ask) me, I would have agreed.</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
+        </section>
 
-        </div>
-   
-        <!--FIRST CONDITIONAL -->
-        <div class="mb-10">
-            <h3 class="text-xl font-bold text-orange-400 mb-3">First Conditional: Posibilidad Real</h3>
-            <p class="text-slate-300 mb-4">Para situaciones probables en el futuro. Estructura: <code class="bg-slate-800 px-1 rounded">If + Present Simple, Will + Verb</code>.</p>
-            <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
-                <li>If it is sunny tomorrow, we will go to the beach.</li>
-                <li>If you study hard, you will pass the exam.</li>
-                <li>If I have enough money, I will buy that car.</li>
-            </ul>
-            <div class="bg-slate-950 p-4 rounded-lg">
-                <p class="font-semibold text-white">Ejercicios:</p>
-                <ol class="list-decimal list-inside text-sm text-slate-300">
-                    <li>If he (arrive) late, we will start without him.</li>
-                    <li>We (go) to the park if the weather is nice.</li>
-                    <li>If you (not / hurry), you will miss the bus.</li>
-                    <li>If I (find) your keys, I will call you.</li>
-                    <li>They (be) angry if we don't invite them.</li>
-                </ol>
-            </div>
-            <code class="bg-slate-800 px-1 rounded">FUTURE TIME CLAUSES</code><br>
-            <p>We use the present tense after <code class="bg-slate-800 px-1 rounded">when, as soon as, until, before, after</code> to talk about the future.<br><br>
-            Ejemplos:<br>
-            I will not have dinner <code class="bg-slate-800 px-1 rounded">until</code> I finish my Homeworks.<br>
-            <code class="bg-slate-800 px-1 rounded">As soon as</code> you finish the test, call me.<br>
-            <code class="bg-slate-800 px-1 rounded">After/when</code> I finish my degree, I will move to England.<br> 
-            </p>
-        </div>
+        <!-- ================= SECCIÓN 6: FUTURO Y PROBABILIDAD DETALLADA ================= -->
+        <section id="future-prob-section" class="hidden animate-fade-in space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <div class="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
+                    <div class="p-2 bg-emerald-500/10 rounded-xl border border-emerald-500/30">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Grados de Probabilidad y Futuro (B2)</h2>
+                        <p class="text-slate-400 text-sm">Los modales de deducción expresan tu nivel de certeza epistémica. Usa el deslizador interactivo para ver cómo cambia la sintaxis según la probabilidad.</p>
+                    </div>
+                </div>
 
-        <!--SECOND CONDITIONAL -->
-        <div class="mb-10">
-            <h3 class="text-xl font-bold text-orange-400 mb-3">Second Conditional: Hipotético Presente</h3>
-            <p class="text-slate-300 mb-4">Para situaciones imaginarias o poco probables en el presente. Estructura: <code class="bg-slate-800 px-1 rounded">If + Past Simple, Would + Infinitive</code>.</p>
-            <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
-                <li>If I won the lottery, I would travel the world.</li>
-                <li>If I were you, I would take that job.</li>
-                <li>If she had more time, she would learn French.</li>
-            </ul>
-            <div class="bg-slate-950 p-4 rounded-lg">
-                <p class="font-semibold text-white">Ejercicios:</p>
-                <ol class="list-decimal list-inside text-sm text-slate-300">
-                    <li>If I (be) you, I would apologize.</li>
-                    <li>He (travel) more if he had more money.</li>
-                    <li>If we (have) a bigger house, we would host a party.</li>
-                    <li>What would you do if you (see) a ghost?</li>
-                    <li>If she (know) the answer, she would tell us.</li>
-                </ol>
-            </div>
-        </div>
+                <!-- SLIDER INTERACTIVO DE PROBABILIDAD -->
+                <div class="bg-gradient-to-r from-emerald-950/20 to-slate-950 p-6 rounded-2xl border border-emerald-500/20 space-y-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Línea de Certeza Epistémica</span>
+                            <span id="prob-percentage-label" class="text-lg font-black text-white bg-emerald-600/20 border border-emerald-500/30 px-3 py-1 rounded-xl">90% Certeza</span>
+                        </div>
+                        <input type="range" id="probability-slider" min="0" max="5" value="4" oninput="updateProbabilityWidget()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-slate-500 font-mono px-1">
+                            <span>0% (Imposible)</span>
+                            <span>30% (Remoto)</span>
+                            <span>50% (Posible)</span>
+                            <span>75% (Probable)</span>
+                            <span>90% (Lógico)</span>
+                            <span>100% (Absoluto)</span>
+                        </div>
+                    </div>
 
-        <!--THIRD CONDITIONAL -->
-        <div class="mb-10">
-            <h3 class="text-xl font-bold text-orange-400 mb-3">Third Conditional: Arrepentimiento Pasado</h3>
-            <p class="text-slate-300 mb-4">Para situaciones pasadas que no ocurrieron. Estructura: <code class="bg-slate-800 px-1 rounded">If + Past Perfect, Would Have + P.P.</code>.</p>
-            <ul class="list-disc list-inside text-slate-400 space-y-1 mb-4">
-                <li>If I had studied, I would have passed.</li>
-                <li>If you had told me, I would have helped you.</li>
-                <li>If we hadn't missed the train, we would have arrived on time.</li>
-            </ul>
-            <div class="bg-slate-950 p-4 rounded-lg">
-                <p class="font-semibold text-white">Ejercicios:</p>
-                <ol class="list-decimal list-inside text-sm text-slate-300">
-                    <li>If I (see) him, I would have said hello.</li>
-                    <li>She would have called if she (have) your number.</li>
-                    <li>If they (not / eat) so much, they wouldn't have felt sick.</li>
-                    <li>We (win) the match if we had trained more.</li>
-                    <li>If you (ask) me, I would have agreed.</li>
-                </ol>
+                    <!-- Cuadro de Análisis Sintáctico de la Probabilidad -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+                        <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block">Verbo Modal / Estructura</span>
+                                <h3 id="prob-modal-title" class="text-xl font-bold text-emerald-400 mt-1">Must</h3>
+                            </div>
+                            <p id="prob-modal-meaning" class="text-xs text-slate-400 mt-2">Deducción lógica afirmativa. Estás seguro del hecho por evidencias claras.</p>
+                        </div>
+
+                        <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block">Fórmula Estructural</span>
+                                <code id="prob-modal-formula" class="text-xs font-mono text-indigo-300 block mt-1">Sujeto + MUST + Verbo (Infinitive)</code>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-2">No utilices la preposición "to" tras el verbo auxiliar modal.</p>
+                        </div>
+
+                        <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800/80 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block">Escenario Real en Contexto</span>
+                                <p id="prob-modal-example" class="text-sm font-semibold text-white mt-1">"You have worked for 14 hours. You must be exhausted."</p>
+                            </div>
+                            <span id="prob-modal-translation" class="text-xs text-slate-400 italic block mt-2">"Has trabajado 14 horas. Debes estar exhausto."</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIFERENCIA CRÍTICA: WILL VS GOING TO -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="p-5 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                            <h3 class="font-bold text-sm text-white">Will (Predicciones / Espontáneo)</h3>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                            <li><strong>Decisiones inmediatas:</strong> "I will answer the phone."</li>
+                            <li><strong>Predicciones sin base física obvia:</strong> "I think it will rain tomorrow."</li>
+                            <li><strong>Promesas y ofertas:</strong> "I will help you with your homework."</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            <h3 class="font-bold text-sm text-white">Going to (Planes / Evidencia)</h3>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                            <li><strong>Planes premeditados:</strong> "We are going to buy a house next year."</li>
+                            <li><strong>Evidencias obvias e inmediatas:</strong> "Look at those black clouds; it is going to rain."</li>
+                            <li><strong>Intenciones claras:</strong> "I am going to learn German."</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
     </main>
 
     <!--CHULETA DE ESTUDIO LATERAL -->
     <div id="cheat-sheet-sidebar" class="fixed inset-y-0 right-0 w-full max-w-lg bg-slate-900 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
         <div class="p-6 border-b border-slate-800 flex items-center justify-between">
-            <h3 class="text-base font-bold text-white uppercase tracking-wider">Chuleta: Resumen 12 Tiempos</h3>
+            <h3 id="cheat-sheet-main-title" class="text-base font-bold text-white uppercase tracking-wider">Chuleta: Resumen 12 Tiempos</h3>
             <button onclick="toggleCheatSheet()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">X</button>
         </div>
-        <div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs text-slate-300">
+        <div id="cheat-sheet-content-container" class="p-6 overflow-y-auto flex-1 space-y-6 text-xs text-slate-300">
             <!-- ESTRUCTURA TOTAL -->
             <div class="space-y-4">
                 <h4 class="font-bold text-indigo-400 border-b border-indigo-500/30 pb-2">🕒 PASADO</h4>
@@ -904,7 +985,7 @@
             document.getElementById('toast-icon').innerText = icon;
             toast.classList.remove('pointer-events-none', 'opacity-0');
             toast.classList.add('opacity-100');
-            setTimeout(hideToast, 5000); // Se esconde en 5 segundos
+            setTimeout(hideToast, 5000); 
         }
 
         function hideToast() {
@@ -997,7 +1078,7 @@
                         { index: 4, verb: "blow", answers: ["was blowing"], hint: "Fondo atmosférico.", explanation: "El viento soplaba (decorado escénico): Past Continuous." },
                         { index: 5, verb: "light", answers: ["had lit"], hint: "Acción previa al hallazgo.", explanation: "Alguien había encendido el fuego con anterioridad: Past Perfect Simple." },
                         { index: 6, verb: "seek", answers: ["were seeking"], hint: "Acción en curso paralela.", explanation: "Estaban buscando ropa seca mientras ocurría otra cosa: Past Continuous." },
-                        { index: 7, verb: "fly", answers: ["flew"], hint: "Acción interruptora rápida.", explanation: "La puerta se abrió de golpe: Past Simple." },
+                        { index: 7, verb: "fly", answers: ["fly", "flew"], hint: "Acción interruptora rápida.", explanation: "La puerta se abrió de golpe: Past Simple." },
                         { index: 8, verb: "read", answers: ["had been reading"], hint: "Proceso de fondo repetitivo previo.", explanation: "Llevaba toda la semana leyendo historias de miedo: Past Perfect Continuous." },
                         { index: 9, verb: "scream", answers: ["screamed"], hint: "Reacción puntual rápida.", explanation: "Gritó de inmediato: Past Simple." }
                     ]
@@ -1121,8 +1202,8 @@
                         { index: 0, verb: "cook", answers: ["cooks"], hint: "Rutina del chef.", explanation: "'Every single evening' marca hábito: Present Simple." },
                         { index: 1, verb: "work", answers: ["are working"], hint: "Acción provisional excepcional.", explanation: "'Today' combinado con un esfuerzo extraordinario provisional: Present Continuous." },
                         { index: 2, verb: "reserve", answers: ["have reserved"], hint: "Experiencia acumulada.", explanation: "Reservar 3 veces mide la experiencia acumulada hasta hoy: Present Perfect Simple." },
-                        { index: 3, verb: "taste", answers: ["is tasting"], hint: "Acción activa voluntaria.", explanation: "Probar el plato justo ahora es una acción en desarrollo: Present Continuous." },
-                        { index: 4, verb: "demand", answers: ["have been demanding"], hint: "Proceso reciente de insistencia.", explanation: "'Lately' indica demanda acumulada reciente: Present Perfect Continuous." },
+                        { index: 3, verb: "taste", answers: ["taste", "is tasting"], hint: "Acción activa voluntaria.", explanation: "Probar el plato justo ahora es una acción en desarrollo: Present Continuous." },
+                        { index: 4, verb: "demand", answers: ["have been demanding"], hint: "Proceso reciente de insignencia.", explanation: "'Lately' indica demanda acumulada reciente: Present Perfect Continuous." },
                         { index: 5, verb: "not open", answers: ["has not opened", "hasn't opened"], hint: "Acción inconclusa con 'yet'.", explanation: "'Yet' exige el uso del Present Perfect Simple negativo." },
                         { index: 6, verb: "expect", answers: ["expects"], hint: "Estado de creencia o previsión.", explanation: "Expectativa general (verbo de estado): Present Simple." },
                         { index: 7, verb: "be", answers: ["is"], hint: "Estado permanente.", explanation: "Ser perfeccionista es una cualidad estable: Present Simple." },
@@ -1587,7 +1668,7 @@
             { infinitive: "pay", pastSimple: "paid", pastParticiple: "paid", meaning: "pagar" },
             { infinitive: "prove", pastSimple: "proved", pastParticiple: "proven/proved", meaning: "probar, demostrar" },
             { infinitive: "put", pastSimple: "put", pastParticiple: "put", meaning: "poner, colocar" },
-            { infinitive: "read", pastSimple: "read (pron. /red/)", pastParticiple: "read (pron. /red/)", meaning: "leer" },
+            { infinitive: "read", pastSimple: "read", pastParticiple: "read", meaning: "leer" },
             { infinitive: "rebuild", pastSimple: "rebuilt", pastParticiple: "rebuilt", meaning: "reconstruir" },
             { infinitive: "recast", pastSimple: "recast", pastParticiple: "recast", meaning: "refundir" },
             { infinitive: "redo", pastSimple: "redid", pastParticiple: "redone", meaning: "rehacer" },
@@ -1787,7 +1868,7 @@
                 title: "Chuleta de Oro - PRESENTES (Present)",
                 html: `<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4">
                     <p class="text-xs text-indigo-300 font-semibold uppercase tracking-wider mb-1">¡Claves de Descarte!</p>
-                    <p class="text-sm text-indigo-200">Distingue entre hábitos rutinarios, lo que está pasando en directo y los lazos que unen el pasado con tu realidad actual.</p>
+                    <p class="text-sm text-indigo-200">Distingue entre hábitos rutinarios, lo que está pasando en directo y los lazos que unen el pasado con tu reality actual.</p>
                 </div>`
             },
             future: {
@@ -1798,6 +1879,154 @@
                 </div>`
             }
         };
+
+        // ESCALA DE PROBABILIDAD DE EXAMEN B2
+        const PROBABILITY_SCALE = [
+            { pct: "0%", modal: "Can't", formula: "Sujeto + can't + Verbo", desc: "Certeza absoluta de que un hecho es imposible de acuerdo a la lógica o a evidencias sólidas.", ex: "He is sleeping in Madrid. He can't be in Paris right now.", trans: "Él está durmiendo en Madrid. No puede estar en París ahora mismo." },
+            { pct: "30%", modal: "Might", formula: "Sujeto + might + Verbo", desc: "Probabilidad muy remota o débil en el presente o futuro.", ex: "Take an umbrella. It might rain later.", trans: "Lleva un paraguas. Podría llover más tarde (débil probabilidad)." },
+            { pct: "50%", modal: "May", formula: "Sujeto + may + Verbo", desc: "Posibilidad razonable o equilibrio total entre un sí y un no.", ex: "We may visit my grandparents next weekend if we have time.", trans: "Es posible que visitemos a mis abuelos el próximo fin de semana." },
+            { pct: "75%", modal: "Should", formula: "Sujeto + should + Verbo", desc: "Fuerte expectativa basada en una planificación o hecho normal esperado.", ex: "He left an hour ago. He should be here by now.", trans: "Él se fue hace una hora. Debería estar aquí ya." },
+            { pct: "90%", modal: "Must", formula: "Sujeto + must + Verbo", desc: "Deducción lógica irrefutable. Una conclusión afirmativa obvia basada en evidencia directa.", ex: "The ground is completely wet. It must have rained.", trans: "El suelo está completamente mojado. Debe haber llovido." },
+            { pct: "100%", modal: "Will", formula: "Sujeto + will + Verbo", desc: "Hecho futuro inevitable o certeza absoluta libre de especulación.", ex: "Water will boil if you keep heating it.", trans: "El agua hervirá si continúas calentándola." }
+        ];
+
+        const CONDITIONAL_EXERCISES = [
+            {
+                type: 0,
+                label: "Zero Conditional",
+                formula: "If + Present Simple, Present Simple",
+                desc: "Describe realidades científicas, leyes de la naturaleza o verdades lógicas.",
+                if_cl: "If you heat ice",
+                res_cl: "it melts.",
+                prompt: "If you ____________ (not water) plants, they ____________ (die).",
+                ans1: "DONT WATER",
+                ans2: "DIE"
+            },
+            {
+                type: 1,
+                label: "First Conditional",
+                formula: "If + Present Simple, Will + Verb",
+                desc: "Plantea una posibilidad altamente realista y sus consecuencias futuras.",
+                if_cl: "If it rains tonight",
+                res_cl: "we will stay home.",
+                prompt: "If she ____________ (study) hard, she ____________ (pass) the exam.",
+                ans1: "STUDIES",
+                ans2: "WILL PASS"
+            },
+            {
+                type: 2,
+                label: "Second Conditional",
+                formula: "If + Past Simple, Would + Verb",
+                desc: "Escenarios imaginarios, irreales u utópicos en el tiempo presente.",
+                if_cl: "If I won the lottery",
+                res_cl: "I would travel forever.",
+                prompt: "If I ____________ (be) you, I ____________ (buy) that house.",
+                ans1: "WERE",
+                ans2: "WOULD BUY"
+            },
+            {
+                type: 3,
+                label: "Third Conditional",
+                formula: "If + Past Perfect, Would have + Past Participle",
+                desc: "Especulaciones sobre situaciones pasadas que nunca ocurrieron; arrepentimientos.",
+                if_cl: "If we had run faster",
+                res_cl: "we would have caught the train.",
+                prompt: "If they ____________ (invite) me, I ____________ (have) attended.",
+                ans1: "HAD INVITED",
+                ans2: "WOULD HAVE"
+            }
+        ];
+
+        const SYNTAX_DATABASE = [
+            {
+                type: "Past Continuous (Interrupción)",
+                translation: "Ella estaba leyendo cuando él llamó.",
+                correct: ["She", "was", "reading", "when", "he", "called."],
+                pool: ["She", "was", "reading", "when", "he", "called.", "is", "were", "call"]
+            },
+            {
+                type: "Past Perfect (Acción previa)",
+                translation: "Ellos ya habían comido cuando yo llegué.",
+                correct: ["They", "had", "already", "eaten", "when", "I", "arrived."],
+                pool: ["They", "had", "already", "eaten", "when", "I", "arrived.", "have", "eating", "arrive"]
+            },
+            {
+                type: "Second Conditional (Hipotético)",
+                translation: "Si yo fuera tú, yo compraría ese coche.",
+                correct: ["If", "I", "were", "you,", "I", "would", "buy", "that", "car."],
+                pool: ["If", "I", "were", "you,", "I", "would", "buy", "that", "car.", "was", "will", "bought"]
+            },
+            {
+                type: "Modal de Deducción (90% Certeza)",
+                translation: "Debes estar bromeando sobre este asunto.",
+                correct: ["You", "must", "be", "joking", "about", "this", "matter."],
+                pool: ["You", "must", "be", "joking", "about", "this", "matter.", "should", "to", "joke"]
+            },
+            {
+                type: "First Conditional (Estructura)",
+                translation: "Si estudias duro, aprobarás el examen.",
+                correct: ["If", "you", "study", "hard,", "you", "will", "pass", "the", "exam."],
+                pool: ["If", "you", "study", "hard,", "you", "will", "pass", "the", "exam.", "studies", "would", "passed"]
+            }
+        ];
+
+        const DIAGNOSTIC_QUIZ = [
+            {
+                context: "Contraste de Tiempos (Simple vs Continuous)",
+                question: "While Sarah ________ a book, the lights suddenly ________ off.",
+                options: [
+                    { text: "was reading / went", correct: true },
+                    { text: "read / was going", correct: false },
+                    { text: "had read / went", correct: false },
+                    { text: "was reading / was going", correct: false }
+                ],
+                explanation: "Utilizamos el pasado continuo ('was reading') para una acción prolongada en progreso en el pasado y el pasado simple ('went') para una acción corta y súbita que la interrumpe."
+            },
+            {
+                context: "Estructuras de Condicional Imposible",
+                question: "If we had started earlier, we ________ the train yesterday.",
+                options: [
+                    { text: "wouldn't have missed", correct: true },
+                    { text: "won't miss", correct: false },
+                    { text: "wouldn't miss", correct: false },
+                    { text: "didn't miss", correct: false }
+                ],
+                explanation: "Este es un Tercer Condicional (Third Conditional) que trata de arrepentimientos pasados. Estructura: If + Past Perfect, would have + past participle."
+            },
+            {
+                context: "Sintaxis Negativa del Pasado Simple",
+                question: "I wanted to attend the conference, but I ________ receive my visa on time.",
+                options: [
+                    { text: "didn't", correct: true },
+                    { text: "hadn't", correct: false },
+                    { text: "wasn't", correct: false },
+                    { text: "don't", correct: false }
+                ],
+                explanation: "Para negar en el pasado simple con un verbo de acción regular/irregular ('receive' en infinitivo), el único auxiliar correcto es 'didn't' ('did not')."
+            },
+            {
+                context: "Deducción Epistémica (Grados de Certeza)",
+                question: "She is fluent in five languages. She ________ be exceptionally intelligent.",
+                options: [
+                    { text: "must", correct: true },
+                    { text: "can't", correct: false },
+                    { text: "might not", correct: false },
+                    { text: "should to", correct: false }
+                ],
+                explanation: "La evidencia ('hablar cinco idiomas fluidamente') nos otorga un nivel muy alto de certeza afirmativa (~90%). El modal correcto es 'must'."
+            },
+            {
+                context: "Segunda Condicional (Verbos de Estado)",
+                question: "If she ________ more free time, she ________ join the local swimming club.",
+                options: [
+                    { text: "had / would", correct: true },
+                    { text: "has / will", correct: false },
+                    { text: "had had / would", correct: false },
+                    { text: "would have / had", correct: false }
+                ],
+                explanation: "El segundo condicional plantea un escenario irreal presente. Requiere Pasado Simple en la condición ('had') y condicional simple ('would') en el resultado."
+            }
+        ];
 
         // VARIABLES DE ESTADO DEL NEGOCIO
         let activeView = 'theory'; 
@@ -1884,14 +2113,16 @@
             const phrasalsSec = document.getElementById('phrasals-section');
             const verbsSec = document.getElementById('verbs-section');
             const conditionalsSec = document.getElementById('conditionals-section');
+            const futureProbSec = document.getElementById('future-prob-section');
 
             theorySec.classList.add('hidden');
             practiceSec.classList.add('hidden');
             phrasalsSec.classList.add('hidden');
             verbsSec.classList.add('hidden');
             conditionalsSec.classList.add('hidden');
+            futureProbSec.classList.add('hidden');
 
-            const mainTabs = ['theory', 'past', 'present', 'future', 'phrasals', 'verbs', 'conditionals'];
+            const mainTabs = ['theory', 'past', 'present', 'future', 'phrasals', 'verbs', 'conditionals', 'future-prob'];
             mainTabs.forEach(tab => {
                 const btn = document.getElementById(`tab-btn-${tab}`);
                 if (btn) {
@@ -1903,19 +2134,24 @@
             
             if (viewName === 'theory') {
                 theorySec.classList.remove('hidden');
-                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-indigo-500/30 bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/25";
+                if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-indigo-500/30 bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/25";
             } 
             else if (viewName === 'phrasals') {
                 phrasalsSec.classList.remove('hidden');
-                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-pink-500/30 bg-gradient-to-tr from-pink-600 to-fuchsia-600 text-white shadow-lg shadow-pink-500/25";
+                if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-pink-500/30 bg-gradient-to-tr from-pink-600 to-fuchsia-600 text-white shadow-lg shadow-pink-500/25";
             } 
             else if (viewName === 'verbs') {
                 verbsSec.classList.remove('hidden');
-                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-violet-500/30 bg-gradient-to-tr from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/25";
+                if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-violet-500/30 bg-gradient-to-tr from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/25";
             } 
             else if (viewName === 'conditionals') {
                 conditionalsSec.classList.remove('hidden');
-                activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-orange-500/30 bg-gradient-to-tr from-orange-600 to-yellow-600 text-white shadow-lg shadow-orange-500/25";
+                if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-orange-500/30 bg-gradient-to-tr from-orange-600 to-yellow-600 text-white shadow-lg shadow-orange-500/25";
+            }
+            else if (viewName === 'future-prob') {
+                futureProbSec.classList.remove('hidden');
+                if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-emerald-500/30 bg-gradient-to-tr from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25";
+                updateProbabilityWidget();
             }
             else {
                 practiceSec.classList.remove('hidden');
@@ -1923,11 +2159,11 @@
                 selectedActivityId = 1;
 
                 if (viewName === 'past') {
-                    activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-rose-500/30 bg-gradient-to-tr from-rose-600 to-orange-600 text-white shadow-lg shadow-rose-500/25";
+                    if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-rose-500/30 bg-gradient-to-tr from-rose-600 to-orange-600 text-white shadow-lg shadow-rose-500/25";
                 } else if (viewName === 'present') {
-                    activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-emerald-500/30 bg-gradient-to-tr from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25";
+                    if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-emerald-500/30 bg-gradient-to-tr from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25";
                 } else {
-                    activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-sky-500/30 bg-gradient-to-tr from-sky-600 to-blue-600 text-white shadow-lg shadow-sky-500/25";
+                    if (activeBtn) activeBtn.className = "group flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 border border-sky-500/30 bg-gradient-to-tr from-sky-600 to-blue-600 text-white shadow-lg shadow-sky-500/25";
                 }
 
                 setCompetenceMode('fill'); 
@@ -1942,18 +2178,19 @@
             subs.forEach(s => {
                 document.getElementById(s).classList.add('hidden');
                 const btn = document.getElementById(`subtab-btn-${s}`);
-                btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400 hover:text-slate-200";
+                if (btn) btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-slate-800 bg-slate-950 text-slate-400 hover:text-slate-200";
             });
 
             document.getElementById(subTabId).classList.remove('hidden');
             const activeBtn = document.getElementById(`subtab-btn-${subTabId}`);
-            
-            if (subTabId === 'theory-past') {
-                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-indigo-500/30 bg-indigo-950/40 text-indigo-300";
-            } else if (subTabId === 'theory-present') {
-                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-emerald-500/30 bg-emerald-950/40 text-emerald-300";
-            } else {
-                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-rose-500/30 bg-rose-950/40 text-rose-300";
+            if (activeBtn) {
+                if (subTabId === 'theory-past') {
+                    activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-indigo-500/30 bg-indigo-950/40 text-indigo-300";
+                } else if (subTabId === 'theory-present') {
+                    activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-emerald-500/30 bg-emerald-950/40 text-emerald-300";
+                } else {
+                    activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all shrink-0 border border-rose-500/30 bg-rose-950/40 text-rose-300";
+                }
             }
         }
 
@@ -1965,24 +2202,24 @@
             const modes = ['fill', 'reading', 'listening'];
             modes.forEach(m => {
                 const btn = document.getElementById(`comp-btn-${m}`);
-                btn.className = "py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 text-slate-400 hover:bg-slate-900";
+                if (btn) btn.className = "py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 text-slate-400 hover:bg-slate-900";
             });
 
             const activeBtn = document.getElementById(`comp-btn-${mode}`);
-            activeBtn.className = "py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/25";
+            if (activeBtn) activeBtn.className = "py-2 rounded-lg text-[10px] font-bold uppercase transition-all flex flex-col items-center justify-center gap-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/25";
 
             const sideTitle = document.getElementById('sidebar-activity-title');
             const counter = document.getElementById('activity-counter-badge');
             
             if (mode === 'fill') {
-                sideTitle.innerText = "📝 Historias Gap-Fill";
-                counter.innerText = "5 Retos";
+                if (sideTitle) sideTitle.innerText = "📝 Historias Gap-Fill";
+                if (counter) counter.innerText = "5 Retos";
             } else if (mode === 'reading') {
-                sideTitle.innerText = "📖 Comprensión Lectora";
-                counter.innerText = "2 Ejercicios";
+                if (sideTitle) sideTitle.innerText = "📖 Comprensión Lectora";
+                if (counter) counter.innerText = "2 Ejercicios";
             } else {
-                sideTitle.innerText = "🎧 Prácticas de Listening";
-                counter.innerText = "5 Audios";
+                if (sideTitle) sideTitle.innerText = "🎧 Prácticas de Listening";
+                if (counter) counter.innerText = "5 Audios";
             }
 
             selectedActivityId = 1; 
@@ -1994,6 +2231,7 @@
         // RENDER DE LA LISTA LATERAL DINÁMICA
         function renderActivitiesList() {
             const container = document.getElementById('story-selector-list');
+            if (!container) return;
             container.innerHTML = '';
 
             let list = [];
@@ -2048,7 +2286,7 @@
         // CARGA EL CONTENIDO DEL EJERCICIO SELECCIONADO EN EL LIENZO CENTRAL
         function loadActiveExercise(id) {
             const player = document.getElementById('listening-player-container');
-            player.classList.add('hidden'); 
+            if (player) player.classList.add('hidden'); 
 
             let db = [];
             if (activeCompetence === 'fill') {
@@ -2063,27 +2301,34 @@
             if (!item) return;
 
             // Configurar cabeceras
-            document.getElementById('story-active-badge').innerText = `${activeCompetence.toUpperCase()} - Reto ${item.id}`;
-            document.getElementById('story-genre-badge').innerText = currentTenseGroup.toUpperCase();
-            document.getElementById('story-title').innerText = item.title;
+            const badge = document.getElementById('story-active-badge');
+            if (badge) badge.innerText = `${activeCompetence.toUpperCase()} - Reto ${item.id}`;
+            const genreBadge = document.getElementById('story-genre-badge');
+            if (genreBadge) genreBadge.innerText = currentTenseGroup.toUpperCase();
+            const titleEl = document.getElementById('story-title');
+            if (titleEl) titleEl.innerText = item.title;
 
             // Configurar estado completado
             const isCompleted = completedActivities[currentTenseGroup][activeCompetence][item.id] !== undefined;
             const statusText = document.getElementById('story-status-text');
-            if (isCompleted) {
-                statusText.innerText = `Completado (${completedActivities[currentTenseGroup][activeCompetence][item.id]}%)`;
-                statusText.className = "text-sm font-bold text-emerald-400";
-            } else {
-                statusText.innerText = "Pendiente de realizar";
-                statusText.className = "text-sm font-bold text-yellow-500";
+            if (statusText) {
+                if (isCompleted) {
+                    statusText.innerText = `Completado (${completedActivities[currentTenseGroup][activeCompetence][item.id]}%)`;
+                    statusText.className = "text-sm font-bold text-emerald-400";
+                } else {
+                    statusText.innerText = "Pendiente de realizar";
+                    statusText.className = "text-sm font-bold text-yellow-500";
+                }
             }
 
             const textContainer = document.getElementById('story-text-container');
+            if (!textContainer) return;
             textContainer.innerHTML = '';
 
             // CARGA SEGÚN LA MODALIDAD
             if (activeCompetence === 'fill') {
-                document.getElementById('story-intro').innerText = item.introduction;
+                const introEl = document.getElementById('story-intro');
+                if (introEl) introEl.innerText = item.introduction;
                 const p = document.createElement('p');
                 p.className = 'leading-relaxed text-slate-300 select-text';
 
@@ -2113,7 +2358,8 @@
                 textContainer.appendChild(p);
             } 
             else if (activeCompetence === 'reading') {
-                document.getElementById('story-intro').innerText = "Lee el texto en inglés y responde a las preguntas de opción múltiple con la conjugación o comprensión adecuada.";
+                const introEl = document.getElementById('story-intro');
+                if (introEl) introEl.innerText = "Lee el texto en inglés y responde a las preguntas de opción múltiple con la conjugación o comprensión adecuada.";
                 
                 // Bloque de lectura
                 const readingBox = document.createElement('div');
@@ -2146,9 +2392,11 @@
             } 
             else if (activeCompetence === 'listening') {
                 // Activar e inyectar el reproductor
-                player.classList.remove('hidden');
-                document.getElementById('story-intro').innerText = "Reproduce el audio para escuchar al profesor nativo. Puedes regular la velocidad y responder el reto.";
-                document.getElementById('listening-transcript-text').innerText = item.audioText;
+                if (player) player.classList.remove('hidden');
+                const introEl = document.getElementById('story-intro');
+                if (introEl) introEl.innerText = "Reproduce el audio para escuchar al profesor nativo. Puedes regular la velocidad y responder el reto.";
+                const scriptEl = document.getElementById('listening-transcript-text');
+                if (scriptEl) scriptEl.innerText = item.audioText;
                 
                 // Preguntas de audición
                 item.questions.forEach((q, qIndex) => {
@@ -2213,8 +2461,8 @@
             const playBtn = document.getElementById('btn-audio-play');
             const statusLbl = document.getElementById('player-status-lbl');
             
-            playBtn.innerText = "⏸";
-            statusLbl.innerText = "Reproduciendo audio oficial...";
+            if (playBtn) playBtn.innerText = "⏸";
+            if (statusLbl) statusLbl.innerText = "Reproduciendo audio oficial...";
 
             let start = Date.now();
             const estimatedDuration = (textToSpeak.split(" ").length / (150 * speed)) * 60 * 1000; 
@@ -2222,20 +2470,20 @@
             progressInterval = setInterval(() => {
                 let elapsed = Date.now() - start;
                 let pct = Math.min((elapsed / estimatedDuration) * 100, 99);
-                progress.style.width = `${pct}%`;
+                if (progress) progress.style.width = `${pct}%`;
             }, 300);
 
             activeUtterance.onend = function() {
                 clearInterval(progressInterval);
-                progress.style.width = "100%";
-                playBtn.innerText = "▶";
-                statusLbl.innerText = "Audio finalizado";
+                if (progress) progress.style.width = "100%";
+                if (playBtn) playBtn.innerText = "▶";
+                if (statusLbl) statusLbl.innerText = "Audio finalizado";
             };
 
             activeUtterance.onerror = function() {
                 clearInterval(progressInterval);
-                playBtn.innerText = "▶";
-                statusLbl.innerText = "Listo para reproducir";
+                if (playBtn) playBtn.innerText = "▶";
+                if (statusLbl) statusLbl.innerText = "Listo para reproducir";
             };
 
             synth.speak(activeUtterance);
@@ -2271,6 +2519,7 @@
             let correctCount = 0;
             let totalQuestions = 0;
             const explanationList = document.getElementById('explanation-list');
+            if (!explanationList) return;
             explanationList.innerHTML = '';
 
             if (activeCompetence === 'fill') {
@@ -2355,27 +2604,33 @@
 
             // Desplegar reporte
             const feedbackPanel = document.getElementById('feedback-panel');
-            feedbackPanel.classList.remove('hidden');
+            if (feedbackPanel) feedbackPanel.classList.remove('hidden');
 
             const scoreRatio = document.getElementById('feedback-score-ratio');
-            scoreRatio.innerText = `${correctCount} / ${totalQuestions}`;
-            scoreRatio.className = `text-4xl font-black mb-2 ${correctCount === totalQuestions ? 'text-emerald-400' : 'text-indigo-400'}`;
-
-            const scoreBar = document.getElementById('feedback-score-bar');
-            scoreBar.style.width = `${percentage}%`;
-            scoreBar.className = correctCount === totalQuestions ? 'bg-emerald-500 h-2 rounded-full' : 'bg-indigo-500 h-2 rounded-full';
-
-            const feedbackText = document.getElementById('feedback-text');
-            if (correctCount === totalQuestions) {
-                feedbackText.innerHTML = "<strong>¡Excelente trabajo David!</strong> Nivel de examen perfecto. Dominas esta competencia al 100%.";
-                triggerConfetti();
-            } else if (correctCount >= totalQuestions / 2) {
-                feedbackText.innerHTML = "<strong>¡Buen intento!</strong> Vas por el camino correcto pero te quedan algunos detalles finos por pulir. ¡Ánimo!";
-            } else {
-                feedbackText.innerHTML = "<strong>Sección para repasar.</strong> Te recomendamos consultar las explicaciones de la Profe IA abajo para solventar las dudas.";
+            if (scoreRatio) {
+                scoreRatio.innerText = `${correctCount} / ${totalQuestions}`;
+                scoreRatio.className = `text-4xl font-black mb-2 ${correctCount === totalQuestions ? 'text-emerald-400' : 'text-indigo-400'}`;
             }
 
-            feedbackPanel.scrollIntoView({ behavior: 'smooth' });
+            const scoreBar = document.getElementById('feedback-score-bar');
+            if (scoreBar) {
+                scoreBar.style.width = `${percentage}%`;
+                scoreBar.className = correctCount === totalQuestions ? 'bg-emerald-500 h-2 rounded-full' : 'bg-indigo-500 h-2 rounded-full';
+            }
+
+            const feedbackText = document.getElementById('feedback-text');
+            if (feedbackText) {
+                if (correctCount === totalQuestions) {
+                    feedbackText.innerHTML = "<strong>¡Excelente trabajo David!</strong> Nivel de examen perfecto. Dominas esta competencia al 100%.";
+                    triggerConfetti();
+                } else if (correctCount >= totalQuestions / 2) {
+                    feedbackText.innerHTML = "<strong>¡Buen intento!</strong> Vas por el camino correcto pero te quedan algunos detalles finos por pulir. ¡Ánimo!";
+                } else {
+                    feedbackText.innerHTML = "<strong>Sección para repasar.</strong> Te recomendamos consultar las explicaciones de la Profe IA abajo para solventar las dudas.";
+                }
+            }
+
+            if (feedbackPanel) feedbackPanel.scrollIntoView({ behavior: 'smooth' });
         }
 
         function resetCurrentExercise() {
@@ -2390,39 +2645,49 @@
             const modalCard = document.getElementById('ai-teacher-modal-card');
             const container = document.getElementById('ai-modal-response-container');
 
-            document.getElementById('ai-modal-verb').innerText = verb;
-            document.getElementById('ai-modal-user').innerText = userAns;
-            document.getElementById('ai-modal-correct').innerText = correctAns;
+            const modalVerb = document.getElementById('ai-modal-verb');
+            const modalUser = document.getElementById('ai-modal-user');
+            const modalCorrect = document.getElementById('ai-modal-correct');
 
-            container.innerHTML = `
-                <p class="font-semibold text-indigo-300">¡Hola David! Analicemos este punto juntos para tu examen:</p>
-                <p class="text-xs text-slate-300 leading-relaxed mt-2 bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    Tu respuesta fue <strong>"${userAns}"</strong>, pero la opción óptima para el estándar de Oxford es <strong>"${correctAns}"</strong>.
-                </p>
-                <p class="text-xs text-slate-400 leading-relaxed mt-2">
-                    <strong>Análisis del conector:</strong> ${reasoning}
-                </p>
-                <div class="border-t border-slate-800 mt-4 pt-3 flex items-center gap-2">
-                    <span class="text-lg">💡</span>
-                    <p class="text-[11px] text-indigo-400 italic font-semibold">Consejo Profe IA: Las sutilezas de tiempo definen los límites del nivel B2. ¡Fíjate en las palabras chivato!</p>
-                </div>
-            `;
+            if (modalVerb) modalVerb.innerText = verb;
+            if (modalUser) modalUser.innerText = userAns;
+            if (modalCorrect) modalCorrect.innerText = correctAns;
 
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalCard.classList.remove('scale-95');
-            }, 50);
+            if (container) {
+                container.innerHTML = `
+                    <p class="font-semibold text-indigo-300">¡Hola David! Analicemos este punto juntos para tu examen:</p>
+                    <p class="text-xs text-slate-300 leading-relaxed mt-2 bg-slate-950 p-3 rounded-lg border border-slate-800">
+                        Tu respuesta fue <strong>"${userAns}"</strong>, pero la opción óptima para el estándar de Oxford es <strong>"${correctAns}"</strong>.
+                    </p>
+                    <p class="text-xs text-slate-400 leading-relaxed mt-2">
+                        <strong>Análisis del conector:</strong> ${reasoning}
+                    </p>
+                    <div class="border-t border-slate-800 mt-4 pt-3 flex items-center gap-2">
+                        <span class="text-lg">💡</span>
+                        <p class="text-[11px] text-indigo-400 italic font-semibold">Consejo Profe IA: Las sutilezas de tiempo definen los límites del nivel B2. ¡Fíjate en las palabras chivato!</p>
+                    </div>
+                `;
+            }
+
+            if (modal) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    if (modalCard) modalCard.classList.remove('scale-95');
+                }, 50);
+            }
         }
 
         function closeAITeacherModal() {
             const modal = document.getElementById('ai-teacher-modal');
             const modalCard = document.getElementById('ai-teacher-modal-card');
-            modal.classList.add('opacity-0');
-            modalCard.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            if (modal) {
+                modal.classList.add('opacity-0');
+                if (modalCard) modalCard.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
         }
 
         function updateGlobalStats() {
@@ -2448,23 +2713,31 @@
                 });
             });
 
-            document.getElementById('global-progress').innerText = `${completed} / ${total} Retos`;
+            const globProg = document.getElementById('global-progress');
+            if (globProg) globProg.innerText = `${completed} / ${total} Retos`;
+            
             const accuracy = completed > 0 ? Math.round(scoreSum / completed) : 0;
-            document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
-            document.getElementById('stat-total-correct').innerText = completed;
+            const statAcc = document.getElementById('stat-accuracy');
+            if (statAcc) statAcc.innerText = `${accuracy}%`;
+            
+            const statCorr = document.getElementById('stat-total-correct');
+            if (statCorr) statCorr.innerText = completed;
         }
 
         function updateCheatSheetUI() {
             const data = cheatSheetData[currentTenseGroup];
             if (data) {
-                document.getElementById('cheat-sheet-main-title').innerText = data.title;
-                document.getElementById('cheat-sheet-content-container').innerHTML = data.html;
+                const sheetTitle = document.getElementById('cheat-sheet-main-title');
+                if (sheetTitle) sheetTitle.innerText = data.title;
+                const sheetContent = document.getElementById('cheat-sheet-content-container');
+                if (sheetContent) sheetContent.innerHTML = data.html;
             }
         }
 
         // ================= SISTEMA DE VERBOS IRREGULARES =================
         function renderIrregularVerbsTable() {
             const tbody = document.getElementById('irregular-verbs-table-body');
+            if (!tbody) return;
             tbody.innerHTML = '';
 
             irregularVerbsDB.forEach(verb => {
@@ -2479,6 +2752,27 @@
                 `;
                 tbody.appendChild(tr);
             });
+        }
+
+        // CONTROLADOR DE CAMBIO DEL COMPONENTE DE PROBABILIDAD MODAL
+        function updateProbabilityWidget() {
+            const slider = document.getElementById('probability-slider');
+            if (!slider) return;
+            const index = slider.value;
+            const data = PROBABILITY_SCALE[index];
+
+            const lbl = document.getElementById('prob-percentage-label');
+            if (lbl) lbl.innerText = `${data.pct} Certeza`;
+            const title = document.getElementById('prob-modal-title');
+            if (title) title.innerText = data.modal;
+            const meaning = document.getElementById('prob-modal-meaning');
+            if (meaning) meaning.innerText = data.desc;
+            const formula = document.getElementById('prob-modal-formula');
+            if (formula) formula.innerText = data.formula;
+            const example = document.getElementById('prob-modal-example');
+            if (example) example.innerText = data.ex;
+            const translation = document.getElementById('prob-modal-translation');
+            if (translation) translation.innerText = data.trans;
         }
 
         function setVerbLetterFilter(letter) {
@@ -2511,38 +2805,21 @@
         }
 
         function exportVerbsToCSV() {
-            let csvContent = "data:text/csv;charset=utf-8,Infinitive,Simple Past,Past Participle,Spanish Meaning\n";
+            let csvContent = "data:text/csv;charset=utf-8,Infinitive,Past Simple,Past Participle,Spanish Meaning\n";
             irregularVerbsDB.forEach(verb => {
-                csvContent += `${verb.infinitive},${verb.pastSimple},${verb.pastParticiple},"${verb.meaning}"\n`;
+                csvContent += `"${verb.infinitive}","${verb.pastSimple}","${verb.pastParticiple}","${verb.meaning}"\n`;
             });
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "LISTA_VERBOS_IRREGULARES_DAVID.csv");
+            link.setAttribute("download", "verbos_irregulares_B2.csv");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showToast("Lista de verbos exportada correctamente.", "📊");
         }
 
         // ================= SISTEMA DE PHRASAL VERBS =================
-        function renderPhrasalsTable() {
-            const tbody = document.getElementById('phrasals-table-body');
-            tbody.innerHTML = '';
-
-            phrasalsDB.forEach(pv => {
-                if (selectedPhrasalLetter !== 'TODOS' && !pv.phrasal.toLowerCase().startsWith(selectedPhrasalLetter.toLowerCase())) return;
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-900/60 transition-colors";
-                tr.innerHTML = `
-                    <td class="p-4 font-bold text-pink-300 font-mono text-sm">${pv.phrasal}</td>
-                    <td class="p-4 text-slate-300 font-medium">${pv.meaning}</td>
-                    <td class="p-4 text-slate-400 italic font-medium">${pv.example}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-            document.getElementById('phrasal-total-count-badge').innerText = `${phrasalsDB.length} Phrasals`;
-        }
-
         function setPhrasalLetterFilter(letter) {
             selectedPhrasalLetter = letter;
             const alphabet = ["TODOS", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")];
@@ -2553,6 +2830,30 @@
             const activeBtn = document.getElementById(`phrasal-letter-${letter}`);
             if (activeBtn) activeBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all shrink-0 bg-pink-600 text-white border border-pink-500 shadow-lg shadow-pink-500/20";
             renderPhrasalsTable();
+        }
+
+        function renderPhrasalsTable() {
+            const tbody = document.getElementById('phrasals-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            phrasalsDB.forEach(p => {
+                if (selectedPhrasalLetter !== 'TODOS' && !p.phrasal.toLowerCase().startsWith(selectedPhrasalLetter.toLowerCase())) return;
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/60 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-white font-mono text-sm">${p.phrasal}</td>
+                    <td class="p-4 text-slate-300 text-xs">${p.meaning}</td>
+                    <td class="p-4 text-pink-300 italic text-xs">${p.example}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            const countBadge = document.getElementById('phrasal-total-count-badge');
+            if (countBadge) {
+                const count = selectedPhrasalLetter === 'TODOS' ? phrasalsDB.length : phrasalsDB.filter(p => p.phrasal.toLowerCase().startsWith(selectedPhrasalLetter.toLowerCase())).length;
+                countBadge.innerText = `${count} Phrasals`;
+            }
         }
 
         function filterPhrasals() {
@@ -2572,39 +2873,43 @@
         }
 
         function exportPhrasalsToCSV() {
-            let csvContent = "data:text/csv;charset=utf-8,Phrasal Verb,Spanish Meaning,Example\n";
-            phrasalsDB.forEach(pv => {
-                csvContent += `"${pv.phrasal}","${pv.meaning}","${pv.example}"\n`;
+            let csvContent = "data:text/csv;charset=utf-8,Phrasal Verb,Spanish Meaning,B2 Context Example\n";
+            phrasalsDB.forEach(p => {
+                csvContent += `"${p.phrasal}","${p.meaning}","${p.example}"\n`;
             });
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "LISTA_PHRASAL_VERBS_B2_DAVID.csv");
+            link.setAttribute("download", "phrasal_verbs_B2.csv");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showToast("Diccionario de Phrasals exportado correctamente.", "📊");
         }
 
-        function triggerConfetti() {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-        }
-
+        // CHULETA DRAWER
         function toggleCheatSheet() {
             const sidebar = document.getElementById('cheat-sheet-sidebar');
             const overlay = document.getElementById('cheat-sheet-overlay');
+            if (sidebar && overlay) {
+                if (sidebar.classList.contains('translate-x-full')) {
+                    sidebar.classList.remove('translate-x-full');
+                    overlay.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('translate-x-full');
+                    overlay.classList.add('hidden');
+                }
+            }
+        }
 
-            if (sidebar.classList.contains('translate-x-full')) {
-                sidebar.classList.remove('translate-x-full');
-                overlay.classList.remove('hidden');
-                setTimeout(() => overlay.classList.add('opacity-100'), 50);
-            } else {
-                sidebar.classList.add('translate-x-full');
-                overlay.classList.remove('opacity-100');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
+        // EFECTOS DE CONFETI PARA CELEBRACIÓN DE DAVID
+        function triggerConfetti() {
+            if (typeof confetti !== 'undefined') {
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
             }
         }
     </script>
