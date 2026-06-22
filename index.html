@@ -826,10 +826,9 @@
                         <input type="range" id="probability-slider" min="0" max="5" value="4" oninput="updateProbabilityWidget()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
                         <div class="flex justify-between text-[10px] text-slate-500 font-mono px-1">
                             <span>0% (Imposible)</span>
-                            <span>30% (Remoto)</span>
-                            <span>50% (Posible)</span>
-                            <span>75% (Probable)</span>
-                            <span>90% (Lógico)</span>
+                            <span>40% (Remoto)</span>
+                            <span>60% (Posible)</span>
+                            <span>80% (Probable)</span>
                             <span>100% (Absoluto)</span>
                         </div>
                     </div>
@@ -1979,11 +1978,11 @@
         // ESCALA DE PROBABILIDAD DE EXAMEN B2
         const PROBABILITY_SCALE = [
             { pct: "0%", modal: "Can't", formula: "Sujeto + can't + Verbo", desc: "Certeza absoluta de que un hecho es imposible de acuerdo a la lógica o a evidencias sólidas.", ex: "He is sleeping in Madrid. He can't be in Paris right now.", trans: "Él está durmiendo en Madrid. No puede estar en París ahora mismo." },
-            { pct: "30%", modal: "Might", formula: "Sujeto + might + Verbo", desc: "Probabilidad muy remota o débil en el presente o futuro.", ex: "Take an umbrella. It might rain later.", trans: "Lleva un paraguas. Podría llover más tarde (débil probabilidad)." },
-            { pct: "50%", modal: "May", formula: "Sujeto + may + Verbo", desc: "Posibilidad razonable o equilibrio total entre un sí y un no.", ex: "We may visit my grandparents next weekend if we have time.", trans: "Es posible que visitemos a mis abuelos el próximo fin de semana." },
-            { pct: "75%", modal: "Should", formula: "Sujeto + should + Verbo", desc: "Fuerte expectativa basada en una planificación o hecho normal esperado.", ex: "He left an hour ago. He should be here by now.", trans: "Él se fue hace una hora. Debería estar aquí ya." },
-            { pct: "90%", modal: "Must", formula: "Sujeto + must + Verbo", desc: "Deducción lógica irrefutable. Una conclusión afirmativa obvia basada en evidencia directa.", ex: "The ground is completely wet. It must have rained.", trans: "El suelo está completamente mojado. Debe haber llovido." },
-            { pct: "100%", modal: "Will", formula: "Sujeto + will + Verbo", desc: "Hecho futuro inevitable o certeza absoluta libre de especulación.", ex: "Water will boil if you keep heating it.", trans: "El agua hervirá si continúas calentándola." }
+            { pct: "40%", modal: "May", formula: "Sujeto + may + Verbo", desc: "Posibilidad razonable o equilibrio total entre un sí y un no.", ex: "We may visit my grandparents next weekend if we have time.", trans: "Es posible que visitemos a mis abuelos el próximo fin de semana." },
+            { pct: "60%", modal: "Might", formula: "Sujeto + might + Verbo", desc: "Probabilidad muy remota o débil en el presente o futuro.", ex: "Take an umbrella. It might rain later.", trans: "Lleva un paraguas. Podría llover más tarde (débil probabilidad)." },
+            { pct: "80%", modal: "Should", formula: "Sujeto + should + Verbo", desc: "Fuerte expectativa basada en una planificación o hecho normal esperado.", ex: "He left an hour ago. He should be here by now.", trans: "Él se fue hace una hora. Debería estar aquí ya." },
+            { pct: "100%", modal: "Must", formula: "Sujeto + must + Verbo", desc: "Deducción lógica irrefutable. Una conclusión afirmativa obvia basada en evidencia directa.", ex: "The ground is completely wet. It must have rained.", trans: "El suelo está completamente mojado. Debe haber llovido." },
+                    
         ];
 
         const CONDITIONAL_EXERCISES = [
